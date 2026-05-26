@@ -121,10 +121,11 @@ export const caseStudies = [
       "Before/after metrics in the public PR"
     ],
     technicalDecisions: [
-      "Targeted allocator pressure and tile/floor traversal before touching higher-level editor behavior",
-      "Kept the work inside load/save/rendering hot paths so map semantics stayed stable",
-      "Improved binary I/O and save traversal for large OTBM files instead of relying on UI-side masking",
-      "Reduced repaint invalidation work for static viewport scenarios where repeated rendering had low value"
+      "Added a small-object slab allocator for hot Item/Tile/Floor allocation paths",
+      "Cached floor/tile lookup and assigned tile locations directly during parsing",
+      "Used direct tile-location traversal during save to reduce repeated lookup work",
+      "Split scene-dirty refresh from overlay-only refresh so static overlays did not invalidate cached map rendering",
+      "Throttled preview animation without breaking real animated scene updates"
     ],
     solution:
       "Added pooled allocation, cached floor/tile lookups, improved binary I/O, optimized save traversal, and reduced unnecessary repaint work in the editor rendering path.",
@@ -138,7 +139,7 @@ export const caseStudies = [
     id: "livestream-cast-system",
     title: "Livestream/Cast System",
     context:
-      "OpenTibiaBR needed a livestream/cast viewer flow that crossed the Canary server runtime and the login-server stack. The feature had to expose active casts to clients while preserving game-state safety and login compatibility.",
+      "OpenTibiaBR needed a livestream/cast viewer flow that crossed the Canary server runtime and the login-server stack. The feature had to expose active casts to clients through a normal client-compatible login path while preserving game-state safety.",
     problem:
       "Viewer sessions needed to be read-only, isolated from player actions, represented in login descriptors, and compatible with client expectations without turning spectators into normal game participants.",
     whatIOwned: [
@@ -150,9 +151,10 @@ export const caseStudies = [
       "Documentation and compatibility work"
     ],
     technicalDecisions: [
-      "Kept viewer sessions read-only by design instead of relying on command-level restrictions alone",
+      "Used explicit livestream login descriptors instead of hidden client assumptions",
+      "Persisted active caster state so login services could list available sessions",
+      "Kept viewer input restricted inside the game protocol path, not only at command level",
       "Separated Canary runtime behavior from login-server descriptor support so each repository owned the right part of the flow",
-      "Represented casts through explicit login data rather than hidden client assumptions",
       "Made the public evidence traceable across both repositories with linked PRs"
     ],
     solution:
@@ -169,28 +171,34 @@ export const caseStudies = [
   {
     id: "market-inbox-data-safety",
     title: "Market/Inbox Data Safety",
-    context: "Market and inbox flows handle item movement where duplication, item loss, or partial mutation would be serious.",
-    problem: "Capacity and insertion paths needed stronger preflight checks and atomic behavior.",
+    context:
+      "MMORPG market, inbox, and offline-save flows need strong item and persistence invariants. Small mistakes can duplicate items, lose items, or overwrite valid player progression.",
+    problem:
+      "Full inboxes, stack splitting, partial insertions, market clone behavior, and partial offline-player saves had edge cases where mutation order could corrupt state.",
     whatIOwned: [
       "Capacity validation logic",
       "Stack and non-stack item handling",
       "Atomic batch insertion behavior",
+      "Offline save protection",
       "Tests and edge-case coverage"
     ],
     technicalDecisions: [
       "Validated capacity before mutating item state",
+      "Added dry-run/test-only insertion behavior for preflight checks",
       "Handled stackable and non-stackable items explicitly",
-      "Added tests around edge cases that affect player data integrity"
+      "Centralized insertion behavior to reduce duplicated item movement logic",
+      "Avoided saving incomplete offline-player state over valid persistent fields"
     ],
     solution:
-      "Hardened inbox and market insertion paths with capacity checks, safer cloning/insertion behavior, and tests.",
-    impact: "Protects game economy and player data integrity.",
+      "Hardened inbox and market insertion paths with capacity checks, safer cloning/insertion behavior, batch insertion helpers, and offline save protections.",
+    impact: "Reduced risk of duplicated/ghost items, item loss, and progression resets in economy and persistence flows.",
     evidenceStatus: "Public PR merged",
     evidence: [
       { label: "Canary PR #3893", url: "https://github.com/opentibiabr/canary/pull/3893" },
-      { label: "Canary PR #3504", url: "https://github.com/opentibiabr/canary/pull/3504" }
+      { label: "Canary PR #3504", url: "https://github.com/opentibiabr/canary/pull/3504" },
+      { label: "Canary PR #3538", url: "https://github.com/opentibiabr/canary/pull/3538" }
     ],
-    technologies: ["C++", "data safety", "persistence", "tests"]
+    technologies: ["C++", "SQL persistence", "inventory containers", "data safety", "tests"]
   },
   {
     id: "docker-quickstart-runtime-smoke-tests",
@@ -207,8 +215,11 @@ export const caseStudies = [
     ],
     technicalDecisions: [
       "Validated runtime startup, not just compilation",
-      "Used Docker to make local onboarding reproducible",
-      "Connected database, server, login, and MyAAC account tooling in one flow"
+      "Used the published Canary runtime image instead of requiring local compilation",
+      "Included MariaDB, MyAAC account tooling, and login-server in one reproducible stack",
+      "Kept the quickstart on the intended login-server flow",
+      "Added platform-specific startup scripts and LAN mode",
+      "Validated runtime startup in CI across Linux, macOS, and Windows"
     ],
     solution:
       "Built a local stack with MariaDB, Canary runtime image, MyAAC account tooling, login-server, startup scripts, LAN mode, and runtime smoke tests.",
@@ -218,18 +229,19 @@ export const caseStudies = [
       { label: "Canary PR #3973", url: "https://github.com/opentibiabr/canary/pull/3973" },
       { label: "Canary PR #3963", url: "https://github.com/opentibiabr/canary/pull/3963" }
     ],
-    technologies: ["Docker", "GitHub Actions", "MariaDB", "runtime validation"]
+    technologies: ["Docker", "MariaDB", "MyAAC", "Go login-server", "GitHub Actions", "runtime validation"]
   },
   {
     id: "private-commercial-game-client",
     title: "Private Commercial Game Client",
     context:
-      "Private commercial game work covered client systems, protocol compatibility, UI modules, release operations, diagnostics, and production support.",
+      "Private commercial game work covered client systems, protocol compatibility, UI modules, release operations, diagnostics, and production support for a custom game client.",
     problem:
       "The project needed substantial client engineering while keeping company, repository, asset, service, and operational details confidential.",
     whatIOwned: [
       "C++/Lua client systems",
       "Protocol compatibility",
+      "UI/module runtime work",
       "Launcher/API integration",
       "Release operations",
       "Telemetry and crash reporting"
@@ -240,7 +252,7 @@ export const caseStudies = [
       "Prepared the case for future client-verified testimonial support after explicit approval"
     ],
     solution:
-      "Built and maintained substantial client systems while keeping private details confidential.",
+      "Built and maintained substantial client systems across runtime behavior, protocol compatibility, UI modules, release support, operational diagnostics, and production maintenance while keeping private details confidential.",
     impact:
       "Shows production ownership beyond open-source work while keeping client and project details confidential.",
     evidenceStatus: "Private / Anonymized",
