@@ -1,0 +1,22 @@
+{
+  "name": "dudantas.github.io",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^6.3.7",
+    "tailwindcss": "^3.4.19"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.15",
+    "typescript": "^5.9.3"
+  }
+}
