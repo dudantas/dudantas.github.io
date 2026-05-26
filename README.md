@@ -48,7 +48,7 @@ Update public site content in `src/data/portfolio.ts`.
 Rules for content updates:
 
 - Keep private work labeled as `Private / Anonymized` unless public permission is available.
-- Do not add private repository names, private URLs, internal service addresses, proprietary code, assets, network traces, logs, screenshots, customer names, or unapproved business metrics.
+- Do not add private repository names, private URLs, internal service addresses, proprietary code, assets, packet captures / network traces, logs, screenshots, customer names, or unapproved business metrics.
 - Do not import or reference private research files from this repository.
 - Keep public claims tied to merged/open public PRs, public releases, or explicitly approved private references.
 

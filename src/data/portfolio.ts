@@ -75,6 +75,7 @@ export const featuredWork = [
       "Built and maintained substantial client systems across C++/Lua, protocol compatibility, UI, release operations, telemetry, and crash reporting.",
     impact: "Shows production ownership beyond open-source work while keeping client and project details confidential.",
     metrics: [{ value: "Private / Anonymized", label: "commercial game client" }],
+    clientVerifiedLabel: "Private / Anonymized · Client-verified",
     tags: ["C++", "Lua", "client runtime", "release operations"]
   }
 ];
@@ -108,21 +109,25 @@ export const caseStudies = [
   {
     id: "rme-otbm-load-save-rendering-performance",
     title: "RME OTBM Load/Save/Rendering Performance",
-    context: "Remere's Map Editor is a C++ map editor used for large OTBM maps.",
-    problem: "Large maps and static preview paths created unnecessary allocation, traversal, I/O, and repaint costs.",
+    context:
+      "Remere's Map Editor is a long-lived C++ desktop tool used by OpenTibia mappers to inspect, edit, load, save, and render large OTBM maps. Performance problems in this tool directly affect map iteration speed and contributor productivity.",
+    problem:
+      "Large-map workflows were paying too much allocation, traversal, binary I/O, save-path, and repaint-invalidation cost. Static preview/rendering paths also spent CPU where the viewport should have been mostly idle.",
     whatIOwned: [
       "Profiling and diagnosis",
       "Allocator and traversal changes",
       "Binary I/O and save-path improvements",
-      "Rendering invalidation changes"
+      "Rendering invalidation changes",
+      "Before/after metrics in the public PR"
     ],
     technicalDecisions: [
-      "Targeted allocation and traversal overhead instead of cosmetic UI changes",
-      "Improved binary I/O and save behavior for large-map workflows",
-      "Reduced repaint invalidation work for static viewport scenarios"
+      "Targeted allocator pressure and tile/floor traversal before touching higher-level editor behavior",
+      "Kept the work inside load/save/rendering hot paths so map semantics stayed stable",
+      "Improved binary I/O and save traversal for large OTBM files instead of relying on UI-side masking",
+      "Reduced repaint invalidation work for static viewport scenarios where repeated rendering had low value"
     ],
     solution:
-      "Added pooled allocation, cached floor/tile lookups, improved binary I/O, optimized save traversal, and reduced unnecessary repaint work.",
+      "Added pooled allocation, cached floor/tile lookups, improved binary I/O, optimized save traversal, and reduced unnecessary repaint work in the editor rendering path.",
     impact:
       "Public PR metrics report slab refills dropping from 17,830 to 2,230, allocation CPU share dropping from 20.01% to 14.62%, and static viewport sampled CPU dropping from 139,767 to 126.",
     evidenceStatus: "Public PR merged",
@@ -133,21 +138,25 @@ export const caseStudies = [
     id: "livestream-cast-system",
     title: "Livestream/Cast System",
     context:
-      "OpenTibiaBR needed a viewer flow that connected game server state with login-server behavior and client compatibility.",
-    problem: "Viewer sessions needed to be read-only, safe, and compatible with the login flow.",
+      "OpenTibiaBR needed a livestream/cast viewer flow that crossed the Canary server runtime and the login-server stack. The feature had to expose active casts to clients while preserving game-state safety and login compatibility.",
+    problem:
+      "Viewer sessions needed to be read-only, isolated from player actions, represented in login descriptors, and compatible with client expectations without turning spectators into normal game participants.",
     whatIOwned: [
       "Server-side livestream/cast flow",
       "Viewer restrictions and session state",
       "Login descriptor contract",
       "Lua command integration",
+      "Persistence and runtime integration",
       "Documentation and compatibility work"
     ],
     technicalDecisions: [
-      "Kept viewer sessions read-only by design",
-      "Split server runtime behavior from login descriptor support",
-      "Made the feature understandable through public PRs across both repositories"
+      "Kept viewer sessions read-only by design instead of relying on command-level restrictions alone",
+      "Separated Canary runtime behavior from login-server descriptor support so each repository owned the right part of the flow",
+      "Represented casts through explicit login data rather than hidden client assumptions",
+      "Made the public evidence traceable across both repositories with linked PRs"
     ],
-    solution: "Implemented livestream manager behavior in Canary and login flow support in login-server.",
+    solution:
+      "Implemented livestream manager behavior in Canary, viewer restrictions, Lua command integration, persistence/runtime support, and matching login flow support in login-server.",
     impact:
       "The work demonstrates multi-repo ownership across server runtime, protocol/login behavior, persistence, commands, and client compatibility.",
     evidenceStatus: "Public PR merged",
@@ -189,7 +198,7 @@ export const caseStudies = [
     context:
       "New users and maintainers need a reproducible local stack, and CI needs to catch runtime startup failures.",
     problem:
-      "Build success alone did not prove that the server could start with database, config, map data, login-server, and web account tooling integration.",
+      "Build success alone did not prove that the server could start with database, config, map data, login-server, and MyAAC account tooling integration.",
     whatIOwned: [
       "Docker quickstart architecture",
       "Startup scripts and documentation",
@@ -199,10 +208,10 @@ export const caseStudies = [
     technicalDecisions: [
       "Validated runtime startup, not just compilation",
       "Used Docker to make local onboarding reproducible",
-      "Connected database, server, login, and account tooling in one flow"
+      "Connected database, server, login, and MyAAC account tooling in one flow"
     ],
     solution:
-      "Built a local stack with MariaDB, Canary runtime image, account tooling, login-server, startup scripts, LAN mode, and runtime smoke tests.",
+      "Built a local stack with MariaDB, Canary runtime image, MyAAC account tooling, login-server, startup scripts, LAN mode, and runtime smoke tests.",
     impact: "Improved developer onboarding and increased confidence in runtime startup behavior.",
     evidenceStatus: "Public PR merged",
     evidence: [
@@ -228,7 +237,7 @@ export const caseStudies = [
     technicalDecisions: [
       "Kept public language architectural and anonymized",
       "Separated client runtime claims from private project identifiers",
-      "Prepared the case for future client-verified testimonial support"
+      "Prepared the case for future client-verified testimonial support after explicit approval"
     ],
     solution:
       "Built and maintained substantial client systems while keeping private details confidential.",
@@ -260,7 +269,7 @@ export const selectedContributions = [
     category: "DevOps / Developer Experience",
     evidenceStatus: "Public PR merged",
     url: "https://github.com/opentibiabr/canary/pull/3973",
-    summary: "Built a reproducible local Canary stack with MariaDB, account tooling, runtime image, and login-server."
+    summary: "Built a reproducible local Canary stack with MariaDB, MyAAC account tooling, runtime image, and login-server."
   },
   {
     title: "Runtime Smoke Tests",
@@ -342,6 +351,7 @@ export const privateWork = {
   summary:
     "Commercial game client work across C++/Lua systems, protocol compatibility, UI modules, launcher/API integration, asset delivery, telemetry, crash reporting, and release operations.",
   reference: "Client reference available on request.",
+  clientVerifiedLabel: "Private / Anonymized · Client-verified",
   whatCanBeSaid: [
     "Built and maintained substantial client systems",
     "Worked across client runtime, protocol compatibility, release operations, and diagnostics",
@@ -351,6 +361,6 @@ export const privateWork = {
     "Customer names",
     "Private repository names",
     "Private URLs or internal service addresses",
-    "Proprietary code, assets, logs, network traces, screenshots, and business metrics"
+    "Proprietary code, assets, logs, packet captures / network traces, screenshots, and business metrics"
   ]
 };
