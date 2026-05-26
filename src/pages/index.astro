@@ -5,6 +5,7 @@ import {
   featuredWork,
   heroMetrics,
   navItems,
+  openSourceImpact,
   privateWork,
   profile,
   selectedContributions,
@@ -13,12 +14,12 @@ import {
 
 const statusClass = (status: string) => {
   if (status.includes("Private")) return "border-amber-400/30 bg-amber-400/10 text-amber-100";
-  if (status.includes("open") || status.includes("proposal")) return "border-sky-400/30 bg-sky-400/10 text-sky-100";
+  if (status.includes("Open") || status.includes("active")) return "border-sky-400/30 bg-sky-400/10 text-sky-100";
   return "border-emerald-400/30 bg-emerald-400/10 text-emerald-100";
 };
 ---
 
-<BaseLayout title="Eduardo Dantas - Software Engineer" description={profile.subtitle}>
+<BaseLayout title="Eduardo Dantas — Senior Software Engineer for Complex Game Systems" description={profile.description}>
   <div class="min-h-screen bg-slate-950 text-slate-100">
     <header class="sticky top-0 z-20 border-b border-white/10 bg-slate-950/85 backdrop-blur">
       <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8" aria-label="Main navigation">
@@ -28,7 +29,7 @@ const statusClass = (status: string) => {
             <a class="transition hover:text-white" href={item.href}>{item.label}</a>
           ))}
         </div>
-        <a class="rounded-md border border-sky-400/40 px-3 py-2 text-sm font-medium text-sky-100 transition hover:border-sky-300 hover:bg-sky-400/10" href="#contact">
+        <a class="rounded-md border border-sky-400/40 px-3 py-2 text-sm font-medium text-sky-100 transition hover:border-sky-300 hover:bg-sky-400/10" href="https://www.linkedin.com/in/dudantas" target="_blank" rel="noreferrer">
           Contact
         </a>
       </nav>
@@ -60,13 +61,6 @@ const statusClass = (status: string) => {
 
           <aside class="flex flex-col gap-5">
             <div class="overflow-hidden rounded-lg border border-white/10 bg-white/[0.03]">
-              <div class="flex items-center gap-4 border-b border-white/10 p-5">
-                <img class="h-16 w-16 rounded-md border border-white/10 bg-slate-900" src="https://github.com/dudantas.png" alt="Eduardo Dantas" loading="eager" />
-                <div>
-                  <p class="text-lg font-semibold text-white">{profile.name}</p>
-                  <p class="text-sm text-slate-400">@{profile.handle} - {profile.location}</p>
-                </div>
-              </div>
               <div class="grid gap-px bg-white/10 sm:grid-cols-3 lg:grid-cols-1">
                 {heroMetrics.map((metric) => (
                   <div class="bg-slate-950 p-5">
@@ -85,7 +79,7 @@ const statusClass = (status: string) => {
         <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div class="max-w-3xl">
             <p class="font-mono text-sm uppercase tracking-[0.18em] text-sky-300">Featured Work</p>
-            <h2 class="mt-3 text-3xl font-semibold text-white sm:text-4xl">Selected systems with clear technical signal.</h2>
+            <h2 class="mt-3 text-3xl font-semibold text-white sm:text-4xl">Selected work with measurable impact, public evidence, and production-grade engineering scope.</h2>
           </div>
           <div class="mt-10 grid gap-5 md:grid-cols-2">
             {featuredWork.map((work) => (
@@ -97,12 +91,16 @@ const statusClass = (status: string) => {
                   </span>
                 </div>
                 <h3 class="mt-4 text-2xl font-semibold text-white">{work.title}</h3>
-                <p class="mt-4 text-slate-300">{work.summary}</p>
-                <div class="mt-6 rounded-md border border-white/10 bg-slate-950/70 p-4">
-                  <p class="text-2xl font-semibold text-lime-200">{work.metric}</p>
-                  <p class="mt-1 text-sm text-slate-400">{work.metricLabel}</p>
+                <div class={`mt-6 grid gap-3 ${work.metrics.length > 1 ? "sm:grid-cols-2" : ""}`}>
+                  {work.metrics.map((metric) => (
+                    <div class="rounded-md border border-lime-300/20 bg-lime-300/10 p-5">
+                      <p class="text-3xl font-semibold leading-tight text-lime-200 sm:text-4xl">{metric.value}</p>
+                      <p class="mt-2 text-sm text-lime-50/70">{metric.label}</p>
+                    </div>
+                  ))}
                 </div>
-                <p class="mt-5 text-sm leading-6 text-slate-400">{work.impact}</p>
+                <p class="mt-5 text-base leading-7 text-slate-300">{work.summary}</p>
+                <p class="mt-3 text-sm leading-6 text-slate-400">{work.impact}</p>
                 <div class="mt-5 flex flex-wrap gap-2">
                   {work.tags.map((tag) => (
                     <span class="rounded-md border border-white/10 px-2.5 py-1 text-xs text-slate-300">{tag}</span>
@@ -110,9 +108,9 @@ const statusClass = (status: string) => {
                 </div>
                 {"url" in work && work.url && (
                   <div class="mt-6 flex flex-wrap gap-3">
-                    <a class="text-sm font-medium text-sky-300 hover:text-sky-200" href={work.url} target="_blank" rel="noreferrer">Public evidence</a>
-                    {"relatedUrls" in work && work.relatedUrls?.map((url) => (
-                      <a class="text-sm font-medium text-sky-300 hover:text-sky-200" href={url} target="_blank" rel="noreferrer">Related PR</a>
+                    <a class="text-sm font-medium text-sky-300 hover:text-sky-200" href={work.url} target="_blank" rel="noreferrer">{work.evidenceLabel}</a>
+                    {"relatedUrls" in work && work.relatedUrls?.map((item) => (
+                      <a class="text-sm font-medium text-sky-300 hover:text-sky-200" href={item.url} target="_blank" rel="noreferrer">{item.label}</a>
                     ))}
                   </div>
                 )}
@@ -122,54 +120,90 @@ const statusClass = (status: string) => {
         </div>
       </section>
 
+      <section id="open-source-impact" class="border-b border-white/10 py-16 sm:py-20">
+        <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <div class="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
+            <div>
+              <p class="font-mono text-sm uppercase tracking-[0.18em] text-sky-300">Open Source Impact</p>
+              <h2 class="mt-3 text-3xl font-semibold text-white sm:text-4xl">Public work across a real game platform.</h2>
+            </div>
+            <p class="text-lg leading-8 text-slate-300">{openSourceImpact}</p>
+          </div>
+        </div>
+      </section>
+
       <section id="case-studies" class="border-b border-white/10 py-16 sm:py-20">
         <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div class="max-w-3xl">
             <p class="font-mono text-sm uppercase tracking-[0.18em] text-sky-300">Case Studies</p>
-            <h2 class="mt-3 text-3xl font-semibold text-white sm:text-4xl">Engineering narratives backed by public evidence.</h2>
+            <h2 class="mt-3 text-3xl font-semibold text-white sm:text-4xl">Detailed engineering narratives with anchors and evidence.</h2>
           </div>
-          <div class="mt-10 grid gap-5">
+          <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {caseStudies.map((study) => (
-              <article class="rounded-lg border border-white/10 bg-white/[0.03] p-6 lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:gap-8">
-                <div>
-                  <div class="flex flex-wrap items-center gap-3">
-                    <h3 class="text-2xl font-semibold text-white">{study.title}</h3>
+              <a class="rounded-md border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-medium text-slate-200 transition hover:border-sky-300/50 hover:bg-sky-400/10" href={`#${study.id}`}>
+                {study.title}
+              </a>
+            ))}
+          </div>
+          <div class="mt-10 grid gap-4">
+            {caseStudies.map((study) => (
+              <details id={study.id} class="scroll-mt-24 rounded-lg border border-white/10 bg-white/[0.03] p-6 open:border-sky-300/30" open={study.id === "canary-startup-loading-performance"}>
+                <summary class="cursor-pointer list-none">
+                  <div class="flex flex-wrap items-center justify-between gap-3">
+                    <h3 class="text-xl font-semibold text-white sm:text-2xl">{study.title}</h3>
                     <span class={`rounded-md border px-2.5 py-1 text-xs font-medium ${statusClass(study.evidenceStatus)}`}>{study.evidenceStatus}</span>
                   </div>
-                  <p class="mt-4 text-slate-300">{study.context}</p>
-                  <p class="mt-4 text-sm leading-6 text-slate-400"><strong class="font-semibold text-slate-200">Problem:</strong> {study.problem}</p>
-                  <p class="mt-4 text-sm leading-6 text-slate-400"><strong class="font-semibold text-slate-200">Solution:</strong> {study.solution}</p>
-                  <p class="mt-4 text-sm leading-6 text-slate-400"><strong class="font-semibold text-lime-200">Impact:</strong> {study.impact}</p>
-                </div>
-                <div class="mt-6 grid gap-5 lg:mt-0">
-                  <div>
-                    <h4 class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">What I owned</h4>
-                    <ul class="mt-3 grid gap-2 text-sm text-slate-300 sm:grid-cols-2">
-                      {study.whatIOwned.map((item) => (
-                        <li class="rounded-md border border-white/10 bg-slate-950/60 px-3 py-2">{item}</li>
-                      ))}
-                    </ul>
+                  <p class="mt-3 text-sm text-slate-400">Context, problem, ownership, decisions, solution, impact, evidence, and technologies.</p>
+                </summary>
+                <div class="mt-6 grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+                  <div class="grid gap-4 text-sm leading-6 text-slate-400">
+                    <p><strong class="font-semibold text-slate-200">Context:</strong> {study.context}</p>
+                    <p><strong class="font-semibold text-slate-200">Problem:</strong> {study.problem}</p>
+                    <p><strong class="font-semibold text-slate-200">Solution:</strong> {study.solution}</p>
+                    <p><strong class="font-semibold text-lime-200">Impact:</strong> {study.impact}</p>
                   </div>
-                  <div>
-                    <h4 class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Evidence</h4>
-                    <div class="mt-3 flex flex-wrap gap-3">
-                      {study.evidence.map((url, index) => (
-                        <a class="rounded-md border border-sky-400/30 px-3 py-2 text-sm font-medium text-sky-200 hover:bg-sky-400/10" href={url} target="_blank" rel="noreferrer">
-                          Public link {index + 1}
-                        </a>
-                      ))}
+                  <div class="grid gap-5">
+                    <div>
+                      <h4 class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">What I owned</h4>
+                      <ul class="mt-3 grid gap-2 text-sm text-slate-300 sm:grid-cols-2">
+                        {study.whatIOwned.map((item) => (
+                          <li class="rounded-md border border-white/10 bg-slate-950/60 px-3 py-2">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Technical decisions</h4>
+                      <ul class="mt-3 grid gap-2 text-sm text-slate-300">
+                        {study.technicalDecisions.map((item) => (
+                          <li class="rounded-md border border-white/10 bg-slate-950/60 px-3 py-2">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Evidence</h4>
+                      <div class="mt-3 flex flex-wrap gap-3">
+                        {study.evidence.map((item) => (
+                          "url" in item ? (
+                            <a class="rounded-md border border-sky-400/30 px-3 py-2 text-sm font-medium text-sky-200 hover:bg-sky-400/10" href={item.url} target="_blank" rel="noreferrer">
+                              {item.label}
+                            </a>
+                          ) : (
+                            <span class="rounded-md border border-amber-400/30 bg-amber-400/10 px-3 py-2 text-sm font-medium text-amber-100">{item.label}</span>
+                          )
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Technologies</h4>
+                      <div class="mt-3 flex flex-wrap gap-2">
+                        {study.technologies.map((tech) => (
+                          <span class="rounded-md border border-white/10 px-2.5 py-1 text-xs text-slate-300">{tech}</span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <h4 class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Technologies</h4>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                      {study.technologies.map((tech) => (
-                        <span class="rounded-md border border-white/10 px-2.5 py-1 text-xs text-slate-300">{tech}</span>
-                      ))}
-                    </div>
-                  </div>
                 </div>
-              </article>
+              </details>
             ))}
           </div>
         </div>
@@ -190,7 +224,7 @@ const statusClass = (status: string) => {
                 </div>
                 <h3 class="mt-4 text-lg font-semibold text-white">{item.title}</h3>
                 <p class="mt-3 text-sm leading-6 text-slate-400">{item.summary}</p>
-                <a class="mt-5 inline-flex text-sm font-medium text-sky-300 hover:text-sky-200" href={item.url} target="_blank" rel="noreferrer">View evidence</a>
+                <a class="mt-5 inline-flex text-sm font-medium text-sky-300 hover:text-sky-200" href={item.url} target="_blank" rel="noreferrer">View PR</a>
               </article>
             ))}
           </div>
@@ -226,6 +260,7 @@ const statusClass = (status: string) => {
               <h2 class="mt-3 text-3xl font-semibold text-white sm:text-4xl">{privateWork.title}</h2>
               <span class={`mt-5 inline-flex rounded-md border px-3 py-1.5 text-sm font-medium ${statusClass(privateWork.label)}`}>{privateWork.label}</span>
               <p class="mt-6 text-lg leading-8 text-slate-300">{privateWork.summary}</p>
+              <p class="mt-4 text-sm font-medium text-amber-100">{privateWork.reference}</p>
             </div>
             <div class="grid gap-5 md:grid-cols-2">
               <article class="rounded-lg border border-white/10 bg-white/[0.03] p-6">
@@ -253,7 +288,7 @@ const statusClass = (status: string) => {
         <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div class="rounded-lg border border-white/10 bg-white/[0.03] p-8 sm:p-10">
             <p class="font-mono text-sm uppercase tracking-[0.18em] text-sky-300">Contact</p>
-            <h2 class="mt-3 max-w-3xl text-3xl font-semibold text-white sm:text-4xl">Available for senior engineering work in complex game systems.</h2>
+            <h2 class="mt-3 max-w-3xl text-3xl font-semibold text-white sm:text-4xl">Available for senior engineering roles and consulting in complex game systems.</h2>
             <p class="mt-5 max-w-3xl text-slate-300">
               Best fit: game server engineering, game client engineering, performance work, protocol tooling, open-source infrastructure, and production reliability.
             </p>

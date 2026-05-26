@@ -4,7 +4,8 @@ export const profile = {
   headline: "Senior Software Engineer for complex game systems.",
   subtitle:
     "I build and maintain MMORPG servers, game clients, protocol tooling, performance-critical C++/Lua systems, and open-source infrastructure.",
-  location: "Brazil",
+  description:
+    "Portfolio of Eduardo Dantas, focused on MMORPG servers, game clients, C++/Lua, protocol compatibility, performance, tooling, and open-source infrastructure.",
   links: [
     { label: "GitHub", href: "https://github.com/dudantas" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/dudantas" }
@@ -13,17 +14,20 @@ export const profile = {
 
 export const navItems = [
   { label: "Work", href: "#featured-work" },
+  { label: "Impact", href: "#open-source-impact" },
   { label: "Cases", href: "#case-studies" },
   { label: "Contributions", href: "#selected-contributions" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" }
+  { label: "Skills", href: "#skills" }
 ];
 
 export const heroMetrics = [
-  { label: "Public ecosystem", value: "OpenTibiaBR", detail: "Server, client, tooling, infrastructure" },
-  { label: "Primary stack", value: "C++ / Lua", detail: "Performance-critical game systems" },
-  { label: "Positioning", value: "End-to-end", detail: "Server, client, protocol, build, CI/CD" }
+  { label: "Public ecosystem", value: "OpenTibiaBR", detail: "Server, client, tooling" },
+  { label: "Primary stack", value: "C++ / Lua", detail: "Performance-critical systems" },
+  { label: "Scope", value: "End-to-end", detail: "Server, client, protocol, CI/CD" }
 ];
+
+export const openSourceImpact =
+  "My public work focuses on OpenTibiaBR's game platform: Canary server runtime, OTClient, Remere's Map Editor, login-server, protocol compatibility, Docker workflows, CI smoke tests, and developer tooling. I prioritize changes that make complex systems faster, safer, easier to operate, and easier to maintain.";
 
 export const featuredWork = [
   {
@@ -31,57 +35,53 @@ export const featuredWork = [
     eyebrow: "Game Server Engineering",
     evidenceStatus: "Public PR merged",
     url: "https://github.com/opentibiabr/canary/pull/3968",
-    summary:
-      "Profiled and optimized Canary startup across Lua loading, map parsing, tile cache construction, zone indexing, and spawn startup.",
-    impact:
-      "Public measurements report script/module loading dropping from about 54 seconds to roughly 1.5-3.0 seconds.",
-    metric: "~54s -> 1.5-3.0s",
-    metricLabel: "script/module loading",
-    tags: ["C++", "Lua", "profiling", "startup", "server runtime"]
+    evidenceLabel: "Canary PR #3968",
+    summary: "Optimized Canary startup hot paths across Lua loading, map parsing, caches, indexing, and spawns.",
+    impact: "Reduced a major startup bottleneck while preserving runtime behavior.",
+    metrics: [{ value: "~54s -> 1.5-3.0s", label: "script/module loading" }],
+    tags: ["C++", "Lua", "profiling", "startup"]
   },
   {
     title: "RME OTBM Load/Save and Rendering Performance",
     eyebrow: "Developer Tooling",
     evidenceStatus: "Public PR merged",
     url: "https://github.com/opentibiabr/remeres-map-editor/pull/188",
-    summary:
-      "Optimized OTBM load/save/rendering paths through allocator, traversal, binary I/O, and repaint invalidation work.",
-    impact:
-      "Public metrics report slab refills from 17,830 to 2,230 and static viewport sampled CPU from 139,767 to 126.",
-    metric: "17,830 -> 2,230",
-    metricLabel: "slab refills",
-    tags: ["C++", "performance", "allocator", "binary I/O", "rendering"]
+    evidenceLabel: "RME PR #188",
+    summary: "Improved large-map load, save, allocation, and viewport rendering paths in Remere's Map Editor.",
+    impact: "Made large OTBM workflows faster and easier to operate for map authors.",
+    metrics: [
+      { value: "17,830 -> 2,230", label: "slab refills" },
+      { value: "139,767 -> 126", label: "static viewport sampled CPU" }
+    ],
+    tags: ["C++", "allocator", "binary I/O", "rendering"]
   },
   {
     title: "Livestream/Cast System Across Canary and Login Stack",
     eyebrow: "Protocol & Networking",
     evidenceStatus: "Public PR merged",
     url: "https://github.com/opentibiabr/canary/pull/3965",
-    relatedUrls: ["https://github.com/opentibiabr/login-server/pull/31"],
-    summary:
-      "Designed a read-only viewer flow across Canary server state, login descriptor support, Lua commands, persistence, and client compatibility.",
-    impact:
-      "Demonstrates multi-repo ownership across server runtime, protocol/login behavior, persistence, commands, and client compatibility.",
-    metric: "2 repos",
-    metricLabel: "server + login stack",
-    tags: ["C++", "Lua", "Go", "protocol", "login flow"]
+    evidenceLabel: "Canary PR #3965",
+    relatedUrls: [{ label: "login-server PR #31", url: "https://github.com/opentibiabr/login-server/pull/31" }],
+    summary: "Built a read-only viewer flow across server state, login descriptors, persistence, commands, and compatibility.",
+    impact: "Connected runtime, protocol, login flow, and client compatibility across repositories.",
+    metrics: [{ value: "2 repos", label: "server + login stack" }],
+    tags: ["C++", "Lua", "Go", "protocol"]
   },
   {
     title: "Private Commercial Game Client",
     eyebrow: "Game Client Engineering",
     evidenceStatus: "Private / Anonymized",
     summary:
-      "Built and maintained substantial client systems across C++/Lua, protocol compatibility, UI modules, launcher/API integration, asset delivery, telemetry, crash reporting, and release operations.",
-    impact:
-      "Demonstrates commercial production experience beyond open-source patches while keeping private details confidential.",
-    metric: "Private / Anonymized",
-    metricLabel: "commercial game client",
-    tags: ["C++", "Lua", "client runtime", "release operations", "telemetry"]
+      "Built and maintained substantial client systems across C++/Lua, protocol compatibility, UI, release operations, telemetry, and crash reporting.",
+    impact: "Shows production ownership beyond open-source work while keeping client and project details confidential.",
+    metrics: [{ value: "Private / Anonymized", label: "commercial game client" }],
+    tags: ["C++", "Lua", "client runtime", "release operations"]
   }
 ];
 
 export const caseStudies = [
   {
+    id: "canary-startup-loading-performance",
     title: "Canary Startup Loading Performance",
     context:
       "Canary is a large C++/Lua MMORPG server where startup touches scripts, map data, tile caches, spawn configuration, and runtime registries.",
@@ -92,15 +92,21 @@ export const caseStudies = [
       "Behavior preservation",
       "Measurement and tradeoff documentation"
     ],
+    technicalDecisions: [
+      "Focused on startup hot paths before changing broader runtime architecture",
+      "Preserved expected script, map, tile, zone, and spawn behavior",
+      "Used public before/after measurements to document impact"
+    ],
     solution:
       "Optimized Lua loading, map parsing, tile cache construction, zone indexing, and spawn startup without changing expected runtime behavior.",
     impact:
-      "Script/module loading dropped from about 54 seconds to roughly 1.5-3.0 seconds in the public PR measurements.",
+      "Script/module loading dropped from about 54 seconds to roughly 1.5-3.0 seconds in public PR measurements.",
     evidenceStatus: "Public PR merged",
-    evidence: ["https://github.com/opentibiabr/canary/pull/3968"],
+    evidence: [{ label: "Canary PR #3968", url: "https://github.com/opentibiabr/canary/pull/3968" }],
     technologies: ["C++", "Lua", "profiling", "MMORPG server runtime"]
   },
   {
+    id: "rme-otbm-load-save-rendering-performance",
     title: "RME OTBM Load/Save/Rendering Performance",
     context: "Remere's Map Editor is a C++ map editor used for large OTBM maps.",
     problem: "Large maps and static preview paths created unnecessary allocation, traversal, I/O, and repaint costs.",
@@ -110,15 +116,21 @@ export const caseStudies = [
       "Binary I/O and save-path improvements",
       "Rendering invalidation changes"
     ],
+    technicalDecisions: [
+      "Targeted allocation and traversal overhead instead of cosmetic UI changes",
+      "Improved binary I/O and save behavior for large-map workflows",
+      "Reduced repaint invalidation work for static viewport scenarios"
+    ],
     solution:
       "Added pooled allocation, cached floor/tile lookups, improved binary I/O, optimized save traversal, and reduced unnecessary repaint work.",
     impact:
       "Public PR metrics report slab refills dropping from 17,830 to 2,230, allocation CPU share dropping from 20.01% to 14.62%, and static viewport sampled CPU dropping from 139,767 to 126.",
     evidenceStatus: "Public PR merged",
-    evidence: ["https://github.com/opentibiabr/remeres-map-editor/pull/188"],
+    evidence: [{ label: "RME PR #188", url: "https://github.com/opentibiabr/remeres-map-editor/pull/188" }],
     technologies: ["C++", "allocator work", "binary I/O", "rendering"]
   },
   {
+    id: "livestream-cast-system",
     title: "Livestream/Cast System",
     context:
       "OpenTibiaBR needed a viewer flow that connected game server state with login-server behavior and client compatibility.",
@@ -130,17 +142,23 @@ export const caseStudies = [
       "Lua command integration",
       "Documentation and compatibility work"
     ],
+    technicalDecisions: [
+      "Kept viewer sessions read-only by design",
+      "Split server runtime behavior from login descriptor support",
+      "Made the feature understandable through public PRs across both repositories"
+    ],
     solution: "Implemented livestream manager behavior in Canary and login flow support in login-server.",
     impact:
       "The work demonstrates multi-repo ownership across server runtime, protocol/login behavior, persistence, commands, and client compatibility.",
     evidenceStatus: "Public PR merged",
     evidence: [
-      "https://github.com/opentibiabr/canary/pull/3965",
-      "https://github.com/opentibiabr/login-server/pull/31"
+      { label: "Canary PR #3965", url: "https://github.com/opentibiabr/canary/pull/3965" },
+      { label: "login-server PR #31", url: "https://github.com/opentibiabr/login-server/pull/31" }
     ],
     technologies: ["C++", "Lua", "Go", "protocol", "login stack"]
   },
   {
+    id: "market-inbox-data-safety",
     title: "Market/Inbox Data Safety",
     context: "Market and inbox flows handle item movement where duplication, item loss, or partial mutation would be serious.",
     problem: "Capacity and insertion paths needed stronger preflight checks and atomic behavior.",
@@ -150,17 +168,23 @@ export const caseStudies = [
       "Atomic batch insertion behavior",
       "Tests and edge-case coverage"
     ],
+    technicalDecisions: [
+      "Validated capacity before mutating item state",
+      "Handled stackable and non-stackable items explicitly",
+      "Added tests around edge cases that affect player data integrity"
+    ],
     solution:
       "Hardened inbox and market insertion paths with capacity checks, safer cloning/insertion behavior, and tests.",
     impact: "Protects game economy and player data integrity.",
     evidenceStatus: "Public PR merged",
     evidence: [
-      "https://github.com/opentibiabr/canary/pull/3893",
-      "https://github.com/opentibiabr/canary/pull/3504"
+      { label: "Canary PR #3893", url: "https://github.com/opentibiabr/canary/pull/3893" },
+      { label: "Canary PR #3504", url: "https://github.com/opentibiabr/canary/pull/3504" }
     ],
     technologies: ["C++", "data safety", "persistence", "tests"]
   },
   {
+    id: "docker-quickstart-runtime-smoke-tests",
     title: "Docker Quickstart and Runtime Smoke Tests",
     context:
       "New users and maintainers need a reproducible local stack, and CI needs to catch runtime startup failures.",
@@ -172,15 +196,47 @@ export const caseStudies = [
       "Runtime smoke-test flow",
       "CI integration"
     ],
+    technicalDecisions: [
+      "Validated runtime startup, not just compilation",
+      "Used Docker to make local onboarding reproducible",
+      "Connected database, server, login, and account tooling in one flow"
+    ],
     solution:
       "Built a local stack with MariaDB, Canary runtime image, account tooling, login-server, startup scripts, LAN mode, and runtime smoke tests.",
     impact: "Improved developer onboarding and increased confidence in runtime startup behavior.",
     evidenceStatus: "Public PR merged",
     evidence: [
-      "https://github.com/opentibiabr/canary/pull/3973",
-      "https://github.com/opentibiabr/canary/pull/3963"
+      { label: "Canary PR #3973", url: "https://github.com/opentibiabr/canary/pull/3973" },
+      { label: "Canary PR #3963", url: "https://github.com/opentibiabr/canary/pull/3963" }
     ],
     technologies: ["Docker", "GitHub Actions", "MariaDB", "runtime validation"]
+  },
+  {
+    id: "private-commercial-game-client",
+    title: "Private Commercial Game Client",
+    context:
+      "Private commercial game work covered client systems, protocol compatibility, UI modules, release operations, diagnostics, and production support.",
+    problem:
+      "The project needed substantial client engineering while keeping company, repository, asset, service, and operational details confidential.",
+    whatIOwned: [
+      "C++/Lua client systems",
+      "Protocol compatibility",
+      "Launcher/API integration",
+      "Release operations",
+      "Telemetry and crash reporting"
+    ],
+    technicalDecisions: [
+      "Kept public language architectural and anonymized",
+      "Separated client runtime claims from private project identifiers",
+      "Prepared the case for future client-verified testimonial support"
+    ],
+    solution:
+      "Built and maintained substantial client systems while keeping private details confidential.",
+    impact:
+      "Shows production ownership beyond open-source work while keeping client and project details confidential.",
+    evidenceStatus: "Private / Anonymized",
+    evidence: [{ label: "Client reference available on request." }],
+    technologies: ["C++", "Lua", "client runtime", "release operations", "telemetry"]
   }
 ];
 
@@ -228,13 +284,6 @@ export const selectedContributions = [
     summary: "Reduced protobuf dependency surface for lite-runtime protocol data."
   },
   {
-    title: "Protobuf Lite-only Upstream Proposal",
-    category: "Build Systems / Upstream",
-    evidenceStatus: "Public issue/proposal",
-    url: "https://github.com/protocolbuffers/protobuf/issues/27231",
-    summary: "Proposed and measured a lite-only target runtime mode for downstream consumers."
-  },
-  {
     title: "OTClient Spectator Retrieval",
     category: "Client Performance",
     evidenceStatus: "Public PR merged",
@@ -256,18 +305,11 @@ export const selectedContributions = [
     summary: "Added structured public errors, admin hints, config validation, and tests."
   },
   {
-    title: "MyAAC Livestream Compatibility",
-    category: "Compatibility",
-    evidenceStatus: "Public PR open",
-    url: "https://github.com/slawkens/myaac/pull/363",
-    summary: "Submitted Canary-compatible event schedule and livestream login support."
-  },
-  {
     title: "Lua API Documentation Generator",
     category: "Developer Tooling",
-    evidenceStatus: "Public PR open",
+    evidenceStatus: "Public PR merged",
     url: "https://github.com/opentibiabr/canary/pull/3771",
-    summary: "Active/open tooling work for generated Lua API docs and stubs."
+    summary: "Added generated Lua API docs and stubs for developer tooling."
   }
 ];
 
@@ -299,6 +341,7 @@ export const privateWork = {
   label: "Private / Anonymized",
   summary:
     "Commercial game client work across C++/Lua systems, protocol compatibility, UI modules, launcher/API integration, asset delivery, telemetry, crash reporting, and release operations.",
+  reference: "Client reference available on request.",
   whatCanBeSaid: [
     "Built and maintained substantial client systems",
     "Worked across client runtime, protocol compatibility, release operations, and diagnostics",
@@ -307,7 +350,7 @@ export const privateWork = {
   whatStaysPrivate: [
     "Customer names",
     "Private repository names",
-    "Private URLs or internal endpoints",
-    "Proprietary code, assets, logs, packet captures, screenshots, and business metrics"
+    "Private URLs or internal service addresses",
+    "Proprietary code, assets, logs, network traces, screenshots, and business metrics"
   ]
 };

@@ -4,5 +4,5 @@ dist/
 .env
 .env.*
 npm-debug.log*
-astro-preview.*.log
+astro-*.log
 screenshots/
