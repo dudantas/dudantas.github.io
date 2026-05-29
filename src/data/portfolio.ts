@@ -17,8 +17,18 @@ export const navItems = [
   { label: "Impact", href: "#open-source-impact" },
   { label: "Cases", href: "#case-studies" },
   { label: "Contributions", href: "#selected-contributions" },
-  { label: "Skills", href: "#skills" }
+  { label: "Skills", href: "#skills" },
+  { label: "Recommendations", href: "#recommendations" }
 ];
+
+export const recommendations = {
+  profileUrl:
+    "https://www.linkedin.com/in/dudantas/details/recommendations/",
+  title: "Recommendations",
+  headline: "Direct feedback from collaborators and clients is available on LinkedIn.",
+  description:
+    "Selected recommendations are linked from my public LinkedIn profile, where recent endorsements and testimonials are available."
+};
 
 export const heroMetrics = [
   { label: "Public ecosystem", value: "OpenTibiaBR", detail: "Server, client, tooling" },
