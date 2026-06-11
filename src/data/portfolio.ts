@@ -96,14 +96,15 @@ export const featuredWork = [
     evidenceLabel: "OTCRP site",
     relatedUrls: [{ label: "Downloads", url: "https://otcrp.com/downloads" }],
     summary:
-      "Built client-side delivery and runtime integration for a public Windows launcher platform with controlled updates, signed update metadata, partner catalog delivery, and asset distribution.",
+      "Built the client-side delivery layer for a public Windows launcher platform that supports multiple partner servers with different asset sets, module sets, launch metadata, catalog visibility, and update requirements.",
     impact:
-      "Creates a public entry point for supported OTClient Redemption partner servers while keeping private source, endpoints, partner operations, and asset internals confidential.",
+      "Turns a launcher into a controlled multiserver delivery surface: one public entry point can distribute server-specific clients without mixing assets, modules, private endpoints, partner operations, or implementation internals.",
     metrics: [
-      { value: "Public beta", label: "official launcher entry" },
+      { value: "Multi-server", label: "catalog-based delivery" },
+      { value: "Per-server", label: "assets, modules, launch rules" },
       { value: "Windows", label: "current public surface" }
     ],
-    tags: ["C++", "Lua", "launcher", "asset delivery", "catalog/API", "release operations"]
+    tags: ["C++", "Lua", "launcher", "multiserver", "asset delivery", "catalog/API", "release operations"]
   }
 ];
 
@@ -325,32 +326,34 @@ export const caseStudies = [
     id: "otcrp-delivery-platform",
     title: "OTClient Redemption Premium Delivery Platform",
     context:
-      "OTClient Redemption Premium is a public, closed-source launcher and delivery platform for supported OTClient Redemption partner servers. The current public surface is Windows launcher delivery; Android/mobile work is an active in-progress track, not a production claim.",
+      "OTClient Redemption Premium is a public, closed-source launcher and delivery platform for supported OTClient Redemption partner servers. The current public surface is Windows launcher delivery.",
     problem:
-      "Partner client distribution needed a controlled public entry point, platform-managed updates, catalog-based multi-server delivery, asset distribution, and operational diagnostics without exposing private source or partner internals.",
+      "Partner client distribution was not a single-download problem. The platform needed to support multiple servers with different asset trees, module sets, launch goals, catalog visibility, update cadence, and delivery rules while preserving one controlled public entry point.",
     whatIOwned: [
       "Client-side launcher/runtime integration",
-      "Catalog and multi-server delivery flow",
+      "Catalog-driven multiserver delivery flow",
+      "Server-specific asset and module loading boundaries",
       "Asset packaging, delivery, and runtime loading",
       "Signed update metadata integration",
-      "Windows release support",
-      "Android/mobile build track"
+      "Windows release support"
     ],
     technicalDecisions: [
       "Anchored public claims to the OTCRP public site and downloads page",
-      "Separated the current Windows public surface from Android/mobile work that is still in progress",
+      "Avoided hardcoding the client flow around a single server or single asset layout",
+      "Kept server-specific assets, modules, launch metadata, and catalog visibility separated through delivery rules",
+      "Kept public platform claims scoped to the current Windows surface",
       "Kept private repository names, source, internal endpoints, partner operations, signing material, and asset internals out of public copy"
     ],
     solution:
-      "Integrated the client with launcher/API delivery flows, catalog-based partner/server selection, asset loading, signed update metadata, and release support for the public Windows launcher surface, while maintaining the mobile build track separately.",
+      "Integrated the client with launcher/API delivery flows, catalog-based partner/server selection, server-specific asset and module loading, signed update metadata, and release support for the public Windows launcher surface.",
     impact:
-      "The public product gives players an official download and update path for supported servers while preserving the confidentiality of closed-source implementation and partner operations.",
+      "The public product gives players an official download/update path for supported servers while preserving separation between server-specific packages and the confidentiality of closed-source implementation and partner operations.",
     evidenceStatus: "Public product",
     evidence: [
       { label: "OTCRP home", url: "https://otcrp.com/?lang=en" },
       { label: "OTCRP downloads", url: "https://otcrp.com/downloads" }
     ],
-    technologies: ["C++", "Lua", "CMake", "Windows launcher", "catalog/API integration", "asset delivery", "Android/mobile in progress"]
+    technologies: ["C++", "Lua", "CMake", "Windows launcher", "multiserver catalog", "server-specific modules", "asset delivery"]
   }
 ];
 
@@ -412,7 +415,7 @@ export const selectedContributions = [
     url: "https://otcrp.com/?lang=en",
     linkLabel: "View product",
     summary:
-      "Public Windows launcher and delivery platform with controlled updates, signed metadata, partner catalog delivery, and asset distribution."
+      "Public Windows launcher platform for multiple supported servers, handling per-server assets/modules, catalog visibility, launch metadata, controlled updates, signed metadata, and asset distribution."
   },
   {
     title: "Protobuf-lite Integration",
@@ -474,7 +477,7 @@ export const skillGroups = [
   },
   {
     title: "Product Delivery",
-    skills: ["Launcher/API integration", "Asset delivery", "Catalog-based server delivery", "Signed update metadata", "Windows releases", "Android/mobile build track"]
+    skills: ["Launcher/API integration", "Multiserver catalog delivery", "Server-specific assets/modules", "Asset delivery", "Signed update metadata", "Windows releases"]
   }
 ];
 
