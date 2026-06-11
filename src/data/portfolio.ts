@@ -37,7 +37,7 @@ export const heroMetrics = [
 ];
 
 export const openSourceImpact =
-  "My public work focuses on OpenTibiaBR's game platform: Canary server runtime, OTClient, Remere's Map Editor, login-server, protocol compatibility, Docker workflows, CI smoke tests, and developer tooling. I prioritize changes that make complex systems faster, safer, easier to operate, and easier to maintain.";
+  "My public work focuses on OpenTibiaBR's game platform and upstream build tooling: Canary server runtime, OTClient, Remere's Map Editor, login-server, protocol compatibility, Docker workflows, CI smoke tests, Protocol Buffers, vcpkg, and developer tooling. I prioritize changes that make complex systems faster, safer, easier to operate, and easier to maintain.";
 
 export const featuredWork = [
   {
@@ -78,15 +78,15 @@ export const featuredWork = [
     tags: ["C++", "Lua", "Go", "protocol"]
   },
   {
-    title: "Private Commercial Game Client",
+    title: "Asteria Client and Server Engineering",
     eyebrow: "Game Client Engineering",
-    evidenceStatus: "Private / Anonymized",
+    evidenceStatus: "Client-approved private work",
     summary:
-      "Built and maintained substantial client systems across C++/Lua, protocol compatibility, UI, release operations, telemetry, and crash reporting.",
-    impact: "Shows production ownership beyond open-source work while keeping client and project details confidential.",
-    metrics: [{ value: "Private / Anonymized", label: "commercial game client" }],
-    clientVerifiedLabel: "Private / Anonymized · Client-verified",
-    tags: ["C++", "Lua", "client runtime", "release operations"]
+      "Built and maintained substantial C++/Lua client and server systems across protocol compatibility, UI/runtime work, performance, batch updates, persistence, launcher/API integration, telemetry, crash reporting, and release operations.",
+    impact: "Shows production ownership beyond open-source work while keeping private code, assets, endpoints, logs, and operational details confidential.",
+    metrics: [{ value: "Asteria", label: "client + server" }],
+    clientVerifiedLabel: "Client-verified reference",
+    tags: ["C++", "Lua", "client runtime", "server runtime", "release operations"]
   }
 ];
 
@@ -242,32 +242,67 @@ export const caseStudies = [
     technologies: ["Docker", "MariaDB", "MyAAC", "Go login-server", "GitHub Actions", "runtime validation"]
   },
   {
-    id: "private-commercial-game-client",
-    title: "Private Commercial Game Client",
+    id: "protobuf-vcpkg-lite-runtime-packaging",
+    title: "Upstream Protobuf/vcpkg Lite Runtime Packaging",
     context:
-      "Private commercial game work covered client systems, protocol compatibility, UI modules, release operations, diagnostics, and production support for a custom game client.",
+      "Some C++ package-manager and cross-build workflows use a host protoc while target packages only need protobuf::libprotobuf-lite.",
     problem:
-      "The project needed substantial client engineering while keeping company, repository, asset, service, and operational details confidential.",
+      "The target-side Protobuf package could still pay build and install cost for full runtime and compiler-side artifacts that the target dependency graph did not need.",
+    whatIOwned: [
+      "Upstream problem statement",
+      "CMake implementation",
+      "vcpkg packaging update",
+      "Maintainer iteration",
+      "Landed-commit verification"
+    ],
+    technicalDecisions: [
+      "Kept Protobuf default behavior unchanged",
+      "Added a strict lite-only mode only when compiler-side artifacts, tests, conformance, examples, and upb are disabled",
+      "Exported and installed only targets that actually exist",
+      "Treated Protobuf's closed PR state through the public Copybara landed commit instead of GitHub's merge flag"
+    ],
+    solution:
+      "Implemented upstream Protobuf CMake support for a constrained lite-only runtime build and contributed the vcpkg port change that makes libprotoc opt-in for non-native target builds.",
+    impact:
+      "The Protobuf change landed through Copybara as public commit 7c090172. The local PoC measured the build step dropping from 508.063s to 55.648s and installed footprint from 113,754 KB to 21,579 KB.",
+    evidenceStatus: "Public upstream commit",
+    evidence: [
+      { label: "Protobuf PR #27407", url: "https://github.com/protocolbuffers/protobuf/pull/27407" },
+      { label: "Landed commit 7c090172", url: "https://github.com/protocolbuffers/protobuf/commit/7c090172a4f502a06e3a3c23df8a3242b03f3148" },
+      { label: "vcpkg PR #51545", url: "https://github.com/microsoft/vcpkg/pull/51545" }
+    ],
+    technologies: ["CMake", "vcpkg", "Protocol Buffers", "package management", "cross-builds"]
+  },
+  {
+    id: "private-commercial-game-client",
+    title: "Asteria Client and Server Engineering",
+    context:
+      "Asteria client and server work covered C++/Lua runtime systems, protocol compatibility, UI modules, performance, persistence, release operations, diagnostics, and production support.",
+    problem:
+      "The project needed substantial client and server engineering while keeping private repository, asset, service, endpoint, log, and operational details confidential.",
     whatIOwned: [
       "C++/Lua client systems",
+      "C++/Lua server systems",
       "Protocol compatibility",
       "UI/module runtime work",
+      "Performance and batch update work",
+      "Persistence and data safety work",
       "Launcher/API integration",
       "Release operations",
       "Telemetry and crash reporting"
     ],
     technicalDecisions: [
-      "Kept public language architectural and anonymized",
+      "Use Asteria by name only at public-safe architecture and outcome level",
       "Separated client runtime claims from private project identifiers",
-      "Prepared the case for future client-verified testimonial support after explicit approval"
+      "Kept private repositories, source code, assets, packet captures, endpoints, logs, screenshots, and operational details out of the public site"
     ],
     solution:
-      "Built and maintained substantial client systems across runtime behavior, protocol compatibility, UI modules, release support, operational diagnostics, and production maintenance while keeping private details confidential.",
+      "Built and maintained substantial client and server systems across runtime behavior, protocol compatibility, UI modules, performance, persistence, release support, operational diagnostics, and production maintenance while keeping sensitive details private.",
     impact:
-      "Shows production ownership beyond open-source work while keeping client and project details confidential.",
-    evidenceStatus: "Private / Anonymized",
-    evidence: [{ label: "Client reference available on request." }],
-    technologies: ["C++", "Lua", "client runtime", "release operations", "telemetry"]
+      "Shows production ownership beyond open-source work across both client and server systems.",
+    evidenceStatus: "Client-approved private work",
+    evidence: [{ label: "Reference available on request." }],
+    technologies: ["C++", "Lua", "client runtime", "server runtime", "release operations", "telemetry"]
   }
 ];
 
@@ -306,6 +341,21 @@ export const selectedContributions = [
     evidenceStatus: "Public PR merged",
     url: "https://github.com/opentibiabr/canary/pull/3938",
     summary: "Migrated login RSA backend abstraction from OpenSSL usage to Mbed TLS."
+  },
+  {
+    title: "Protocol Buffers Lite-only Runtime Build",
+    category: "Upstream Build Systems",
+    evidenceStatus: "Public upstream commit",
+    url: "https://github.com/protocolbuffers/protobuf/commit/7c090172a4f502a06e3a3c23df8a3242b03f3148",
+    linkLabel: "View commit",
+    summary: "Added narrowly constrained CMake support for installing and exporting protobuf::libprotobuf-lite without the full runtime."
+  },
+  {
+    title: "vcpkg Protobuf Packaging",
+    category: "Upstream Packaging / vcpkg",
+    evidenceStatus: "Public PR merged",
+    url: "https://github.com/microsoft/vcpkg/pull/51545",
+    summary: "Made libprotoc opt-in for non-native vcpkg Protobuf builds."
   },
   {
     title: "Protobuf-lite Integration",
@@ -359,7 +409,7 @@ export const skillGroups = [
   },
   {
     title: "Infrastructure",
-    skills: ["CMake / vcpkg", "Docker", "GitHub Actions", "MySQL / MariaDB", "Release engineering"]
+    skills: ["CMake / vcpkg", "Protocol Buffers", "Docker", "GitHub Actions", "MySQL / MariaDB", "Release engineering"]
   },
   {
     title: "Tooling",
@@ -368,16 +418,16 @@ export const skillGroups = [
 ];
 
 export const privateWork = {
-  title: "Private Commercial Game Client",
-  label: "Private / Anonymized",
+  title: "Asteria Client and Server Engineering",
+  label: "Client-approved private work",
   summary:
-    "Commercial game client work across C++/Lua systems, protocol compatibility, UI modules, launcher/API integration, asset delivery, telemetry, crash reporting, and release operations.",
-  reference: "Client reference available on request.",
-  clientVerifiedLabel: "Private / Anonymized · Client-verified",
+    "Asteria client and server work across C++/Lua systems, protocol compatibility, UI/runtime work, performance, batch updates, persistence, launcher/API integration, asset delivery, telemetry, crash reporting, and release operations.",
+  reference: "Reference available on request.",
+  clientVerifiedLabel: "Client-verified reference",
   whatCanBeSaid: [
-    "Built and maintained substantial client systems",
-    "Worked across client runtime, protocol compatibility, release operations, and diagnostics",
-    "Integrated client systems with launcher/API, asset delivery, telemetry, and crash reporting"
+    "Built and maintained substantial client and server systems",
+    "Worked across client runtime, server runtime, protocol compatibility, release operations, and diagnostics",
+    "Integrated systems with launcher/API, asset delivery, telemetry, and crash reporting"
   ],
   whatStaysPrivate: [
     "Customer names",
