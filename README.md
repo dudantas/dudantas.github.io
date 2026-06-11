@@ -51,5 +51,7 @@ Rules for content updates:
 - Do not add private repository names, private URLs, internal service addresses, proprietary code, assets, packet captures / network traces, logs, screenshots, customer names, or unapproved business metrics.
 - Do not import or reference private research files from this repository.
 - Keep public claims tied to merged/open public PRs, public releases, landed upstream commits tied to public PRs, or explicitly approved private references.
+- Public closed-source product evidence may be used when there is a public product/download page. Keep the private repository name and implementation details out of the public site.
+- Separate production/current surfaces from in-progress work. For example, OTClient Redemption Premium currently has a public Windows launcher surface; Android/mobile work should be described only as an in-progress build track until it is production-ready.
 
 Before publishing a content update, scan the repository for private identifiers and machine-local paths.

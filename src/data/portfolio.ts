@@ -87,6 +87,23 @@ export const featuredWork = [
     metrics: [{ value: "Asteria", label: "client + server" }],
     clientVerifiedLabel: "Client-verified reference",
     tags: ["C++", "Lua", "client runtime", "server runtime", "release operations"]
+  },
+  {
+    title: "OTClient Redemption Premium Delivery Platform",
+    eyebrow: "Closed-source Product Delivery",
+    evidenceStatus: "Public product",
+    url: "https://otcrp.com/?lang=en",
+    evidenceLabel: "OTCRP site",
+    relatedUrls: [{ label: "Downloads", url: "https://otcrp.com/downloads" }],
+    summary:
+      "Built client-side delivery and runtime integration for a public Windows launcher platform with controlled updates, signed update metadata, partner catalog delivery, and asset distribution.",
+    impact:
+      "Creates a public entry point for supported OTClient Redemption partner servers while keeping private source, endpoints, partner operations, and asset internals confidential.",
+    metrics: [
+      { value: "Public beta", label: "official launcher entry" },
+      { value: "Windows", label: "current public surface" }
+    ],
+    tags: ["C++", "Lua", "launcher", "asset delivery", "catalog/API", "release operations"]
   }
 ];
 
@@ -303,6 +320,37 @@ export const caseStudies = [
     evidenceStatus: "Client-approved private work",
     evidence: [{ label: "Reference available on request." }],
     technologies: ["C++", "Lua", "client runtime", "server runtime", "release operations", "telemetry"]
+  },
+  {
+    id: "otcrp-delivery-platform",
+    title: "OTClient Redemption Premium Delivery Platform",
+    context:
+      "OTClient Redemption Premium is a public, closed-source launcher and delivery platform for supported OTClient Redemption partner servers. The current public surface is Windows launcher delivery; Android/mobile work is an active in-progress track, not a production claim.",
+    problem:
+      "Partner client distribution needed a controlled public entry point, platform-managed updates, catalog-based multi-server delivery, asset distribution, and operational diagnostics without exposing private source or partner internals.",
+    whatIOwned: [
+      "Client-side launcher/runtime integration",
+      "Catalog and multi-server delivery flow",
+      "Asset packaging, delivery, and runtime loading",
+      "Signed update metadata integration",
+      "Windows release support",
+      "Android/mobile build track"
+    ],
+    technicalDecisions: [
+      "Anchored public claims to the OTCRP public site and downloads page",
+      "Separated the current Windows public surface from Android/mobile work that is still in progress",
+      "Kept private repository names, source, internal endpoints, partner operations, signing material, and asset internals out of public copy"
+    ],
+    solution:
+      "Integrated the client with launcher/API delivery flows, catalog-based partner/server selection, asset loading, signed update metadata, and release support for the public Windows launcher surface, while maintaining the mobile build track separately.",
+    impact:
+      "The public product gives players an official download and update path for supported servers while preserving the confidentiality of closed-source implementation and partner operations.",
+    evidenceStatus: "Public product",
+    evidence: [
+      { label: "OTCRP home", url: "https://otcrp.com/?lang=en" },
+      { label: "OTCRP downloads", url: "https://otcrp.com/downloads" }
+    ],
+    technologies: ["C++", "Lua", "CMake", "Windows launcher", "catalog/API integration", "asset delivery", "Android/mobile in progress"]
   }
 ];
 
@@ -356,6 +404,15 @@ export const selectedContributions = [
     evidenceStatus: "Public PR merged",
     url: "https://github.com/microsoft/vcpkg/pull/51545",
     summary: "Made libprotoc opt-in for non-native vcpkg Protobuf builds."
+  },
+  {
+    title: "OTClient Redemption Premium Delivery Platform",
+    category: "Closed-source Product / Launcher Platform",
+    evidenceStatus: "Public product",
+    url: "https://otcrp.com/?lang=en",
+    linkLabel: "View product",
+    summary:
+      "Public Windows launcher and delivery platform with controlled updates, signed metadata, partner catalog delivery, and asset distribution."
   },
   {
     title: "Protobuf-lite Integration",
@@ -414,6 +471,10 @@ export const skillGroups = [
   {
     title: "Tooling",
     skills: ["Go services", "C# protocol tooling", "Developer tooling", "Open-source maintenance"]
+  },
+  {
+    title: "Product Delivery",
+    skills: ["Launcher/API integration", "Asset delivery", "Catalog-based server delivery", "Signed update metadata", "Windows releases", "Android/mobile build track"]
   }
 ];
 
