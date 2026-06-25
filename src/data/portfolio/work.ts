@@ -16,21 +16,21 @@ export const publicEvidence = {
     },
     {
       title: "Private work boundaries",
-      summary: "Private repositories, endpoints, logs, captures, screenshots, assets, and business metrics stay out of public copy."
+      summary: "Private repositories, endpoints, logs, diagnostic artifacts, screenshots, assets, and business metrics stay out of public copy."
     }
   ]
 };
 
 export const featuredWork: FeaturedWorkItem[] = [
   {
-    title: "C++/Lua Runtime Startup Performance",
+    title: "C++ Runtime Startup Performance with Lua Integration",
     eyebrow: "Performance Engineering",
     evidenceStatus: "Public PR merged",
     caseStudyId: "cpp-lua-runtime-startup-performance",
     url: "https://github.com/opentibiabr/canary/pull/3968",
     evidenceLabel: "Canary PR #3968",
     summary: "Optimized startup hot paths across Lua loading, map parsing, caches, indexing, and spawns.",
-    impact: "Reduced a major C++/Lua runtime startup bottleneck while preserving behavior.",
+    impact: "Reduced a major C++ runtime startup bottleneck while preserving Lua integration behavior.",
     metrics: [{ value: "~54s -> 1.5-3.0s", label: "script/module loading" }],
     tags: ["C++", "Lua", "profiling", "runtime startup"]
   },
@@ -128,7 +128,7 @@ export const featuredWork: FeaturedWorkItem[] = [
 export const caseStudies: CaseStudy[] = [
   {
     id: "cpp-lua-runtime-startup-performance",
-    title: "C++/Lua Runtime Startup Performance",
+    title: "C++ Runtime Startup Performance with Lua Integration",
     context:
       "OpenTibiaBR Canary is a large C++/Lua online server runtime where startup touches scripts, map data, tile caches, spawn configuration, and runtime registries.",
     problem: "Startup had expensive hot paths that slowed iteration and operational startup.",
@@ -494,6 +494,6 @@ export const privateWork = {
     "Customer names",
     "Private repository names",
     "Private URLs or internal service addresses",
-    "Proprietary code, assets, logs, packet captures / network traces, screenshots, and business metrics"
+    "Proprietary code, assets, logs, private diagnostic artifacts, screenshots, and business metrics"
   ]
 };

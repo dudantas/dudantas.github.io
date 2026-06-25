@@ -33,7 +33,7 @@ export const heroMetrics: Metric[] = [
 export const recommendations = {
   profileUrl:
     "https://www.linkedin.com/in/dudantas/details/recommendations/",
-  title: "Recommendations",
+  title: "LinkedIn Recommendations",
   headline: "Direct feedback from collaborators and clients is available on LinkedIn.",
   description:
     "Selected recommendations are linked from my public LinkedIn profile, where recent endorsements and testimonials are available."
