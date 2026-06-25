@@ -43,7 +43,14 @@ Repository settings should use GitHub Actions as the Pages source.
 
 ## Updating Content
 
-Update public site content in `src/data/portfolio.ts`.
+Update public site content in `src/data/portfolio/`.
+
+The content is split by concern:
+
+- `src/data/portfolio/profile.ts` for profile, navigation, hero, and recommendation copy.
+- `src/data/portfolio/capabilities.ts` for capability groups and impact highlights.
+- `src/data/portfolio/work.ts` for featured work, case studies, selected contributions, public evidence, and private work.
+- `src/data/portfolio/types.ts` for shared content types.
 
 Rules for content updates:
 
