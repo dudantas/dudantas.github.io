@@ -386,25 +386,11 @@ export const caseStudies: CaseStudy[] = [
 
 export const selectedContributions: SelectedContribution[] = [
   {
-    title: "Release Workflow and Metadata Tooling",
-    category: "Release Engineering",
+    title: "Protobuf-lite Integration",
+    category: "Build Systems / Protocol Tooling",
     evidenceStatus: "Public PR merged",
-    url: "https://github.com/opentibiabr/canary/pull/4004",
-    summary: "Added tag-driven release workflow, metadata tooling, release docs, and artifact publishing support."
-  },
-  {
-    title: "Release Tag Materialization",
-    category: "CI/CD / Release Safety",
-    evidenceStatus: "Public PR merged",
-    url: "https://github.com/opentibiabr/canary/pull/4006",
-    summary: "Materialized tags before publishing so release metadata and assets resolve consistently."
-  },
-  {
-    title: "Launcher Relay and Capture Tooling",
-    category: "Protocol Tooling",
-    evidenceStatus: "Public PR merged",
-    url: "https://github.com/dudantas/TibiaAPI/pull/2",
-    summary: "Added launcher relay, global capture tooling, parser resilience, and capture validation support."
+    url: "https://github.com/opentibiabr/canary/pull/3935",
+    summary: "Reduced protobuf dependency surface for lite-runtime protocol data."
   },
   {
     title: "OTClient HTTP/WebSocket Modernization",
@@ -435,11 +421,18 @@ export const selectedContributions: SelectedContribution[] = [
     summary: "Hardened inbox insertion with capacity checks, stack-aware behavior, atomicity, and tests."
   },
   {
-    title: "Market Clone/Ghost Item Fix",
-    category: "Runtime Stability / Data Safety",
+    title: "Release Workflow and Metadata Tooling",
+    category: "Release Engineering",
     evidenceStatus: "Public PR merged",
-    url: "https://github.com/opentibiabr/canary/pull/3504",
-    summary: "Reduced item duplication/loss risk in market and inbox flows."
+    url: "https://github.com/opentibiabr/canary/pull/4004",
+    summary: "Added tag-driven release workflow, metadata tooling, release docs, and artifact publishing support."
+  },
+  {
+    title: "Login-server Structured Errors",
+    category: "Operator DX / Stability",
+    evidenceStatus: "Public PR merged",
+    url: "https://github.com/opentibiabr/login-server/pull/33",
+    summary: "Added structured public errors, admin hints, config validation, and tests."
   },
   {
     title: "Mbed TLS RSA Backend",
@@ -449,11 +442,25 @@ export const selectedContributions: SelectedContribution[] = [
     summary: "Migrated login RSA backend abstraction from OpenSSL usage to Mbed TLS."
   },
   {
-    title: "Protobuf-lite Integration",
-    category: "Build Systems / Protocol Tooling",
+    title: "Release Tag Materialization",
+    category: "CI/CD / Release Safety",
     evidenceStatus: "Public PR merged",
-    url: "https://github.com/opentibiabr/canary/pull/3935",
-    summary: "Reduced protobuf dependency surface for lite-runtime protocol data."
+    url: "https://github.com/opentibiabr/canary/pull/4006",
+    summary: "Materialized tags before publishing so release metadata and assets resolve consistently."
+  },
+  {
+    title: "Launcher Relay and Capture Tooling",
+    category: "Protocol Tooling",
+    evidenceStatus: "Public PR merged",
+    url: "https://github.com/dudantas/TibiaAPI/pull/2",
+    summary: "Added launcher relay, global capture tooling, parser resilience, and capture validation support."
+  },
+  {
+    title: "Market Clone/Ghost Item Fix",
+    category: "Runtime Stability / Data Safety",
+    evidenceStatus: "Public PR merged",
+    url: "https://github.com/opentibiabr/canary/pull/3504",
+    summary: "Reduced item duplication/loss risk in market and inbox flows."
   },
   {
     title: "OTClient Spectator Retrieval",
@@ -461,13 +468,6 @@ export const selectedContributions: SelectedContribution[] = [
     evidenceStatus: "Public PR merged",
     url: "https://github.com/opentibiabr/otclient/pull/1319",
     summary: "Optimized spectator retrieval and added tests."
-  },
-  {
-    title: "Login-server Structured Errors",
-    category: "Operator DX / Stability",
-    evidenceStatus: "Public PR merged",
-    url: "https://github.com/opentibiabr/login-server/pull/33",
-    summary: "Added structured public errors, admin hints, config validation, and tests."
   },
   {
     title: "Lua API Documentation Generator",
@@ -482,13 +482,13 @@ export const privateWork = {
   title: "Private Client/Server Runtime Engineering",
   label: "Client-approved private work",
   summary:
-    "Asteria client and server work across C++/Lua systems, protocol compatibility, UI/runtime work, performance, batch updates, persistence, launcher/API integration, asset delivery, telemetry, crash reporting, and release operations.",
+    "Asteria client and server work across C++/Lua runtime systems, protocol compatibility, UI/runtime behavior, persistence, launcher/API integration, asset delivery, telemetry, crash reporting, and release operations.",
   reference: "Reference available on request.",
   clientVerifiedLabel: "Client-verified reference",
   whatCanBeSaid: [
     "Built and maintained substantial client and server systems",
-    "Worked across client runtime, server runtime, protocol compatibility, release operations, and diagnostics",
-    "Integrated systems with launcher/API, asset delivery, telemetry, and crash reporting"
+    "Worked across runtime behavior, protocol compatibility, persistence, release operations, and diagnostics",
+    "Integrated launcher/API, asset delivery, telemetry, and crash reporting flows"
   ],
   whatStaysPrivate: [
     "Customer names",

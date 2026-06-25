@@ -21,8 +21,7 @@ export const navItems: LinkItem[] = [
   { label: "Capabilities", href: "#capabilities" },
   { label: "Impact", href: "#impact-highlights" },
   { label: "Work", href: "#featured-work" },
-  { label: "Evidence", href: "#evidence" },
-  { label: "Contact", href: "#contact" }
+  { label: "Evidence", href: "#evidence" }
 ];
 
 export const heroMetrics: Metric[] = [
