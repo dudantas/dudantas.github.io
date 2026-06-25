@@ -5,11 +5,11 @@ export const profile = {
   handle: "dudantas",
   headline: "Senior C++ Software Engineer for Performance-Critical Systems",
   subtitle:
-    "I build, optimize, and maintain C++/Lua backend runtimes, protocol-driven client/server systems, cross-platform tooling, and production-grade software where performance, stability, and data correctness matter.",
+    "I build, optimize, and maintain C++ backend runtimes, Lua-integrated systems, protocol-driven client/server software, cross-platform tooling, and production-grade systems where performance, stability, and data correctness matter.",
   secondaryContext:
     "Applied across online infrastructure, open-source platforms, private client/server products, and developer tooling across Linux and Windows.",
   description:
-    "Portfolio of Eduardo Dantas, focused on C++ systems engineering, performance-critical runtimes, protocol compatibility, build tooling, reliability, data safety, and open-source infrastructure.",
+    "Senior C++ engineer focused on performance-critical backend runtimes, protocols, Linux/Windows systems, build tooling, reliability, and data safety.",
   heroChips: ["C++ Runtime Systems", "Protocols & Networking", "Performance & Reliability", "Linux / Windows"],
   links: [
     { label: "GitHub", href: "https://github.com/dudantas" },
@@ -21,13 +21,12 @@ export const navItems: LinkItem[] = [
   { label: "Capabilities", href: "#capabilities" },
   { label: "Impact", href: "#impact-highlights" },
   { label: "Work", href: "#featured-work" },
-  { label: "Cases", href: "#case-studies" },
-  { label: "Evidence", href: "#public-evidence" },
-  { label: "Contributions", href: "#selected-contributions" }
+  { label: "Evidence", href: "#evidence" },
+  { label: "Contact", href: "#contact" }
 ];
 
 export const heroMetrics: Metric[] = [
-  { label: "Primary focus", value: "C++ systems", detail: "Runtime, protocols, performance" },
+  { label: "Primary focus", value: "C++ backend systems", detail: "Runtime, protocols, performance" },
   { label: "Platforms", value: "Linux / Windows", detail: "Builds, CI/CD, debugging" },
   { label: "Evidence", value: "Public PRs", detail: "Open source, products, upstream commits" }
 ];

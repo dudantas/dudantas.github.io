@@ -59,8 +59,8 @@ export const impactHighlights: ImpactHighlight[] = [
   },
   {
     value: "Linux / macOS / Windows",
-    label: "runtime CI",
-    detail: "Added cross-platform runtime smoke coverage.",
+    label: "smoke tests",
+    detail: "Added cross-platform runtime smoke tests.",
     url: "https://github.com/opentibiabr/canary/pull/3963",
     evidenceLabel: "Canary PR #3963"
   },

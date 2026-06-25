@@ -1,7 +1,7 @@
 import type { CaseStudy, FeaturedWorkItem, SelectedContribution } from "./types";
 
 export const publicEvidence = {
-  title: "Public Evidence",
+  title: "Public Evidence & Contributions",
   headline: "Claims are tied to public artifacts wherever possible.",
   description:
     "This portfolio prioritizes merged PRs, upstream commits, public product pages, and cross-repository evidence. Private work is separated and described only at a public-safe architecture and outcome level.",
@@ -26,6 +26,7 @@ export const featuredWork: FeaturedWorkItem[] = [
     title: "C++/Lua Runtime Startup Performance",
     eyebrow: "Performance Engineering",
     evidenceStatus: "Public PR merged",
+    caseStudyId: "cpp-lua-runtime-startup-performance",
     url: "https://github.com/opentibiabr/canary/pull/3968",
     evidenceLabel: "Canary PR #3968",
     summary: "Optimized startup hot paths across Lua loading, map parsing, caches, indexing, and spawns.",
@@ -37,6 +38,7 @@ export const featuredWork: FeaturedWorkItem[] = [
     title: "C++ Build System & Protobuf Packaging Optimization",
     eyebrow: "Build Systems",
     evidenceStatus: "Public upstream commit",
+    caseStudyId: "cpp-build-system-protobuf-packaging-optimization",
     url: "https://github.com/protocolbuffers/protobuf/commit/7c090172a4f502a06e3a3c23df8a3242b03f3148",
     evidenceLabel: "Protobuf landed commit",
     relatedUrls: [
@@ -55,6 +57,7 @@ export const featuredWork: FeaturedWorkItem[] = [
     title: "Runtime Hot-path & Memory Ownership",
     eyebrow: "Runtime Reliability",
     evidenceStatus: "Public PR merged",
+    caseStudyId: "runtime-hot-path-memory-ownership",
     url: "https://github.com/opentibiabr/canary/pull/3987",
     evidenceLabel: "Canary PR #3987",
     relatedUrls: [
@@ -70,6 +73,7 @@ export const featuredWork: FeaturedWorkItem[] = [
     title: "Multi-Repo Protocol/Login Flow",
     eyebrow: "Protocol & Networking",
     evidenceStatus: "Public PR merged",
+    caseStudyId: "multi-repo-protocol-login-flow",
     url: "https://github.com/opentibiabr/canary/pull/3965",
     evidenceLabel: "Canary PR #3965",
     relatedUrls: [{ label: "login-server PR #31", url: "https://github.com/opentibiabr/login-server/pull/31" }],
@@ -82,6 +86,7 @@ export const featuredWork: FeaturedWorkItem[] = [
     title: "Multi-Tenant Client Delivery & Release Platform",
     eyebrow: "Product Delivery",
     evidenceStatus: "Public product",
+    caseStudyId: "modern-client-asset-delivery-platform",
     url: "https://otcrp.com/?lang=en",
     evidenceLabel: "OTCRP site",
     relatedUrls: [
@@ -106,6 +111,7 @@ export const featuredWork: FeaturedWorkItem[] = [
     title: "Large Data Load/Save & Rendering Optimization",
     eyebrow: "Developer Tooling",
     evidenceStatus: "Public PR merged",
+    caseStudyId: "large-data-load-save-rendering-optimization",
     url: "https://github.com/opentibiabr/remeres-map-editor/pull/188",
     evidenceLabel: "RME PR #188",
     relatedUrls: [{ label: "RME PR #160", url: "https://github.com/opentibiabr/remeres-map-editor/pull/160" }],

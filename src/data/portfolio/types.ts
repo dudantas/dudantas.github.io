@@ -32,6 +32,7 @@ export type FeaturedWorkItem = {
   title: string;
   eyebrow: string;
   evidenceStatus: string;
+  caseStudyId?: string;
   url?: string;
   evidenceLabel?: string;
   relatedUrls?: EvidenceLink[];
