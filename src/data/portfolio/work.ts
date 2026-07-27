@@ -8,11 +8,13 @@ export const publicEvidence = {
   points: [
     {
       title: "Open-source systems",
-      summary: "Canary, OTClient, Remere's Map Editor, login-server, vcpkg, and Protocol Buffers contributions."
+      summary:
+        "Canary, OTClient, Remere's Map Editor, Assets Editor, login-server, vcpkg, and Protocol Buffers contributions."
     },
     {
-      title: "Production-like surfaces",
-      summary: "Public launcher/download pages, runtime smoke tests, release workflows, and partner delivery flows."
+      title: "Field-validated systems",
+      summary:
+        "Runtime scheduling and multiprotocol deployments, public launcher/download pages, smoke tests, release workflows, and partner delivery flows."
     },
     {
       title: "Private work boundaries",
@@ -35,6 +37,51 @@ export const featuredWork: FeaturedWorkItem[] = [
     tags: ["C++", "Lua", "profiling", "runtime startup"]
   },
   {
+    title: "Fair Runtime Scheduling & Parallel Compute",
+    eyebrow: "Concurrency & Runtime Performance",
+    evidenceStatus: "Merged and field validated",
+    caseStudyId: "fair-runtime-scheduling-parallel-compute",
+    url: "https://github.com/opentibiabr/canary/pull/4030",
+    evidenceLabel: "Canary PR #4030",
+    relatedUrls: [
+      { label: "Canary PR #4023", url: "https://github.com/opentibiabr/canary/pull/4023" },
+      { label: "Canary PR #4036", url: "https://github.com/opentibiabr/canary/pull/4036" },
+      { label: "Canary PR #3987", url: "https://github.com/opentibiabr/canary/pull/3987" }
+    ],
+    summary:
+      "Designed bounded, lane-aware scheduling and multi-core compute for expensive runtime decisions while preserving authoritative state mutation.",
+    impact:
+      "Improved player-visible responsiveness under heavy workloads with fairness, backpressure, immutable snapshots, and stale-result rejection.",
+    metrics: [
+      { value: "264 / 264", label: "unit and regression tests" },
+      { value: "Multi-core", label: "bounded compute service" }
+    ],
+    tags: ["C++", "concurrency", "scheduling", "backpressure", "pathfinding", "runtime telemetry"]
+  },
+  {
+    title: "Runtime Multiprotocol Networking Architecture",
+    eyebrow: "Protocols & Networking",
+    evidenceStatus: "Merged and field validated",
+    caseStudyId: "runtime-multiprotocol-networking-architecture",
+    url: "https://github.com/opentibiabr/canary/pull/4009",
+    evidenceLabel: "Canary PR #4009",
+    relatedUrls: [
+      { label: "Canary PR #4020", url: "https://github.com/opentibiabr/canary/pull/4020" },
+      { label: "Canary PR #4022", url: "https://github.com/opentibiabr/canary/pull/4022" },
+      { label: "Assets Editor PR #90", url: "https://github.com/Arch-Mina/Assets-Editor/pull/90" },
+      { label: "Client release PR #19", url: "https://github.com/dudantas/tibia-client/pull/19" }
+    ],
+    summary:
+      "Designed transport codecs, protocol profiles, session hints, and version-gated payload contracts for multiple client generations.",
+    impact:
+      "Replaced scattered version checks with explicit, testable contracts in one C++ runtime without per-version ports or builds.",
+    metrics: [
+      { value: "3 client families", label: "15.x, 11.00, and 8.60" },
+      { value: "1 C++ runtime", label: "shared protocol stack" }
+    ],
+    tags: ["C++", "TCP", "transport codecs", "protocol profiles", "compatibility", "unit tests"]
+  },
+  {
     title: "C++ Build System & Protobuf Packaging Optimization",
     eyebrow: "Build Systems",
     evidenceStatus: "Public upstream commit",
@@ -54,36 +101,7 @@ export const featuredWork: FeaturedWorkItem[] = [
     tags: ["CMake", "vcpkg", "Protocol Buffers", "cross-builds"]
   },
   {
-    title: "Runtime Hot-path & Memory Ownership",
-    eyebrow: "Runtime Reliability",
-    evidenceStatus: "Public PR merged",
-    caseStudyId: "runtime-hot-path-memory-ownership",
-    url: "https://github.com/opentibiabr/canary/pull/3987",
-    evidenceLabel: "Canary PR #3987",
-    relatedUrls: [
-      { label: "Canary PR #4007", url: "https://github.com/opentibiabr/canary/pull/4007" },
-      { label: "Canary PR #3701", url: "https://github.com/opentibiabr/canary/pull/3701" }
-    ],
-    summary: "Hardened Lua shared-userdata ownership, reduced refcount churn, improved query construction, and batched container updates.",
-    impact: "Improved runtime safety and reduced avoidable work in memory, persistence, and player-state hot paths.",
-    metrics: [{ value: "3 PRs", label: "memory, database, batching" }],
-    tags: ["C++", "Lua", "memory ownership", "hot paths", "data safety"]
-  },
-  {
-    title: "Multi-Repo Protocol/Login Flow",
-    eyebrow: "Protocol & Networking",
-    evidenceStatus: "Public PR merged",
-    caseStudyId: "multi-repo-protocol-login-flow",
-    url: "https://github.com/opentibiabr/canary/pull/3965",
-    evidenceLabel: "Canary PR #3965",
-    relatedUrls: [{ label: "login-server PR #31", url: "https://github.com/opentibiabr/login-server/pull/31" }],
-    summary: "Built a read-only viewer flow across server state, login descriptors, persistence, commands, and compatibility.",
-    impact: "Connected runtime, protocol, login flow, and client compatibility across repositories.",
-    metrics: [{ value: "2 repos", label: "server + login stack" }],
-    tags: ["C++", "Lua", "Go", "protocol", "login flow"]
-  },
-  {
-    title: "Multi-Tenant Client Delivery & Release Platform",
+    title: "Versioned Client Asset Delivery & Release Platform",
     eyebrow: "Product Delivery",
     evidenceStatus: "Public product",
     caseStudyId: "modern-client-asset-delivery-platform",
@@ -91,21 +109,19 @@ export const featuredWork: FeaturedWorkItem[] = [
     evidenceLabel: "OTCRP site",
     relatedUrls: [
       { label: "Downloads", url: "https://otcrp.com/downloads" },
-      { label: "OTClient PR #1727", url: "https://github.com/opentibiabr/otclient/pull/1727" },
-      { label: "OTClient PR #1739", url: "https://github.com/opentibiabr/otclient/pull/1739" },
-      { label: "partner-platform-service PR #1", url: "https://github.com/dudantas/partner-platform-service/pull/1" },
-      { label: "partner-platform-service PR #2", url: "https://github.com/dudantas/partner-platform-service/pull/2" }
+      { label: "OTClient PR #1766", url: "https://github.com/opentibiabr/otclient/pull/1766" },
+      { label: "Assets Editor PR #91", url: "https://github.com/Arch-Mina/Assets-Editor/pull/91" },
+      { label: "partner-platform-service PR #1", url: "https://github.com/dudantas/partner-platform-service/pull/1" }
     ],
     summary:
-      "Built client-side and service-side delivery flows for server-specific assets, modules, catalogs, news, monitoring, and Windows launcher distribution.",
+      "Built client-side and service-side delivery flows with version-aware archives, catalog integrity, server-specific assets, monitoring, and launcher distribution.",
     impact:
-      "Turns a launcher into a controlled multi-server delivery surface without mixing assets, modules, private endpoints, or partner operations.",
+      "Provides a controlled multi-server release surface while preventing version mismatches, duplicate catalog entries, and cross-server package mixing.",
     metrics: [
-      { value: "Multi-server", label: "catalog delivery" },
-      { value: "Per-server", label: "assets and modules" },
-      { value: "Windows", label: "current public surface" }
+      { value: "Version-matched", label: "release archives" },
+      { value: "9,209 / 9,209", label: "unique sprite filenames" }
     ],
-    tags: ["C++", "Lua", "Go", "launcher", "asset delivery", "release operations"]
+    tags: ["C++", "Lua", "Go", "launcher", "asset integrity", "release operations"]
   },
   {
     title: "Large Data Load/Save & Rendering Optimization",
@@ -152,6 +168,97 @@ export const caseStudies: CaseStudy[] = [
     technologies: ["C++", "Lua", "profiling", "server runtime"]
   },
   {
+    id: "fair-runtime-scheduling-parallel-compute",
+    title: "Fair Runtime Scheduling & Parallel Compute",
+    context:
+      "A long-running C++ server runtime must keep player-visible input and movement responsive while processing expensive background pathfinding, target selection, combat preparation, maintenance, and asynchronous work.",
+    problem:
+      "Broad dispatcher queues allowed large background workloads to compete with latency-sensitive work, while repeated asynchronous tasks, stale decisions, ownership churn, and unbounded fanout limited fairness and multi-core utilization.",
+    whatIOwned: [
+      "Dispatcher lane and execution-mode architecture",
+      "Weighted deficit and producer-fair scheduling",
+      "Bounded admission, backpressure, and telemetry",
+      "Parallel pathfinding and decision compute service",
+      "Immutable navigation snapshots and stale-result rejection",
+      "Runtime validation, rollout, documentation, and tests"
+    ],
+    technicalDecisions: [
+      "Kept map mutation, Lua, RNG, combat, conditions, cooldowns, and network-visible state on the authoritative dispatcher",
+      "Allowed workers to receive values or immutable snapshots and return suggestions only",
+      "Bounded every queue and reserved completion capacity for accepted requests",
+      "Revalidated entity generation, position, epoch, and topology revisions before applying worker results",
+      "Adapted background budgets from player-visible latency while preserving producer fairness",
+      "Used sustained exact backlog state for warnings instead of treating transient histogram samples as incidents"
+    ],
+    solution:
+      "Introduced lane-aware scheduling, adaptive runtime budgets, bounded multi-core compute, immutable navigation snapshots, visibility-aware promotion, coalescing, queue telemetry, and strict stale-completion validation.",
+    impact:
+      "Improved runtime behavior and player-visible responsiveness under monster-heavy workloads. The architecture passed 264 unit and regression tests and has been field validated across multiple OT server deployments while broader operational feedback continues.",
+    evidenceStatus: "Merged and field validated",
+    evidence: [
+      { label: "Canary PR #4030", url: "https://github.com/opentibiabr/canary/pull/4030" },
+      { label: "Canary PR #4023", url: "https://github.com/opentibiabr/canary/pull/4023" },
+      { label: "Canary PR #4036", url: "https://github.com/opentibiabr/canary/pull/4036" },
+      { label: "Canary PR #3987", url: "https://github.com/opentibiabr/canary/pull/3987" },
+      { label: "Canary PR #4007", url: "https://github.com/opentibiabr/canary/pull/4007" }
+    ],
+    technologies: [
+      "C++",
+      "concurrency",
+      "weighted deficit round robin",
+      "bounded queues",
+      "immutable snapshots",
+      "runtime telemetry"
+    ]
+  },
+  {
+    id: "runtime-multiprotocol-networking-architecture",
+    title: "Runtime Multiprotocol Networking Architecture",
+    context:
+      "A C++ client/server runtime needed to support modern 15.x, old-protocol 11.00, and compatible 8.60 client families without separate binaries, ports, or fragile version checks spread across the protocol stack.",
+    problem:
+      "The client families differ in TCP framing, checksums, encryption layout, compression, handshake behavior, login payloads, asset signatures, item mapping, and version-specific message fields.",
+    whatIOwned: [
+      "Transport codec and profile architecture",
+      "Protocol profile and feature-flag contracts",
+      "Account-login and game-login layouts",
+      "Session-hint resolution between login and game connections",
+      "Current-client compatibility updates and packet debugging",
+      "Legacy asset export and versioned client release integration"
+    ],
+    technicalDecisions: [
+      "Separated transport framing from protocol feature behavior",
+      "Kept the modern profile as the safe default when no valid legacy hint exists",
+      "Used explicit profile feature flags instead of accumulating direct version comparisons",
+      "Allowed policy to block a detected profile without letting policy guess legacy framing",
+      "Resolved compatible profiles from session hints, protocol data, and asset signatures",
+      "Preserved legacy fallbacks while correcting current-client packet boundaries"
+    ],
+    solution:
+      "Implemented transport codecs, initial-connection behavior, runtime protocol profiles, session hints, version-gated payload contracts, compatibility tests, legacy asset export profiles, and coordinated client release packaging.",
+    impact:
+      "Three client families now share one field-validated C++ runtime and deployment model without requiring per-version ports or server builds.",
+    evidenceStatus: "Merged and field validated",
+    evidence: [
+      { label: "Canary PR #4009", url: "https://github.com/opentibiabr/canary/pull/4009" },
+      { label: "Canary PR #4020", url: "https://github.com/opentibiabr/canary/pull/4020" },
+      { label: "Canary PR #4022", url: "https://github.com/opentibiabr/canary/pull/4022" },
+      { label: "Assets Editor PR #90", url: "https://github.com/Arch-Mina/Assets-Editor/pull/90" },
+      { label: "tibia-client PR #19", url: "https://github.com/dudantas/tibia-client/pull/19" },
+      { label: "Canary PR #4019", url: "https://github.com/opentibiabr/canary/pull/4019" }
+    ],
+    technologies: [
+      "C++",
+      "TCP framing",
+      "XTEA",
+      "checksums",
+      "compression",
+      "protocol profiles",
+      "feature flags",
+      "unit tests"
+    ]
+  },
+  {
     id: "cpp-build-system-protobuf-packaging-optimization",
     title: "C++ Build System & Protobuf Packaging Optimization",
     context:
@@ -182,71 +289,6 @@ export const caseStudies: CaseStudy[] = [
       { label: "vcpkg PR #51545", url: "https://github.com/microsoft/vcpkg/pull/51545" }
     ],
     technologies: ["CMake", "vcpkg", "Protocol Buffers", "package management", "cross-builds"]
-  },
-  {
-    id: "runtime-hot-path-memory-ownership",
-    title: "Runtime Hot-path & Memory Ownership",
-    context:
-      "Long-running C++/Lua server runtimes need correct ownership boundaries, efficient persistence paths, and stable client synchronization during bulk state mutations.",
-    problem:
-      "Lua shared userdata could miss typed finalizers, hot paths created avoidable shared_ptr churn, query construction allocated more than necessary, and bulk container mutations could send repeated intermediate updates.",
-    whatIOwned: [
-      "Lua shared-userdata ownership contract",
-      "Runtime leak and finalizer hardening",
-      "Refcount and notification hot-path reductions",
-      "Database query construction optimization",
-      "Container batch update lifecycle",
-      "Documentation and tests"
-    ],
-    technicalDecisions: [
-      "Migrated critical shared userdata paths to typed finalizers instead of broad ownership rewrites",
-      "Kept raw pointers local and lifetime-anchored by existing strong snapshots",
-      "Left player saves in the existing synchronous transaction flow while reducing formatting overhead",
-      "Batched container refreshes at the outer scope to avoid intermediate client churn"
-    ],
-    solution:
-      "Hardened shared userdata cleanup, reduced avoidable refcount churn, reused query buffers, and added batch update behavior for player/container mutations.",
-    impact:
-      "Improved runtime safety and reduced avoidable work across memory ownership, persistence, movement/spectator, and player-state synchronization paths.",
-    evidenceStatus: "Public PR merged",
-    evidence: [
-      { label: "Canary PR #3987", url: "https://github.com/opentibiabr/canary/pull/3987" },
-      { label: "Canary PR #4007", url: "https://github.com/opentibiabr/canary/pull/4007" },
-      { label: "Canary PR #3701", url: "https://github.com/opentibiabr/canary/pull/3701" }
-    ],
-    technologies: ["C++", "Lua", "memory ownership", "SQL persistence", "runtime synchronization"]
-  },
-  {
-    id: "multi-repo-protocol-login-flow",
-    title: "Multi-Repo Protocol/Login Flow",
-    context:
-      "OpenTibiaBR needed a livestream/cast viewer flow that crossed the Canary server runtime and the login-server stack. The feature had to expose active casts to clients through a normal client-compatible login path while preserving game-state safety.",
-    problem:
-      "Viewer sessions needed to be read-only, isolated from player actions, represented in login descriptors, and compatible with client expectations without turning spectators into normal game participants.",
-    whatIOwned: [
-      "Server-side livestream/cast flow",
-      "Viewer restrictions and session state",
-      "Login descriptor contract",
-      "Lua command integration",
-      "Persistence and runtime integration",
-      "Documentation and compatibility work"
-    ],
-    technicalDecisions: [
-      "Used explicit livestream login descriptors instead of hidden client assumptions",
-      "Persisted active caster state so login services could list available sessions",
-      "Kept viewer input restricted inside the game protocol path, not only at command level",
-      "Separated Canary runtime behavior from login-server descriptor support so each repository owned the right part of the flow"
-    ],
-    solution:
-      "Implemented livestream manager behavior in Canary, viewer restrictions, Lua command integration, persistence/runtime support, and matching login flow support in login-server.",
-    impact:
-      "Demonstrated multi-repo ownership across runtime behavior, protocol/login descriptors, persistence, commands, and client compatibility.",
-    evidenceStatus: "Public PR merged",
-    evidence: [
-      { label: "Canary PR #3965", url: "https://github.com/opentibiabr/canary/pull/3965" },
-      { label: "login-server PR #31", url: "https://github.com/opentibiabr/login-server/pull/31" }
-    ],
-    technologies: ["C++", "Lua", "Go", "protocol", "login stack"]
   },
   {
     id: "runtime-state-persistence-safety",
@@ -281,73 +323,92 @@ export const caseStudies: CaseStudy[] = [
     technologies: ["C++", "SQL persistence", "inventory containers", "data safety", "tests"]
   },
   {
-    id: "reproducible-runtime-environment-ci-smoke-tests",
-    title: "Reproducible Runtime Environment & CI Smoke Tests",
+    id: "profile-aware-content-integrity-auditor",
+    title: "Profile-Aware Content Integrity Auditor",
     context:
-      "New users and maintainers need a reproducible local stack, and CI needs to catch runtime startup failures.",
+      "A large C++/Lua runtime loads mutually exclusive content profiles containing Lua scripts, XML registrations, protobuf-backed item definitions, storages, actions, movements, weapons, spells, monsters, and NPCs.",
     problem:
-      "Build success alone did not prove that the server could start with database, config, map data, login-server, and MyAAC account tooling integration.",
+      "Cross-profile definitions could incorrectly satisfy each other, dynamic Lua expressions could be mistaken for authoritative references, invalid XML ranges could be silently skipped at runtime, and naive whole-repository scans produced noisy or unsafe results.",
     whatIOwned: [
-      "Docker quickstart architecture",
-      "Startup scripts and documentation",
-      "Runtime smoke-test flow",
-      "CI integration"
+      "Static-analysis architecture and Python CLI",
+      "Profile-aware extraction and symbol model",
+      "Lua, XML, and protobuf-backed data analysis",
+      "Deterministic schema-validated artifacts",
+      "Path safety, resource bounds, and atomic output",
+      "CI gating, baseline fingerprints, documentation, and tests"
     ],
     technicalDecisions: [
-      "Validated runtime startup, not just compilation",
-      "Used the published runtime image instead of requiring local compilation",
-      "Included MariaDB, MyAAC account tooling, and login-server in one reproducible stack",
-      "Added platform-specific startup scripts and LAN mode",
-      "Validated runtime startup in CI across Linux, macOS, and Windows"
+      "Kept mutually exclusive runtime profiles isolated throughout extraction and validation",
+      "Used conservative Lua analysis and left dynamic expressions unresolved instead of fabricating missing references",
+      "Parsed authoritative protobuf fields instead of treating every numeric value as an item definition",
+      "Rejected symlink escapes and constrained discovery and output paths to the repository",
+      "Applied bounded token, fact, diagnostic, and finding limits for large or adversarial inputs",
+      "Included occurrence multiplicity in semantic fingerprints so waivers cannot hide new duplicates"
     ],
     solution:
-      "Built a local stack with MariaDB, Canary runtime image, MyAAC account tooling, login-server, startup scripts, LAN mode, and runtime smoke tests.",
-    impact: "Improved developer onboarding and increased confidence in runtime startup behavior.",
+      "Built a deterministic profile-aware auditor that produces typed symbol registries, reference reports, unresolved coverage, stable fingerprints, CI annotations, and JSON/Markdown artifacts validated against bundled schemas.",
+    impact:
+      "Scanned 39,311 facts across two runtime profiles, corrected eight blocking content errors, reduced storage findings from 1,225 to 405 by removing false positives, and completed 72 tests with zero remaining scan errors.",
     evidenceStatus: "Public PR merged",
     evidence: [
-      { label: "Canary PR #3973", url: "https://github.com/opentibiabr/canary/pull/3973" },
-      { label: "Canary PR #3963", url: "https://github.com/opentibiabr/canary/pull/3963" },
-      { label: "Canary PR #4004", url: "https://github.com/opentibiabr/canary/pull/4004" },
-      { label: "Canary PR #4006", url: "https://github.com/opentibiabr/canary/pull/4006" }
+      { label: "Canary PR #4031", url: "https://github.com/opentibiabr/canary/pull/4031" },
+      { label: "Canary PR #4034", url: "https://github.com/opentibiabr/canary/pull/4034" }
     ],
-    technologies: ["Docker", "MariaDB", "Go login-server", "GitHub Actions", "runtime validation", "release workflows"]
+    technologies: ["Python", "Lua analysis", "XML", "Protocol Buffers", "JSON Schema", "static analysis", "GitHub Actions"]
   },
   {
     id: "modern-client-asset-delivery-platform",
-    title: "Modern Client Asset Delivery Platform",
+    title: "Versioned Client Asset Delivery & Release Platform",
     context:
-      "Client delivery needed to support modern asset sets, server-specific modules, public launcher downloads, catalog visibility, operational monitoring, and update metadata without exposing private implementation details.",
+      "Client delivery needed to support modern and legacy asset sets, server-specific modules, public launcher downloads, catalog visibility, operational monitoring, and versioned update metadata without exposing private implementation details.",
     problem:
-      "Partner client distribution was not a single-download problem. Different servers needed different asset trees, module sets, launch goals, update cadence, news, monitoring, and delivery rules while preserving one controlled public entry point.",
+      "Partner distribution was not a single-download problem. Different servers and client versions needed isolated asset trees, module sets, launch goals, update cadence, archive selection, catalog integrity, news, monitoring, and delivery rules through one controlled public entry point.",
     whatIOwned: [
       "Client-side launcher/runtime integration",
       "Catalog-driven multiserver delivery flow",
       "Automatic asset download and install flow",
       "Archive extraction and integrity checks",
+      "Version-aware release archive selection",
+      "Spritesheet catalog collision validation",
       "Admin-side asset monitoring and news APIs",
       "Windows release support"
     ],
     technicalDecisions: [
       "Kept final runtime files in existing client asset paths instead of introducing a second source of truth",
       "Used archive-first installation with manifest fallback behavior",
+      "Matched release archives against the requested client version instead of accepting the first compatible file extension",
+      "Reserved generated spritesheet names across each import batch and failed closed on duplicate or missing catalog entries",
       "Kept server-specific assets, modules, launch metadata, and catalog visibility separated through delivery rules",
       "Scoped public claims to the current Windows launcher surface and public PR evidence",
       "Kept private repository names, source, internal endpoints, signing material, and asset internals out of public copy"
     ],
     solution:
-      "Integrated client asset automation, launcher/API delivery flows, server-specific asset/module loading, partner catalog rules, admin asset monitoring, news APIs, HTTPS monitoring, signed metadata, and release support.",
+      "Integrated client asset automation, launcher/API delivery flows, version-aware archives, catalog validation, server-specific asset/module loading, partner rules, admin monitoring, news APIs, signed metadata, and release support.",
     impact:
-      "Gives players and operators a controlled public download/update path while preserving separation between server-specific packages and confidential partner operations.",
+      "Gives players and operators a controlled download/update path while preventing version-mismatched packages, repairing 11 spritesheet collisions, and preserving separation between server-specific packages and confidential partner operations.",
     evidenceStatus: "Public product",
     evidence: [
       { label: "OTCRP home", url: "https://otcrp.com/?lang=en" },
       { label: "OTCRP downloads", url: "https://otcrp.com/downloads" },
       { label: "OTClient PR #1727", url: "https://github.com/opentibiabr/otclient/pull/1727" },
       { label: "OTClient PR #1739", url: "https://github.com/opentibiabr/otclient/pull/1739" },
+      { label: "OTClient PR #1766", url: "https://github.com/opentibiabr/otclient/pull/1766" },
+      { label: "Assets Editor PR #91", url: "https://github.com/Arch-Mina/Assets-Editor/pull/91" },
+      { label: "tibia-client PR #19", url: "https://github.com/dudantas/tibia-client/pull/19" },
+      { label: "Canary PR #4019", url: "https://github.com/opentibiabr/canary/pull/4019" },
       { label: "partner-platform-service PR #1", url: "https://github.com/dudantas/partner-platform-service/pull/1" },
       { label: "partner-platform-service PR #2", url: "https://github.com/dudantas/partner-platform-service/pull/2" }
     ],
-    technologies: ["C++", "Lua", "Go", "asset delivery", "launcher/API", "release operations", "monitoring"]
+    technologies: [
+      "C++",
+      "Lua",
+      "Go",
+      "asset delivery",
+      "catalog integrity",
+      "launcher/API",
+      "release operations",
+      "monitoring"
+    ]
   },
   {
     id: "large-data-load-save-rendering-optimization",
@@ -386,13 +447,6 @@ export const caseStudies: CaseStudy[] = [
 
 export const selectedContributions: SelectedContribution[] = [
   {
-    title: "Protobuf-lite Integration",
-    category: "Build Systems / Protocol Tooling",
-    evidenceStatus: "Public PR merged",
-    url: "https://github.com/opentibiabr/canary/pull/3935",
-    summary: "Reduced protobuf dependency surface for lite-runtime protocol data."
-  },
-  {
     title: "OTClient HTTP/WebSocket Modernization",
     category: "Client Networking",
     evidenceStatus: "Public PR merged",
@@ -407,13 +461,6 @@ export const selectedContributions: SelectedContribution[] = [
     summary: "Added spdlog backend, centralized logging, log levels, formatting, file output, and safer HTTP log handling."
   },
   {
-    title: "RME Cyclopedia Asset Export",
-    category: "Developer Tooling / Protocol Assets",
-    evidenceStatus: "Public PR merged",
-    url: "https://github.com/opentibiabr/remeres-map-editor/pull/160",
-    summary: "Added Cyclopedia/staticdata protobuf export support and performance-oriented export path changes."
-  },
-  {
     title: "Market/Inbox Data Safety",
     category: "Runtime Stability / Data Safety",
     evidenceStatus: "Public PR merged",
@@ -421,11 +468,12 @@ export const selectedContributions: SelectedContribution[] = [
     summary: "Hardened inbox insertion with capacity checks, stack-aware behavior, atomicity, and tests."
   },
   {
-    title: "Release Workflow and Metadata Tooling",
-    category: "Release Engineering",
+    title: "Cross-Repository Release Integrity",
+    category: "Release Engineering / CI",
     evidenceStatus: "Public PR merged",
-    url: "https://github.com/opentibiabr/canary/pull/4004",
-    summary: "Added tag-driven release workflow, metadata tooling, release docs, and artifact publishing support."
+    url: "https://github.com/opentibiabr/canary/pull/4019",
+    summary:
+      "Linked exact client/server release tags, validated required packages before publishing, and preserved authoritative client metadata."
   },
   {
     title: "Login-server Structured Errors",
@@ -442,13 +490,6 @@ export const selectedContributions: SelectedContribution[] = [
     summary: "Migrated login RSA backend abstraction from OpenSSL usage to Mbed TLS."
   },
   {
-    title: "Release Tag Materialization",
-    category: "CI/CD / Release Safety",
-    evidenceStatus: "Public PR merged",
-    url: "https://github.com/opentibiabr/canary/pull/4006",
-    summary: "Materialized tags before publishing so release metadata and assets resolve consistently."
-  },
-  {
     title: "Launcher Relay and Capture Tooling",
     category: "Protocol Tooling",
     evidenceStatus: "Public PR merged",
@@ -456,18 +497,27 @@ export const selectedContributions: SelectedContribution[] = [
     summary: "Added launcher relay, global capture tooling, parser resilience, and capture validation support."
   },
   {
-    title: "Market Clone/Ghost Item Fix",
-    category: "Runtime Stability / Data Safety",
+    title: "Runtime Memory Ownership & Hot-path Safety",
+    category: "C++ Runtime Reliability",
     evidenceStatus: "Public PR merged",
-    url: "https://github.com/opentibiabr/canary/pull/3504",
-    summary: "Reduced item duplication/loss risk in market and inbox flows."
+    url: "https://github.com/opentibiabr/canary/pull/3987",
+    summary: "Hardened Lua shared-userdata finalizers and reduced avoidable shared-pointer churn in synchronous hot paths."
   },
   {
-    title: "OTClient Spectator Retrieval",
-    category: "Client Performance",
+    title: "Reproducible Runtime Stack & Smoke Tests",
+    category: "Runtime Validation / Platform",
     evidenceStatus: "Public PR merged",
-    url: "https://github.com/opentibiabr/otclient/pull/1319",
-    summary: "Optimized spectator retrieval and added tests."
+    url: "https://github.com/opentibiabr/canary/pull/3963",
+    summary:
+      "Validated runtime startup across Linux, macOS, and Windows and provided a Docker quickstart with database and login services."
+  },
+  {
+    title: "Livestream Protocol/Login Flow",
+    category: "Multi-Repo Protocol Engineering",
+    evidenceStatus: "Public PR merged",
+    url: "https://github.com/opentibiabr/canary/pull/3965",
+    summary:
+      "Connected read-only viewer sessions across C++ runtime state, protocol restrictions, persistence, Lua commands, and a Go login service."
   },
   {
     title: "Lua API Documentation Generator",
@@ -475,6 +525,14 @@ export const selectedContributions: SelectedContribution[] = [
     evidenceStatus: "Public PR merged",
     url: "https://github.com/opentibiabr/canary/pull/3771",
     summary: "Added generated Lua API docs and stubs for developer tooling."
+  },
+  {
+    title: "Windows vcpkg Cache Coordination",
+    category: "Build Systems / CI Reliability",
+    evidenceStatus: "Public PR merged",
+    url: "https://github.com/opentibiabr/canary/pull/4041",
+    summary:
+      "Serialized only Windows cache writers while preserving parallel read-only jobs, preventing duplicate NuGet publication races."
   }
 ];
 
@@ -491,7 +549,7 @@ export const privateWork = {
     "Integrated launcher/API, asset delivery, telemetry, and crash reporting flows"
   ],
   whatStaysPrivate: [
-    "Customer names",
+    "Other customer and partner names without publication approval",
     "Private repository names",
     "Private URLs or internal service addresses",
     "Proprietary code, assets, logs, private diagnostic artifacts, screenshots, and business metrics"
