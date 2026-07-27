@@ -68,8 +68,7 @@ export const featuredWork: FeaturedWorkItem[] = [
     relatedUrls: [
       { label: "Canary PR #4020", url: "https://github.com/opentibiabr/canary/pull/4020" },
       { label: "Canary PR #4022", url: "https://github.com/opentibiabr/canary/pull/4022" },
-      { label: "Assets Editor PR #90", url: "https://github.com/Arch-Mina/Assets-Editor/pull/90" },
-      { label: "Client release PR #19", url: "https://github.com/dudantas/tibia-client/pull/19" }
+      { label: "Assets Editor PR #90", url: "https://github.com/Arch-Mina/Assets-Editor/pull/90" }
     ],
     summary:
       "Designed transport codecs, protocol profiles, session hints, and version-gated payload contracts for multiple client generations.",
@@ -110,8 +109,7 @@ export const featuredWork: FeaturedWorkItem[] = [
     relatedUrls: [
       { label: "Downloads", url: "https://otcrp.com/downloads" },
       { label: "OTClient PR #1766", url: "https://github.com/opentibiabr/otclient/pull/1766" },
-      { label: "Assets Editor PR #91", url: "https://github.com/Arch-Mina/Assets-Editor/pull/91" },
-      { label: "partner-platform-service PR #1", url: "https://github.com/dudantas/partner-platform-service/pull/1" }
+      { label: "Assets Editor PR #91", url: "https://github.com/Arch-Mina/Assets-Editor/pull/91" }
     ],
     summary:
       "Built client-side and service-side delivery flows with version-aware archives, catalog integrity, server-specific assets, monitoring, and launcher distribution.",
@@ -244,7 +242,6 @@ export const caseStudies: CaseStudy[] = [
       { label: "Canary PR #4020", url: "https://github.com/opentibiabr/canary/pull/4020" },
       { label: "Canary PR #4022", url: "https://github.com/opentibiabr/canary/pull/4022" },
       { label: "Assets Editor PR #90", url: "https://github.com/Arch-Mina/Assets-Editor/pull/90" },
-      { label: "tibia-client PR #19", url: "https://github.com/dudantas/tibia-client/pull/19" },
       { label: "Canary PR #4019", url: "https://github.com/opentibiabr/canary/pull/4019" }
     ],
     technologies: [
@@ -394,10 +391,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "OTClient PR #1739", url: "https://github.com/opentibiabr/otclient/pull/1739" },
       { label: "OTClient PR #1766", url: "https://github.com/opentibiabr/otclient/pull/1766" },
       { label: "Assets Editor PR #91", url: "https://github.com/Arch-Mina/Assets-Editor/pull/91" },
-      { label: "tibia-client PR #19", url: "https://github.com/dudantas/tibia-client/pull/19" },
-      { label: "Canary PR #4019", url: "https://github.com/opentibiabr/canary/pull/4019" },
-      { label: "partner-platform-service PR #1", url: "https://github.com/dudantas/partner-platform-service/pull/1" },
-      { label: "partner-platform-service PR #2", url: "https://github.com/dudantas/partner-platform-service/pull/2" }
+      { label: "Canary PR #4019", url: "https://github.com/opentibiabr/canary/pull/4019" }
     ],
     technologies: [
       "C++",
@@ -488,13 +482,6 @@ export const selectedContributions: SelectedContribution[] = [
     evidenceStatus: "Public PR merged",
     url: "https://github.com/opentibiabr/canary/pull/3938",
     summary: "Migrated login RSA backend abstraction from OpenSSL usage to Mbed TLS."
-  },
-  {
-    title: "Launcher Relay and Capture Tooling",
-    category: "Protocol Tooling",
-    evidenceStatus: "Public PR merged",
-    url: "https://github.com/dudantas/TibiaAPI/pull/2",
-    summary: "Added launcher relay, global capture tooling, parser resilience, and capture validation support."
   },
   {
     title: "Runtime Memory Ownership & Hot-path Safety",
