@@ -3,8 +3,8 @@
   <path d="M0 0h1200v630H0z" fill="#020617"/>
   <path d="M90 110h1020v410H90z" fill="#0f172a" stroke="#1e293b" stroke-width="2"/>
   <text x="120" y="190" fill="#38bdf8" font-family="Arial, sans-serif" font-size="30" font-weight="700">dudantas</text>
-  <text x="120" y="280" fill="#ffffff" font-family="Arial, sans-serif" font-size="68" font-weight="700">Senior Software Engineer</text>
-  <text x="120" y="360" fill="#ffffff" font-family="Arial, sans-serif" font-size="62" font-weight="700">for complex game systems</text>
-  <text x="120" y="440" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="32">MMORPG servers, game clients, C++/Lua, protocol tooling, performance.</text>
-  <text x="120" y="500" fill="#bef264" font-family="Arial, sans-serif" font-size="32" font-weight="700">OpenTibiaBR | Canary | OTClient | RME | login-server</text>
+  <text x="120" y="270" fill="#ffffff" font-family="Arial, sans-serif" font-size="58" font-weight="700">Senior C++ Software Engineer</text>
+  <text x="120" y="340" fill="#ffffff" font-family="Arial, sans-serif" font-size="52" font-weight="700">for Performance-Critical Systems</text>
+  <text x="120" y="420" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="30">Backend runtimes, protocols, reliability, Linux / Windows.</text>
+  <text x="120" y="495" fill="#bef264" font-family="Arial, sans-serif" font-size="28" font-weight="700">C++ | Protocols | Performance | Build tooling | Data safety</text>
 </svg>
