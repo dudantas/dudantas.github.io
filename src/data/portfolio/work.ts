@@ -2,9 +2,9 @@ import type { CaseStudy, FeaturedWorkItem, SelectedContribution } from "./types"
 
 export const publicEvidence = {
   title: "Public Evidence & Contributions",
-  headline: "Claims are tied to public artifacts wherever possible.",
+  headline: "Public evidence for the systems work above.",
   description:
-    "This portfolio prioritizes merged PRs, upstream commits, public product pages, and cross-repository evidence. Private work is separated and described only at a public-safe architecture and outcome level.",
+    "Each public claim links to reviewed source, an upstream commit, or an inspectable product surface. Private work remains explicitly separate.",
   points: [
     {
       title: "Open-source systems",
