@@ -1,30 +1,45 @@
 ---
 import { pageNavItems, profile, siteCopy } from "../data/portfolio";
+import Icon from "./Icon.astro";
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
-<header class="site-header">
-  <nav class="page-shell flex items-center justify-between gap-6 py-4" aria-label={siteCopy.navigation}>
-    <a href="/" class="font-mono text-base font-semibold text-white" aria-label={`${profile.name} — Portfolio`}>{profile.handle}</a>
-    <div class="hidden items-center gap-7 sm:flex">
+<header class="site-sidebar">
+  <div class="sidebar-identity">
+    <a href="/" class="sidebar-name" aria-label={`${profile.name} — Portfolio`}>{profile.name}</a>
+    <p class="sidebar-role">{siteCopy.sidebar.role}</p>
+    <p class="sidebar-introduction">{siteCopy.sidebar.introduction}</p>
+  </div>
+
+  <nav class="sidebar-navigation" aria-label={siteCopy.navigation}>
       {pageNavItems.map((item) => (
         <a
           href={item.href}
           aria-current={currentPath === item.href ? "page" : undefined}
-          class:list={["site-nav-link", { "nav-contact": item.href === "/contact" }]}
+          class="sidebar-nav-link"
         >{item.label}</a>
       ))}
-    </div>
-    <details class="mobile-menu sm:hidden">
-      <summary class="cursor-pointer rounded-md border border-white/15 px-4 py-2 text-sm text-slate-200">{siteCopy.menu}</summary>
-      <div class="mobile-menu-panel">
-        {pageNavItems.map((item) => (
-          <a class="site-nav-link block rounded-md px-4 py-3" href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>{item.label}</a>
-        ))}
-      </div>
-    </details>
   </nav>
+
+  <div class="sidebar-contact">
+    <a class="button-primary" href="/contact">{siteCopy.sidebar.contact}<Icon name="arrowRight" /></a>
+    <div class="sidebar-socials">
+      {profile.links.map((link) => (
+        <a href={link.href} target="_blank" rel="noreferrer"><Icon name={link.label === "GitHub" ? "github" : "linkedin"} />{link.label}</a>
+      ))}
+    </div>
+  </div>
+  <p class="sidebar-platforms">{siteCopy.sidebar.platforms}</p>
+
+  <details class="mobile-menu">
+    <summary>{siteCopy.menu}<Icon name="caretDown" /></summary>
+    <nav class="mobile-menu-panel" aria-label={siteCopy.navigation}>
+        {pageNavItems.map((item) => (
+          <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>{item.label}</a>
+        ))}
+    </nav>
+  </details>
 </header>
 
 <script>

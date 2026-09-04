@@ -41,6 +41,12 @@ export const siteCopy = {
   discussProject: "Discuss your project",
   viewServices: "Explore services",
   caseStudy: "Read case study",
+  sidebar: {
+    role: "Senior C++ systems engineer",
+    introduction: "Performance-critical runtimes, protocols, and tooling. Built with care for reliability and data safety.",
+    contact: "Get in touch",
+    platforms: "Linux / Windows"
+  },
   business: {
     title: "Business & invoicing",
     description:

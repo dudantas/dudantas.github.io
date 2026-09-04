@@ -2,11 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("@fontsource-variable/inter/files/inter-latin-wght-normal.woff2") format("woff2");
+}
+
 :root {
   color-scheme: dark;
+  --page: #0d151a;
+  --surface: #131e24;
+  --ink: #edf1ee;
+  --muted: #adb8bd;
+  --accent: #a5d6c5;
+  --line: #344047;
+  --rail-width: 22rem;
   font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #020617;
+    "Inter Variable", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--page);
+  color: var(--ink);
 }
 
 html {
@@ -18,10 +34,10 @@ body {
   min-width: 320px;
   margin: 0;
   overflow-x: clip;
-  background:
-    linear-gradient(180deg, rgba(14, 165, 233, 0.08), transparent 420px),
-    radial-gradient(circle at 20% 0%, rgba(132, 204, 22, 0.08), transparent 360px),
-    #020617;
+  background: var(--page);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -29,7 +45,7 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid #7dd3fc;
+  outline: 2px solid var(--accent);
   outline-offset: 5px;
 }
 
@@ -74,4 +90,63 @@ details[open] > .case-study-summary::after { content: "−"; }
 ::selection {
   background: rgba(56, 189, 248, 0.35);
   color: #ffffff;
+}
+
+.icon { display: inline-flex; flex: 0 0 auto; width: 1.25rem; height: 1.25rem; vertical-align: middle; }
+.icon svg { width: 100%; height: 100%; fill: currentColor; }
+.site-layout { display: grid; grid-template-columns: var(--rail-width) minmax(0, 1fr); max-width: 100rem; margin: 0 auto; }
+.site-sidebar { position: sticky; top: 0; display: flex; flex-direction: column; align-self: start; height: 100svh; overflow-y: auto; border-right: 1px solid var(--line); padding: clamp(3rem, 12.5vh, 8.75rem) 2.5rem 3rem 3.625rem; }
+.sidebar-name { display: block; font-size: 1.85rem; font-weight: 600; letter-spacing: -0.05em; line-height: 1.2; }
+.sidebar-role { margin-top: .6rem; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+.sidebar-introduction { margin-top: 1.8rem; max-width: 15rem; color: var(--muted); line-height: 1.9; }
+.sidebar-navigation { display: grid; gap: 1rem; margin-top: 3.1rem; }
+.sidebar-nav-link { border-left: 3px solid transparent; margin-left: -1px; padding: .2rem 0 .2rem .85rem; color: var(--muted); line-height: 1.5; transition: color .15s ease; }
+.sidebar-nav-link:hover, .sidebar-nav-link[aria-current="page"] { color: var(--ink); }
+.sidebar-nav-link[aria-current="page"] { border-color: var(--accent); font-weight: 500; }
+.sidebar-contact { margin-top: 4.5rem; }
+.sidebar-socials { display: grid; gap: 1.25rem; margin-top: 2.8rem; }
+.sidebar-socials a { display: flex; align-items: center; gap: 1rem; color: var(--accent); width: fit-content; }
+.sidebar-socials .icon { width: 1.5rem; height: 1.5rem; }
+.sidebar-platforms { margin-top: auto; padding-top: 3rem; color: var(--muted); font-size: .875rem; }
+.site-content { min-width: 0; padding: 5.75rem clamp(2.5rem, 4.85vw, 4.375rem) 0; }
+.site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; margin-top: 5rem; border-top: 1px solid var(--line); padding: 1.75rem 0; color: var(--muted); font-size: .8125rem; }
+.footer-socials { display: none; }
+.button-primary, .button-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 1.25rem; min-height: 3.25rem; border: 1px solid transparent; border-radius: .3rem; padding: .85rem 1.35rem; font-size: .9375rem; font-weight: 550; line-height: 1.4; transition: background .15s ease, color .15s ease; }
+.button-primary { background: var(--accent); color: #0d201a; }
+.button-primary:hover { background: #c1e7d9; border-color: transparent; }
+.button-secondary { background: transparent; color: var(--accent); border-color: var(--line); }
+.button-secondary:hover { background: var(--surface); border-color: var(--accent); }
+.text-link { display: inline-flex; align-items: center; gap: .8rem; color: var(--accent); font-size: .9375rem; font-weight: 400; line-height: 1.5; text-decoration: none; }
+.text-link:hover { color: #d6f0e5; text-decoration: underline; text-underline-offset: .3em; }
+.mobile-menu { display: none; }
+.skip-link { background: var(--accent); color: #10211b; }
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  :root { --rail-width: 18rem; }
+  .site-sidebar { padding-left: 2rem; padding-right: 2rem; }
+  .sidebar-name { font-size: 1.6rem; }
+  .site-content { padding-left: 2.5rem; padding-right: 2.5rem; }
+}
+
+@media (max-width: 1023px) {
+  .site-layout { display: block; }
+  .site-sidebar { z-index: 30; flex-direction: row; align-items: center; justify-content: space-between; gap: 1rem; height: auto; overflow: visible; padding: 1.2rem 1.5rem; border-right: 0; border-bottom: 1px solid var(--line); background: var(--page); }
+  .sidebar-name { font-size: 1.25rem; letter-spacing: -.035em; }
+  .sidebar-role { margin-top: .25rem; font-size: .75rem; }
+  .sidebar-introduction, .sidebar-navigation, .sidebar-contact, .sidebar-platforms { display: none; }
+  .mobile-menu { display: block; }
+  .mobile-menu > summary { display: flex; align-items: center; gap: .5rem; min-height: 2.75rem; padding: .4rem .25rem .4rem .75rem; cursor: pointer; font-size: .875rem; list-style: none; }
+  .mobile-menu > summary::-webkit-details-marker { display: none; }
+  .mobile-menu[open] > summary .icon { transform: rotate(180deg); }
+  .mobile-menu-panel { position: absolute; inset: 100% 0 auto; display: grid; gap: .5rem; margin: 0; padding: 1rem 1.5rem 1.5rem; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: var(--page); box-shadow: none; }
+  .mobile-menu-panel a { min-height: 2.75rem; border-left: 3px solid transparent; padding: .5rem 1rem; color: var(--muted); }
+  .mobile-menu-panel a[aria-current="page"] { border-color: var(--accent); background: var(--surface); color: var(--ink); }
+  .site-content { max-width: 52rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+  .site-footer { margin-top: 3.5rem; }
+  .footer-socials { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-socials a { display: inline-flex; align-items: center; gap: .5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0s !important; }
 }

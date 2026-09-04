@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import SiteHeader from "../components/SiteHeader.astro";
+import Icon from "../components/Icon.astro";
 import { profile, siteCopy } from "../data/portfolio";
 
 type Props = {
@@ -35,15 +36,20 @@ const socialImageUrl = new URL("/og-image.svg", siteUrl).href;
     <meta name="twitter:image" content={socialImageUrl} />
     <title>{title}</title>
   </head>
-  <body id="top" class="text-slate-100">
+  <body id="top">
     <a class="skip-link" href="#main-content">{siteCopy.skipLink}</a>
-    <SiteHeader />
-    <slot />
-    <footer class="border-t border-white/10 py-8">
-      <div class="page-shell flex flex-wrap items-center justify-between gap-5 text-sm text-slate-400">
-        <div><p class="font-medium text-slate-200">{profile.name}</p><p class="mt-1">{siteCopy.footer}</p></div>
-        <a class="text-link" href="#top">{siteCopy.backToTop} <span aria-hidden="true">↑</span></a>
+    <div class="site-layout">
+      <SiteHeader />
+      <div class="site-content">
+        <slot />
+        <footer class="site-footer">
+          <p>{siteCopy.footer}</p>
+          <div class="footer-socials">
+            {profile.links.map((link) => <a href={link.href} target="_blank" rel="noreferrer">{link.label}<Icon name="arrowUpRight" /></a>)}
+          </div>
+          <a class="text-link" href="#top">{siteCopy.backToTop}<Icon name="arrowUp" /></a>
+        </footer>
       </div>
-    </footer>
+    </div>
   </body>
 </html>
