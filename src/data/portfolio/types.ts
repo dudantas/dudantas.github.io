@@ -82,3 +82,12 @@ export type ExperienceSummary = {
   summary: string;
   caseStudyId: string;
 };
+
+export type WorkIndexEntry = {
+  caseStudyId: string;
+  category: string;
+  title: string;
+  summary: string;
+  metricIndex?: number;
+  note?: string;
+};

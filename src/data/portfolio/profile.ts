@@ -43,7 +43,7 @@ export const siteCopy = {
   caseStudy: "Read case study",
   sidebar: {
     role: "Senior C++ systems engineer",
-    introduction: "Performance-critical runtimes, protocols, and tooling. Built with care for reliability and data safety.",
+    introduction: ["Performance-critical runtimes, protocols, and tooling.", "Built with care for reliability and data safety."],
     contact: "Get in touch",
     platforms: "Linux / Windows"
   },
@@ -79,6 +79,30 @@ export const aboutPage = {
   privateDescription: "Selected client work, shared with the owner's approval.",
   closingTitle: "Have a systems problem to work through?",
   closingDescription: "Explore the service scopes or get in touch with a short description of your project."
+};
+
+export const homePage = {
+  eyebrow: "Selected engineering work",
+  headline: ["Problems solved.", "Decisions explained."],
+  introduction: "A selection of public work, with implementation evidence.",
+  result: "Result",
+  evidence: "Evidence",
+  allWork: "Explore all engineering work",
+  caseStudiesTitle: "Engineering case studies",
+  caseStudiesDescription: "The context, decisions, and public evidence behind the work.",
+  capabilitiesTitle: "Expertise & tools",
+  measurementsTitle: "Measurements & outcomes",
+  contributionsTitle: "Open-source contributions",
+  moreContributions: "View more contributions",
+  privateTitle: "Private work",
+  privateLink: "More about my experience",
+  recommendationsLink: "Read recommendations on LinkedIn",
+  contactTitle: "Have a systems problem to work through?",
+  contactDescription: "Open to senior C++ engineering roles and focused consulting engagements.",
+  caseLabels: {
+    context: "Context", problem: "Problem", solution: "Solution", impact: "Impact",
+    ownership: "What I owned", decisions: "Technical decisions", evidence: "Public evidence", technologies: "Technologies"
+  }
 };
 
 export const contactPage = {

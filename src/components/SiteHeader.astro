@@ -9,7 +9,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
   <div class="sidebar-identity">
     <a href="/" class="sidebar-name" aria-label={`${profile.name} — Portfolio`}>{profile.name}</a>
     <p class="sidebar-role">{siteCopy.sidebar.role}</p>
-    <p class="sidebar-introduction">{siteCopy.sidebar.introduction}</p>
+    <p class="sidebar-introduction">{siteCopy.sidebar.introduction.map((line) => <span>{line}{" "}</span>)}</p>
   </div>
 
   <nav class="sidebar-navigation" aria-label={siteCopy.navigation}>

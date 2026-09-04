@@ -1,4 +1,28 @@
-import type { CaseStudy, ExperienceSummary, FeaturedWorkItem, SelectedContribution } from "./types";
+import type { CaseStudy, ExperienceSummary, FeaturedWorkItem, SelectedContribution, WorkIndexEntry } from "./types";
+
+export const workIndex: WorkIndexEntry[] = [
+  {
+    caseStudyId: "cpp-lua-runtime-startup-performance",
+    category: "Runtime performance",
+    title: "Faster C++ / Lua startup",
+    summary: "Hot-path improvements across script loading and runtime initialization.",
+    metricIndex: 0
+  },
+  {
+    caseStudyId: "cpp-build-system-protobuf-packaging-optimization",
+    category: "Build tooling",
+    title: "Leaner Protobuf builds",
+    summary: "Constrained packaging for target-side C++ runtimes.",
+    metricIndex: 0
+  },
+  {
+    caseStudyId: "runtime-multiprotocol-networking-architecture",
+    category: "Protocols & networking",
+    title: "One runtime. Multiple client generations.",
+    summary: "Explicit transport and compatibility contracts in a shared C++ runtime.",
+    note: "Designed transport codecs, runtime profiles, session hints, and version-gated payloads so modern and legacy client generations can share one C++ runtime. The case study covers the compatibility boundaries, implementation decisions, and public evidence."
+  }
+];
 
 export const publicEvidence = {
   title: "Public Evidence & Contributions",
