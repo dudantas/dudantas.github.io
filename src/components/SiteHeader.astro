@@ -1,6 +1,7 @@
 ---
 import { pageNavItems, profile, siteCopy } from "../data/portfolio";
 import Icon from "./Icon.astro";
+import ThemePicker from "./ThemePicker.astro";
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
@@ -30,15 +31,21 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
       ))}
     </div>
   </div>
-  <p class="sidebar-platforms">{siteCopy.sidebar.platforms}</p>
+  <div class="sidebar-preferences">
+    <p class="sidebar-platforms">{siteCopy.sidebar.platforms}</p>
+    <ThemePicker />
+  </div>
 
   <details class="mobile-menu">
     <summary>{siteCopy.menu}<Icon name="caretDown" /></summary>
-    <nav class="mobile-menu-panel" aria-label={siteCopy.navigation}>
+    <div class="mobile-menu-panel">
+      <nav aria-label={siteCopy.navigation}>
         {pageNavItems.map((item) => (
           <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>{item.label}</a>
         ))}
-    </nav>
+      </nav>
+      <ThemePicker />
+    </div>
   </details>
 </header>
 

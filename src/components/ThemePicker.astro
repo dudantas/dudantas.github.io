@@ -1,0 +1,12 @@
+---
+import Icon from "./Icon.astro";
+import { siteCopy } from "../data/portfolio";
+---
+
+<div class="theme-picker" data-theme-picker hidden>
+  <p class="theme-label">{siteCopy.theme.label}</p>
+  <div class="theme-options" role="group" aria-label={siteCopy.theme.label}>
+    <button type="button" data-theme-option="light" aria-pressed="false"><Icon name="sun" />{siteCopy.theme.light}</button>
+    <button type="button" data-theme-option="dark" aria-pressed="false"><Icon name="moon" />{siteCopy.theme.dark}</button>
+  </div>
+</div>

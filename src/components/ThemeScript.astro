@@ -1,0 +1,53 @@
+<script is:inline>
+  (() => {
+    const storageKey = "portfolio-theme";
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const isTheme = (value) => value === "light" || value === "dark";
+    let preference = null;
+
+    try {
+      const savedTheme = window.localStorage.getItem(storageKey);
+      if (isTheme(savedTheme)) preference = savedTheme;
+    } catch {
+      // Storage may be unavailable; theme selection must still work for this page.
+    }
+
+    function applyTheme() {
+      const theme = preference ?? (systemTheme.matches ? "dark" : "light");
+      document.documentElement.dataset.theme = theme;
+      document.documentElement.style.colorScheme = theme;
+      document.querySelectorAll("[data-theme-option]").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.getAttribute("data-theme-option") === theme));
+      });
+    }
+
+    // Run in the head so a saved choice is applied before the first content paint.
+    applyTheme();
+
+    function enablePickers() {
+      applyTheme();
+      document.querySelectorAll("[data-theme-picker]").forEach((picker) => { picker.hidden = false; });
+    }
+
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", enablePickers, { once: true });
+    else enablePickers();
+
+    document.addEventListener("click", (event) => {
+      const button = event.target instanceof Element ? event.target.closest("button[data-theme-option]") : null;
+      const theme = button?.getAttribute("data-theme-option");
+      if (!isTheme(theme)) return;
+
+      preference = theme;
+      applyTheme();
+      try {
+        window.localStorage.setItem(storageKey, theme);
+      } catch {
+        // Keep the in-memory choice when the browser blocks persistence.
+      }
+    });
+
+    systemTheme.addEventListener("change", () => {
+      if (preference === null) applyTheme();
+    });
+  })();
+</script>

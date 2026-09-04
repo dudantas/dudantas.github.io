@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import SiteHeader from "../components/SiteHeader.astro";
 import Icon from "../components/Icon.astro";
+import ThemeScript from "../components/ThemeScript.astro";
 import { profile, siteCopy } from "../data/portfolio";
 
 type Props = {
@@ -21,6 +22,8 @@ const socialImageUrl = new URL("/og-image.svg", siteUrl).href;
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <ThemeScript />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
