@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { aboutPage as content, experienceSummaries, premiumClient, privateWork, profile, siteCopy } from "../data/portfolio";
+---
+
+<BaseLayout title={content.title} description={content.description}>
+  <main id="main-content">
+    <section class="page-section">
+      <div class="page-shell grid gap-10 lg:grid-cols-[1.4fr_0.7fr] lg:gap-16">
+        <div>
+          <p class="page-eyebrow">{content.eyebrow}</p>
+          <h1 class="page-title">{content.headline}</h1>
+          <p class="page-lead">{content.lead}</p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            {profile.links.map((link) => <a class="button-secondary" href={link.href} target="_blank" rel="noreferrer">{link.label} <span class="ml-2" aria-hidden="true">↗</span></a>)}
+          </div>
+        </div>
+        <aside class="surface p-6 sm:p-8">
+          <h2 class="text-lg font-semibold text-white">{content.approachTitle}</h2>
+          <ul class="mt-5 grid gap-5 text-base leading-7 text-slate-400">
+            {content.approach.map((item) => <li class="border-l-2 border-lime-300/30 pl-4">{item}</li>)}
+          </ul>
+        </aside>
+        <div class="grid gap-5 text-base leading-8 text-slate-300 lg:col-span-2 lg:grid-cols-2 lg:gap-16">
+          {content.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="page-shell">
+        <h2 class="section-title">{content.experienceTitle}</h2>
+        <p class="mt-4 max-w-3xl text-base leading-7 text-slate-400">{content.experienceDescription}</p>
+        <div class="mt-8 grid gap-5 md:grid-cols-2">
+          {experienceSummaries.map((item) => (
+            <article class="surface flex min-w-0 flex-col p-6 sm:p-7">
+              <p class="text-sm text-sky-200">{item.focus}</p>
+              <h3 class="mt-3 text-xl font-semibold text-white">{item.title}</h3>
+              <p class="mb-5 mt-3 text-base leading-7 text-slate-400">{item.summary}</p>
+              <a class="text-link mt-auto self-start" href={`/#${item.caseStudyId}`}>{siteCopy.caseStudy} <span aria-hidden="true">↗</span></a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="page-shell grid gap-8 lg:grid-cols-[0.7fr_1.4fr] lg:gap-16">
+        <h2 class="section-title">{content.collaborationTitle}</h2>
+        <article class="surface p-6 sm:p-8">
+          <div class="flex flex-wrap items-center gap-4">
+            <h3 class="text-2xl font-semibold text-white">{premiumClient.title}</h3>
+            <span class="rounded-md border border-sky-400/30 bg-sky-400/10 px-3 py-1 text-sm text-sky-200">{premiumClient.label}</span>
+          </div>
+          <p class="mt-5 text-base leading-7 text-slate-300">{premiumClient.summary}</p>
+          <p class="mt-3 text-base leading-7 text-slate-400">{premiumClient.description}</p>
+          <a class="text-link mt-6 inline-flex" href={premiumClient.link.href} target="_blank" rel="noreferrer">{premiumClient.link.label} <span class="ml-2" aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section id="private-work" class="page-section">
+      <div class="page-shell grid gap-8 lg:grid-cols-[0.7fr_1.4fr] lg:gap-16">
+        <div>
+          <h2 class="section-title">{content.privateTitle}</h2>
+          <p class="mt-4 text-base leading-7 text-slate-400">{content.privateDescription}</p>
+        </div>
+        <article class="border-l-2 border-amber-300/40 pl-6">
+          <p class="text-sm text-amber-200">{privateWork.label}</p>
+          <h3 class="mt-3 text-2xl font-semibold text-white">{privateWork.shortTitle}</h3>
+          <p class="mt-4 max-w-2xl text-base leading-7 text-slate-300">{privateWork.shortSummary}</p>
+          <p class="mt-4 text-sm text-amber-100">{privateWork.reference}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="py-14 sm:py-20">
+      <div class="page-shell grid gap-10 lg:grid-cols-[1.4fr_0.7fr] lg:gap-16">
+        <div>
+          <h2 class="section-title">{content.closingTitle}</h2>
+          <p class="mt-4 max-w-2xl text-base leading-7 text-slate-400">{content.closingDescription}</p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a class="button-primary" href="/contact">{siteCopy.discussProject}</a>
+            <a class="button-secondary" href="/services">{siteCopy.viewServices}</a>
+          </div>
+        </div>
+        <aside class="border-t border-white/15 pt-5">
+          <h2 class="text-lg font-semibold text-slate-200">{siteCopy.business.title}</h2>
+          <p class="mt-3 text-sm leading-7 text-slate-400">{siteCopy.business.description}</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

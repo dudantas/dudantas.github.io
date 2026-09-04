@@ -1,4 +1,4 @@
-import type { CaseStudy, FeaturedWorkItem, SelectedContribution } from "./types";
+import type { CaseStudy, ExperienceSummary, FeaturedWorkItem, SelectedContribution } from "./types";
 
 export const publicEvidence = {
   title: "Public Evidence & Contributions",
@@ -525,6 +525,8 @@ export const selectedContributions: SelectedContribution[] = [
 
 export const privateWork = {
   title: "Private Client/Server Runtime Engineering",
+  shortTitle: "Asteria",
+  shortSummary: "C++/Lua client and server engineering across runtime behavior, protocol compatibility, persistence, and delivery workflows.",
   label: "Client-approved private work",
   summary:
     "Asteria client and server work across C++/Lua runtime systems, protocol compatibility, UI/runtime behavior, persistence, launcher/API integration, asset delivery, telemetry, crash reporting, and release operations.",
@@ -541,4 +543,41 @@ export const privateWork = {
     "Private URLs or internal service addresses",
     "Proprietary code, assets, logs, private diagnostic artifacts, screenshots, and business metrics"
   ]
+};
+
+export const experienceSummaries: ExperienceSummary[] = [
+  {
+    title: "Canary",
+    focus: "C++ / Lua runtimes",
+    summary: "Runtime startup, scheduling, protocol compatibility, and data safety contributions.",
+    caseStudyId: "cpp-lua-runtime-startup-performance"
+  },
+  {
+    title: "Remere's Map Editor",
+    focus: "Large-data developer tooling",
+    summary: "Map loading and saving, allocation, rendering, and asset export improvements.",
+    caseStudyId: "large-data-load-save-rendering-optimization"
+  },
+  {
+    title: "OTClient",
+    focus: "Client engineering & delivery",
+    summary: "Client networking, logging, asset delivery, and release workflow contributions.",
+    caseStudyId: "modern-client-asset-delivery-platform"
+  },
+  {
+    title: "Protocol Buffers & vcpkg",
+    focus: "Upstream C++ build tooling",
+    summary: "Constrained runtime packaging and CMake changes for target-side builds.",
+    caseStudyId: "cpp-build-system-protobuf-packaging-optimization"
+  }
+];
+
+export const premiumClient = {
+  title: "Premium OTClient",
+  label: "Public product",
+  summary:
+    "A publicly downloadable client product developed in collaboration with Qatari, Mehah, and Lury.",
+  description:
+    "OTClient Redemption Premium is available through its official download page. This is a shared product with a private implementation.",
+  link: { label: "Official product & downloads", href: "https://otcrp.com/downloads" }
 };

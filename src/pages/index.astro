@@ -11,6 +11,7 @@ import {
   profile,
   publicEvidence,
   recommendations,
+  siteCopy,
   selectedContributions
 } from "../data/portfolio";
 
@@ -27,21 +28,12 @@ const additionalContributions = selectedContributions.slice(8);
 
 <BaseLayout title="Eduardo Dantas - Senior C++ Software Engineer" description={profile.description}>
   <div class="min-h-screen bg-slate-950 text-slate-100">
-    <header class="sticky top-0 z-20 border-b border-white/10 bg-slate-950/85 backdrop-blur">
-      <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8" aria-label="Main navigation">
-        <a href="#top" class="font-mono text-sm font-semibold tracking-normal text-white">{profile.handle}</a>
-        <div class="hidden items-center gap-5 text-sm text-slate-300 lg:flex">
-          {navItems.map((item) => (
-            <a class="transition hover:text-white" href={item.href}>{item.label}</a>
-          ))}
+    <main id="main-content">
+      <nav class="border-b border-white/10" aria-label={siteCopy.portfolioNavigation}>
+        <div class="page-shell flex flex-wrap gap-x-7 gap-y-3 py-4 text-sm text-slate-400">
+          {navItems.map((item) => <a class="hover:text-white" href={item.href}>{item.label}</a>)}
         </div>
-        <a class="rounded-md border border-sky-400/40 px-3 py-2 text-sm font-medium text-sky-100 transition hover:border-sky-300 hover:bg-sky-400/10" href="https://www.linkedin.com/in/dudantas" target="_blank" rel="noreferrer">
-          Contact
-        </a>
       </nav>
-    </header>
-
-    <main id="top">
       <section class="border-b border-white/10">
         <div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[1.2fr_0.8fr] lg:px-8">
           <div class="flex min-w-0 flex-col justify-center">
@@ -190,8 +182,8 @@ const additionalContributions = selectedContributions.slice(8);
           </div>
           <div class="mt-10 grid gap-4">
             {caseStudies.map((study) => (
-              <details id={study.id} class="scroll-mt-24 rounded-lg border border-white/10 bg-white/[0.03] p-6 open:border-sky-300/30" open={study.id === "cpp-lua-runtime-startup-performance"}>
-                <summary class="cursor-pointer list-none">
+              <details id={study.id} data-case-study class="scroll-mt-24 rounded-lg border border-white/10 bg-white/[0.03] p-6 open:border-sky-300/30" open={study.id === "cpp-lua-runtime-startup-performance"}>
+                <summary class="case-study-summary cursor-pointer list-none">
                   <div class="flex flex-wrap items-center justify-between gap-3">
                     <h3 class="text-xl font-semibold text-white sm:text-2xl">{study.title}</h3>
                     <span class={`rounded-md border px-2.5 py-1 text-xs font-medium ${statusClass(study.evidenceStatus)}`}>{study.evidenceStatus}</span>
@@ -366,11 +358,8 @@ const additionalContributions = selectedContributions.slice(8);
               Focused on backend systems, protocol-heavy software, performance-critical runtimes, reliability, build tooling, data safety, and production-grade Linux/Windows systems.
             </p>
             <div class="mt-8 flex flex-wrap gap-3">
-              {profile.links.map((link) => (
-                <a class="rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm font-medium text-white transition hover:border-sky-300 hover:bg-sky-400/10" href={link.href} target="_blank" rel="noreferrer">
-                  {link.label}
-                </a>
-              ))}
+              <a class="button-primary" href="/contact">{siteCopy.discussProject}</a>
+              <a class="button-secondary" href="/services">{siteCopy.viewServices}</a>
             </div>
           </div>
         </div>
@@ -378,3 +367,21 @@ const additionalContributions = selectedContributions.slice(8);
     </main>
   </div>
 </BaseLayout>
+
+<script>
+  function revealCaseStudy(hash: string) {
+    let id: string;
+    try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
+    const study = document.getElementById(id);
+    if (study instanceof HTMLDetailsElement && study.hasAttribute("data-case-study")) {
+      study.open = true;
+      study.scrollIntoView({ block: "start" });
+    }
+  }
+
+  revealCaseStudy(window.location.hash);
+  window.addEventListener("hashchange", () => revealCaseStudy(window.location.hash));
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", () => revealCaseStudy(link.hash));
+  });
+</script>

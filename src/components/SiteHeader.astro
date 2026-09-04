@@ -1,0 +1,41 @@
+---
+import { pageNavItems, profile, siteCopy } from "../data/portfolio";
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<header class="site-header">
+  <nav class="page-shell flex items-center justify-between gap-6 py-4" aria-label={siteCopy.navigation}>
+    <a href="/" class="font-mono text-base font-semibold text-white" aria-label={`${profile.name} — Portfolio`}>{profile.handle}</a>
+    <div class="hidden items-center gap-7 sm:flex">
+      {pageNavItems.map((item) => (
+        <a
+          href={item.href}
+          aria-current={currentPath === item.href ? "page" : undefined}
+          class:list={["site-nav-link", { "nav-contact": item.href === "/contact" }]}
+        >{item.label}</a>
+      ))}
+    </div>
+    <details class="mobile-menu sm:hidden">
+      <summary class="cursor-pointer rounded-md border border-white/15 px-4 py-2 text-sm text-slate-200">{siteCopy.menu}</summary>
+      <div class="mobile-menu-panel">
+        {pageNavItems.map((item) => (
+          <a class="site-nav-link block rounded-md px-4 py-3" href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>{item.label}</a>
+        ))}
+      </div>
+    </details>
+  </nav>
+</header>
+
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>(".mobile-menu");
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && menu?.open) {
+      menu.open = false;
+      menu.querySelector("summary")?.focus();
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (menu?.open && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
+  });
+</script>
