@@ -1,56 +1,70 @@
 import type { ServiceOffering } from "./types";
 
 export const servicesPage = {
-  title: "Engineering Services — Eduardo Dantas",
+  title: "Custom Software Development & Engineering — Eduardo Dantas",
   description:
-    "Scoped C++ and Lua engineering: performance and stability assessments, feature and protocol integration, and developer tooling and automation.",
+    "Custom software development for new and existing products: applications, APIs, integrations, automation, and specialist C++ systems engineering.",
   eyebrow: "Services",
-  headline: "Engineering services for C++ runtime systems.",
+  headline: "Custom software development & engineering.",
   lead:
-    "Focused technical work for teams that need better performance, reliable behavior, clear protocol contracts, or a more effective development workflow.",
+    "Software built around your needs: applications, APIs, integrations, automations, and internal tools. From an initial idea to an existing product, the technology and scope are chosen for the project.",
   primaryCta: "Discuss your project",
   secondaryCta: "Find the right scope",
   fitTitle: "When to bring me in",
   fit: [
-    "A runtime is slow, unstable, or difficult to diagnose.",
-    "A feature or protocol change needs careful integration.",
-    "Manual tooling or fragile builds are slowing delivery."
+    "You have an idea for a new application, service, or internal tool.",
+    "An existing product needs new features or integrations.",
+    "Software is slow, unstable, or difficult to diagnose.",
+    "Manual workflows or fragile tooling are slowing your team down."
   ],
-  offersTitle: "Three focused engagements",
-  offersDescription: "Choose a starting point. The supported environment, deliverables, and acceptance criteria are agreed for each engagement.",
+  offersTitle: "Ways we can work together",
+  offersDescription: "Start with what you need to build or improve. Scope, technology, deliverables, and acceptance criteria are agreed for each project.",
   deliverablesLabel: "What you receive",
   scopeLabel: "Scope & prerequisites",
   outsideLabel: "Outside the initial scope",
   assessmentLabel: "Before implementation",
   evidenceLabel: "Related work",
   openTibia: {
-    eyebrow: "OpenTibia systems",
-    title: "Systems expertise, applied to your server and tools.",
+    eyebrow: "Domain experience · OpenTibia",
+    title: "Client, server & tooling engineering.",
     description:
-      "Scoped engineering across Canary, OTClient, Remere's Map Editor, C++/Lua integration, protocol compatibility, runtime performance, data safety, and asset workflows.",
+      "OpenTibia is one domain where I apply this work. Experience across Canary, OTClient, and Remere's Map Editor covers C++/Lua integration, protocol compatibility, runtime performance, data safety, and asset workflows.",
     scope:
       "Each proposal names the supported base, versions, dependencies, and delivery boundary. Full server bases and ongoing support for an unlimited set of forks are outside these engagements.",
     rights:
       "Work involving code or asset packaging starts with the applicable licenses and distribution rights. Public code remains subject to its original license.",
     linkLabel: "Explore the engineering portfolio"
   },
-  processTitle: "A clear path from problem to handover",
+  processTitle: "A clear path from idea to handover",
   process: [
-    { title: "Brief", description: "Share the problem, goals, environment, timeline, and budget range." },
-    { title: "Assess", description: "Use a paid investigation when the cause, feasibility, or delivery risk is unclear." },
-    { title: "Agree", description: "Define scope, deliverables, dependencies, and acceptance criteria in a proposal." },
+    { title: "Brief", description: "Share your idea or problem, intended users, goals, timeline, and budget range." },
+    { title: "Assess", description: "Clarify requirements and feasibility, with paid discovery or investigation when needed." },
+    { title: "Agree", description: "Define scope, technology, deliverables, dependencies, and acceptance criteria in a proposal." },
     { title: "Implement", description: "Execute the approved work within the agreed technical boundary." },
     { title: "Hand over", description: "Review the agreed criteria, deliver the work, and document the next steps." }
   ],
   supportTitle: "Follow-up support",
   supportDescription:
     "Maintenance can be scoped separately, subject to capacity and agreed hours, response expectations, and coverage. Engagements do not include unlimited support or 24/7 availability.",
-  closingTitle: "Start with the problem you need to solve.",
+  closingTitle: "Start with an idea or a problem to solve.",
   closingDescription: "A short briefing is enough to begin. Technical access and sensitive materials can wait until the scope and confidentiality arrangements are clear.",
   assessmentCta: "Request a technical assessment"
 };
 
 export const serviceOfferings: ServiceOffering[] = [
+  {
+    id: "custom-development",
+    title: "Custom Software Development",
+    summary: "Web and desktop applications, APIs, and internal tools, built from scratch or as part of an existing product.",
+    deliverables: [
+      "A defined scope, milestones, and acceptance criteria.",
+      "The agreed software, with tests for its core workflows.",
+      "Usage documentation and an agreed technical handover."
+    ],
+    outsideScope: "Extra features, third-party costs, and ongoing operations or maintenance unless included in the proposal.",
+    assessment: "We clarify users, workflows, integrations, and delivery needs before selecting the technology. A paid discovery phase may be proposed when requirements or feasibility need investigation.",
+    caseStudyIds: []
+  },
   {
     id: "assessment",
     title: "Performance & Stability Assessment",
@@ -66,27 +80,27 @@ export const serviceOfferings: ServiceOffering[] = [
   },
   {
     id: "integration",
-    title: "Feature & Protocol Integration",
-    summary: "Specific implementation or adaptation work for C++/Lua runtimes and protocol-driven client/server software.",
+    title: "Features & Integrations",
+    summary: "Features, APIs, and protocol integrations for existing applications and client/server systems, including C++/Lua runtimes.",
     deliverables: [
-      "An agreed feature or integration in the supported codebase.",
+      "An agreed feature or integration in your application or service.",
       "Explicit version boundaries and acceptance criteria.",
       "Validation against the agreed criteria and a technical handover."
     ],
-    outsideScope: "Whole-codebase ports, universal compatibility, unrelated features, and ongoing maintenance of every client or fork.",
-    assessment: "A paid assessment may be needed for an unfamiliar fork, incomplete protocol evidence, uncertain dependencies, or unclear compatibility requirements.",
+    outsideScope: "Whole-codebase ports, universal compatibility, unrelated features, and ongoing maintenance unless agreed separately.",
+    assessment: "A paid assessment may be needed for undocumented APIs or protocols, legacy code, uncertain dependencies, or unclear compatibility requirements.",
     caseStudyIds: ["runtime-multiprotocol-networking-architecture"]
   },
   {
     id: "tooling",
-    title: "Developer Tooling & Automation",
-    summary: "Purpose-built improvements for diagnostics, data and asset workflows, builds, and development operations.",
+    title: "Tooling & Automation",
+    summary: "Tools and automations for repetitive tasks, data workflows, diagnostics, builds, and development operations.",
     deliverables: [
       "A focused tool or automation for an agreed workflow.",
       "Defined inputs, outputs, and failure behavior.",
       "Usage documentation and a maintainable handover."
     ],
-    outsideScope: "A new SaaS platform, unlimited integrations, continuous infrastructure operations, or redistribution without the necessary rights.",
+    outsideScope: "A full application or SaaS platform belongs in a custom development scope. Unlimited integrations, continuous operations, and redistribution without the necessary rights are not included.",
     assessment: "A paid assessment may be needed when the workflow, data formats, environment, or packaging rights require investigation.",
     caseStudyIds: ["cpp-build-system-protobuf-packaging-optimization", "large-data-load-save-rendering-optimization"]
   }

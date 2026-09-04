@@ -9,7 +9,7 @@ export const profile = {
   secondaryContext:
     "Applied across online infrastructure, open-source platforms, private client/server products, and developer tooling across Linux and Windows.",
   description:
-    "Senior C++ engineer focused on performance-critical backend runtimes, protocols, Linux/Windows systems, build tooling, reliability, and data safety.",
+    "Senior C++ systems engineer offering custom software development, performance optimization, integrations, and developer tooling across Linux and Windows.",
   heroChips: ["C++ Runtime Systems", "Protocols & Networking", "Performance & Reliability", "Linux / Windows"],
   links: [
     { label: "GitHub", href: "https://github.com/dudantas" },
@@ -44,7 +44,7 @@ export const siteCopy = {
   theme: { label: "Appearance", light: "Light", dark: "Dark" },
   sidebar: {
     role: "Senior C++ systems engineer",
-    introduction: ["Performance-critical runtimes, protocols, and tooling.", "Built with care for reliability and data safety."],
+    introduction: ["Performance-critical runtimes, protocols, and tooling.", "Custom software development, from idea to delivery."],
     contact: "Get in touch",
     platforms: "Linux / Windows"
   },
@@ -58,14 +58,15 @@ export const siteCopy = {
 export const aboutPage = {
   title: "About Eduardo Dantas — C++ Systems Engineer",
   description:
-    "Meet Eduardo Dantas: senior C++ systems engineer, open-source contributor, and collaborator on client/server products and developer tools.",
+    "Meet Eduardo Dantas: senior C++ systems engineer, custom software developer, and open-source contributor working across different application domains.",
   eyebrow: "About",
   headline: "Eduardo Dantas",
   lead:
     "Senior C++ software engineer working across performance-critical runtimes, protocols, reliability, developer tooling, and data safety.",
   paragraphs: [
+    "I develop custom software for different industries, from an idea for a new application to improvements in an existing product. The scope and technology are chosen around the users, requirements, and constraints.",
     "I investigate how systems behave, assess technical feasibility, and turn complex problems into focused engineering work. My experience spans C++ and Lua runtimes, client/server software, large-data tools, and build and release workflows across Linux and Windows.",
-    "OpenTibia is a long-standing application of that work. Public contributions to its servers, clients, and editors sit alongside upstream C++ tooling contributions and private client engagements."
+    "OpenTibia is one of the domains where I apply that experience. Public contributions to its servers, clients, and editors sit alongside upstream C++ tooling contributions and private client engagements."
   ],
   approachTitle: "How I work",
   approach: [
@@ -78,8 +79,8 @@ export const aboutPage = {
   collaborationTitle: "Product collaboration",
   privateTitle: "Private work",
   privateDescription: "Selected client work, shared with the owner's approval.",
-  closingTitle: "Have a systems problem to work through?",
-  closingDescription: "Explore the service scopes or get in touch with a short description of your project."
+  closingTitle: "Have a software project in mind?",
+  closingDescription: "Explore custom development and specialist engineering services, or get in touch with a short description of your idea."
 };
 
 export const homePage = {
@@ -98,8 +99,8 @@ export const homePage = {
   privateTitle: "Private work",
   privateLink: "More about my experience",
   recommendationsLink: "Read recommendations on LinkedIn",
-  contactTitle: "Have a systems problem to work through?",
-  contactDescription: "Open to senior C++ engineering roles and focused consulting engagements.",
+  contactTitle: "Have a software project in mind?",
+  contactDescription: "Available for custom software development, technical consulting, and senior C++ engineering roles.",
   caseLabels: {
     context: "Context", problem: "Problem", solution: "Solution", impact: "Impact",
     ownership: "What I owned", decisions: "Technical decisions", evidence: "Public evidence", technologies: "Technologies"
@@ -107,23 +108,23 @@ export const homePage = {
 };
 
 export const contactPage = {
-  title: "Contact Eduardo Dantas — Engineering & Consulting",
+  title: "Contact Eduardo Dantas — Custom Software & Engineering",
   description:
-    "Contact Eduardo Dantas about C++ engineering, technical assessments, client/server integration, developer tooling, or senior engineering roles.",
+    "Discuss custom software development, new applications, integrations, automation, technical consulting, or senior C++ engineering roles with Eduardo Dantas.",
   eyebrow: "Contact",
   headline: "Let's discuss your project.",
   lead:
-    "Tell me what you are building, what is getting in the way, and what a useful outcome would look like.",
+    "Have an idea for new software or an existing product to improve? Tell me who it is for, what it should do, and what a useful outcome would look like.",
   channel: {
     label: "Message me on LinkedIn",
     href: profile.links.find((link) => link.label === "LinkedIn")!.href,
     description: "Start with a short message on LinkedIn. We can agree on the next step and a suitable channel for the technical discussion."
   },
   briefTitle: "Useful context for your first message",
-  briefIntroduction: "A few details help establish whether the work is a good fit. A full specification is not required.",
+  briefIntroduction: "An idea or a short description is enough to start; a full specification or existing codebase is not required.",
   brief: [
-    { title: "System & version", description: "The product, codebase or fork, relevant version, and operating environment." },
-    { title: "Problem & intended outcome", description: "What happens today, what you need to change, and any constraints you already know." },
+    { title: "Project or idea", description: "What you want to build, who will use it, and whether you are starting from scratch or extending an existing product." },
+    { title: "Goal & requirements", description: "The outcome you need, key workflows or integrations, and any constraints you already know." },
     { title: "Timeline", description: "Your target date and whether it is flexible." },
     { title: "Budget range", description: "An approximate range to help shape a realistic scope." }
   ],
@@ -132,7 +133,7 @@ export const contactPage = {
     "Please do not send credentials, private source code, production data, or sensitive logs. If technical access is needed, we will agree on scope, confidentiality, and a suitable sharing method first.",
   nextTitle: "What happens next",
   nextDescription:
-    "We establish the problem and fit, then define a proposal or a paid assessment when investigation is needed. Timing, deliverables, and any follow-up support are agreed for the engagement.",
+    "We clarify the goals and technical fit, then define scope, technology, timeline, and deliverables in a proposal. A paid discovery or assessment may be useful when requirements or feasibility need investigation.",
   rolesTitle: "Engineering roles & collaboration",
   rolesDescription:
     "You can also reach out about senior C++ engineering roles or a clearly defined technical collaboration."

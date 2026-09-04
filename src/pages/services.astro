@@ -40,15 +40,17 @@ import { caseStudies, serviceOfferings, servicesPage as content, siteCopy } from
                   <div><h4>{content.assessmentLabel}</h4><p>{offer.assessment}</p></div>
                 </div>
               </div>
-              <div class="related-work">
-                <h3>{content.evidenceLabel}</h3>
-                <div class="compact-links">
-                  {offer.caseStudyIds.map((id) => {
-                    const study = caseStudies.find((item) => item.id === id)!;
-                    return <a class="text-link" href={`/#${study.id}`}>{study.title}<Icon name="arrowRight" /></a>;
-                  })}
+              {offer.caseStudyIds.length > 0 && (
+                <div class="related-work">
+                  <h3>{content.evidenceLabel}</h3>
+                  <div class="compact-links">
+                    {offer.caseStudyIds.map((id) => {
+                      const study = caseStudies.find((item) => item.id === id)!;
+                      return <a class="text-link" href={`/#${study.id}`}>{study.title}<Icon name="arrowRight" /></a>;
+                    })}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </details>
         ))}
