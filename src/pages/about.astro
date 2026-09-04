@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ConfidentialityNotice from "../components/ConfidentialityNotice.astro";
 import Icon from "../components/Icon.astro";
 import { aboutPage as content, experienceSummaries, premiumClient, privateWork, profile, siteCopy } from "../data/portfolio";
 ---
@@ -12,6 +13,7 @@ import { aboutPage as content, experienceSummaries, premiumClient, privateWork, 
     </header>
 
     <div class="prose-stack about-introduction">{content.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
+    <ConfidentialityNotice />
     <aside class="context-strip about-approach"><h2>{content.approachTitle}</h2><ul class="plain-list">{content.approach.map((item) => <li>{item}</li>)}</ul></aside>
 
     <section class="content-section">

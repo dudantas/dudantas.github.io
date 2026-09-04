@@ -24,6 +24,13 @@ export const workIndex: WorkIndexEntry[] = [
   }
 ];
 
+export const portfolioConfidentiality = {
+  title: "Confidential work & NDAs",
+  description:
+    "Most of my client work is confidential and covered by non-disclosure agreements (NDAs). The projects shown here are a selection of public work and client-approved references, not a complete record of my work.",
+  boundary: "Confidential project details, code, and assets remain private."
+};
+
 export const publicEvidence = {
   title: "Public Evidence & Contributions",
   headline: "Claims are tied to public artifacts wherever possible.",

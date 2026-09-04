@@ -89,7 +89,7 @@ export const homePage = {
   introduction: "A selection of public work, with implementation evidence.",
   result: "Result",
   evidence: "Evidence",
-  allWork: "Explore all engineering work",
+  allWork: "Explore the case studies",
   caseStudiesTitle: "Engineering case studies",
   caseStudiesDescription: "The context, decisions, and public evidence behind the work.",
   capabilitiesTitle: "Expertise & tools",

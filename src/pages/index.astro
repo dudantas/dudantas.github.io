@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CaseStudy from "../components/CaseStudy.astro";
+import ConfidentialityNotice from "../components/ConfidentialityNotice.astro";
 import Icon from "../components/Icon.astro";
 import {
   capabilities, caseStudies, featuredWork, homePage as content, impactHighlights,
@@ -52,6 +53,8 @@ const additionalContributions = selectedContributions.slice(4);
       })}
       <a class="text-link all-work-link" href="#case-studies">{content.allWork}<Icon name="arrowRight" /></a>
     </section>
+
+    <ConfidentialityNotice />
 
     <section id="case-studies" class="content-section">
       <div class="section-heading"><h2>{content.caseStudiesTitle}</h2><p>{content.caseStudiesDescription}</p></div>
