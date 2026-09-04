@@ -53,3 +53,23 @@ const socialImageUrl = new URL("/og-image.svg", siteUrl).href;
     </div>
   </body>
 </html>
+
+<script>
+  function revealSection(hash: string) {
+    let id: string;
+    try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
+    const section = document.getElementById(id);
+    if (section instanceof HTMLDetailsElement && (section.hasAttribute("data-case-study") || section.hasAttribute("data-expandable"))) {
+      section.open = true;
+      section.scrollIntoView({ block: "start" });
+    }
+  }
+
+  revealSection(window.location.hash);
+  window.addEventListener("hashchange", () => revealSection(window.location.hash));
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (!event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) revealSection(link.hash);
+    });
+  });
+</script>
