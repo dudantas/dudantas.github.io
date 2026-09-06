@@ -25,6 +25,11 @@ export const capabilitiesPtBr: typeof capabilities = [
     title: "Entrega de Produtos",
     summary: "Superfícies públicas de entrega, integração launcher/API e operação de releases.",
     skills: ["integração launcher/API", "entrega de assets", "metadados assinados", "telemetria", "relatórios de falha", "operação de releases"]
+  },
+  {
+    title: "Inteligência Artificial (IA) para Engenharia de Software",
+    summary: "Trabalho técnico de apoio ao treinamento de modelos de IA para código, fundamentado em experiência real de engenharia e contribuições open source.",
+    skills: ["apoio ao treinamento de modelos de código", "raciocínio sobre código", "C++", "depuração", "análise de desempenho", "sistemas open source"]
   }
 ];
 

@@ -48,6 +48,11 @@ export const capabilities: CapabilityGroup[] = [
     title: "Product Delivery",
     summary: "Public delivery surfaces, launcher/API integration, and release operations.",
     skills: ["launcher/API integration", "asset delivery", "signed metadata", "telemetry", "crash reporting", "release operations"]
+  },
+  {
+    title: "Artificial Intelligence (AI) for Software Engineering",
+    summary: "Technical work supporting the training of AI code models, grounded in real open-source engineering experience.",
+    skills: ["code-model training support", "code reasoning", "C++", "debugging", "performance analysis", "open-source systems"]
   }
 ];
 

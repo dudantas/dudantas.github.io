@@ -56,3 +56,20 @@ test("localized pages expose canonical and language-alternate metadata", () => {
   assert.match(picker, /<a[\s\S]*data-locale-option/);
   assert.match(picker, /aria-current=/);
 });
+
+test("AI experience is explicit and machine-readable without identifying a client", () => {
+  const layout = read("src/layouts/BaseLayout.astro");
+  const englishProfile = read("src/data/portfolio/profile.ts");
+  const englishCapabilities = read("src/data/portfolio/capabilities.ts");
+  const portugueseProfile = read("src/data/portfolio/locales/pt-br/profile.ts");
+  const portugueseCapabilities = read("src/data/portfolio/locales/pt-br/capabilities.ts");
+
+  assert.match(layout, /type="application\/ld\+json"/);
+  assert.match(layout, /"@type": "Person"/);
+  assert.match(layout, /knowsAbout: profile\.expertise/);
+  assert.match(layout, /skills: profile\.expertise/);
+  assert.match(englishCapabilities, /Artificial Intelligence \(AI\) for Software Engineering/);
+  assert.match(englishProfile, /code-model training support/);
+  assert.match(portugueseCapabilities, /Inteligência Artificial \(IA\) para Engenharia de Software/);
+  assert.match(portugueseProfile, /apoio ao treinamento de modelos de código/);
+});

@@ -21,6 +21,20 @@ const canonicalUrl = new URL(localizePath(neutralPath, locale), siteUrl).href;
 const alternate = alternateLocale(locale);
 const alternateUrl = new URL(localizePath(neutralPath, alternate), siteUrl).href;
 const socialImageUrl = new URL("/og-image.svg", siteUrl).href;
+const profileUrl = new URL(localizePath("/", locale), siteUrl).href;
+const personStructuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": new URL("/#eduardo-dantas", siteUrl).href,
+  name: profile.name,
+  alternateName: profile.handle,
+  url: profileUrl,
+  jobTitle: profile.headline,
+  description: profile.description,
+  sameAs: profile.links.map((link) => link.href),
+  knowsAbout: profile.expertise,
+  skills: profile.expertise
+}).replaceAll("<", "\\u003c");
 ---
 
 <!doctype html>
@@ -50,6 +64,7 @@ const socialImageUrl = new URL("/og-image.svg", siteUrl).href;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
+    <script type="application/ld+json" is:inline set:html={personStructuredData}></script>
     <title>{title}</title>
   </head>
   <body id="top">

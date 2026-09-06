@@ -18,7 +18,21 @@ export const profilePtBr: typeof profile = {
   secondaryContext:
     "Experiência aplicada a infraestrutura online, plataformas de código aberto, produtos privados cliente/servidor e ferramentas de desenvolvimento no Linux e Windows.",
   description:
-    "Engenheiro sênior de sistemas C++ que oferece desenvolvimento de software sob demanda, otimização de desempenho, integrações e ferramentas para Linux e Windows.",
+    "Engenheiro sênior de sistemas C++ que oferece desenvolvimento de software sob demanda, otimização de desempenho, apoio ao treinamento de modelos de IA para código, integrações e ferramentas para Linux e Windows.",
+  expertise: [
+    "engenharia de sistemas C++",
+    "sistemas críticos de desempenho",
+    "arquitetura de runtime",
+    "protocolos cliente/servidor",
+    "concorrência",
+    "integração com Lua",
+    "desenvolvimento para Linux e Windows",
+    "software de código aberto",
+    "desenvolvimento de software sob demanda",
+    "inteligência artificial aplicada à engenharia de software",
+    "apoio ao treinamento de modelos de código",
+    "raciocínio sobre código"
+  ],
   heroChips: ["Sistemas Runtime em C++", "Protocolos e Redes", "Desempenho e Confiabilidade", "Linux / Windows"]
 };
 
@@ -64,14 +78,14 @@ export const siteCopyPtBr: typeof siteCopy = {
 export const aboutPagePtBr: typeof aboutPage = {
   title: "Sobre Eduardo Dantas — Engenheiro de Sistemas C++",
   description:
-    "Conheça Eduardo Dantas: engenheiro sênior de sistemas C++, desenvolvedor de software sob demanda e colaborador de código aberto em diferentes domínios.",
+    "Conheça Eduardo Dantas: engenheiro sênior de sistemas C++, desenvolvedor de software sob demanda e colaborador de código aberto com experiência técnica no treinamento de modelos de IA voltados a código.",
   eyebrow: "Sobre",
   headline: "Eduardo Dantas",
   lead:
     "Engenheiro de software C++ sênior com atuação em runtimes críticos de desempenho, protocolos, confiabilidade, ferramentas de desenvolvimento e segurança de dados.",
   paragraphs: [
     "Desenvolvo software sob demanda para diferentes setores, desde a ideia de uma nova aplicação até melhorias em um produto existente. O escopo e a tecnologia são escolhidos de acordo com os usuários, requisitos e restrições.",
-    "Investigo o comportamento de sistemas, avalio a viabilidade técnica e transformo problemas complexos em trabalhos de engenharia bem definidos. Minha experiência abrange runtimes C++ e Lua, software cliente/servidor, ferramentas para grandes volumes de dados e fluxos de build e release no Linux e Windows.",
+    "Investigo o comportamento de sistemas, avalio a viabilidade técnica e transformo problemas complexos em trabalhos de engenharia bem definidos. Minha experiência abrange runtimes C++ e Lua, software cliente/servidor, ferramentas para grandes volumes de dados e fluxos de build e release no Linux e Windows. Essa mesma experiência também dá suporte a trabalhos técnicos voltados ao treinamento de modelos de código, sem identificar clientes ou expor detalhes confidenciais dos projetos.",
     "OpenTibia é um dos domínios em que aplico essa experiência. Contribuições públicas em servidores, clientes e editores convivem com trabalho em ferramentas C++ upstream e projetos privados para clientes."
   ],
   approachTitle: "Como trabalho",

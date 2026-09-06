@@ -9,7 +9,21 @@ export const profile = {
   secondaryContext:
     "Applied across online infrastructure, open-source platforms, private client/server products, and developer tooling across Linux and Windows.",
   description:
-    "Senior C++ systems engineer offering custom software development, performance optimization, integrations, and developer tooling across Linux and Windows.",
+    "Senior C++ systems engineer offering custom software development, performance optimization, code-model training support, integrations, and developer tooling across Linux and Windows.",
+  expertise: [
+    "C++ systems engineering",
+    "performance-critical systems",
+    "runtime architecture",
+    "client/server protocols",
+    "concurrency",
+    "Lua integration",
+    "Linux and Windows development",
+    "open-source software",
+    "custom software development",
+    "artificial intelligence for software engineering",
+    "code-model training support",
+    "code reasoning"
+  ],
   heroChips: ["C++ Runtime Systems", "Protocols & Networking", "Performance & Reliability", "Linux / Windows"],
   links: [
     { label: "GitHub", href: "https://github.com/dudantas" },
@@ -59,14 +73,14 @@ export const siteCopy = {
 export const aboutPage = {
   title: "About Eduardo Dantas — C++ Systems Engineer",
   description:
-    "Meet Eduardo Dantas: senior C++ systems engineer, custom software developer, and open-source contributor working across different application domains.",
+    "Meet Eduardo Dantas: senior C++ systems engineer, custom software developer, and open-source contributor with technical experience supporting AI code-model training.",
   eyebrow: "About",
   headline: "Eduardo Dantas",
   lead:
     "Senior C++ software engineer working across performance-critical runtimes, protocols, reliability, developer tooling, and data safety.",
   paragraphs: [
     "I develop custom software for different industries, from an idea for a new application to improvements in an existing product. The scope and technology are chosen around the users, requirements, and constraints.",
-    "I investigate how systems behave, assess technical feasibility, and turn complex problems into focused engineering work. My experience spans C++ and Lua runtimes, client/server software, large-data tools, and build and release workflows across Linux and Windows.",
+    "I investigate how systems behave, assess technical feasibility, and turn complex problems into focused engineering work. My experience spans C++ and Lua runtimes, client/server software, large-data tools, and build and release workflows across Linux and Windows. That same experience also supports technical work for code-model training, without identifying clients or exposing confidential project details.",
     "OpenTibia is one of the domains where I apply that experience. Public contributions to its servers, clients, and editors sit alongside upstream C++ tooling contributions and private client engagements."
   ],
   approachTitle: "How I work",
