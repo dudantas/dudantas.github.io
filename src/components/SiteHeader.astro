@@ -1,14 +1,19 @@
 ---
-import { pageNavItems, profile, siteCopy } from "../data/portfolio";
+import { getPortfolioContent } from "../data/portfolio";
+import { localizePath, stripLocalePrefix, type Locale } from "../i18n/routes";
 import Icon from "./Icon.astro";
+import LocalePicker from "./LocalePicker.astro";
 import ThemePicker from "./ThemePicker.astro";
 
-const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const { pageNavItems, profile, siteCopy } = getPortfolioContent(locale);
+const currentPath = stripLocalePrefix(Astro.url.pathname).replace(/\/$/, "") || "/";
 ---
 
 <header class="site-sidebar">
   <div class="sidebar-identity">
-    <a href="/" class="sidebar-name" aria-label={`${profile.name} — Portfolio`}>{profile.name}</a>
+    <a href={localizePath("/", locale)} class="sidebar-name" aria-label={`${profile.name} — Portfolio`}>{profile.name}</a>
     <p class="sidebar-role">{siteCopy.sidebar.role}</p>
     <p class="sidebar-introduction">{siteCopy.sidebar.introduction.map((line) => <span>{line}{" "}</span>)}</p>
   </div>
@@ -16,7 +21,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
   <nav class="sidebar-navigation" aria-label={siteCopy.navigation}>
       {pageNavItems.map((item) => (
         <a
-          href={item.href}
+          href={localizePath(item.href, locale)}
           aria-current={currentPath === item.href ? "page" : undefined}
           class="sidebar-nav-link"
         >{item.label}</a>
@@ -24,7 +29,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
   </nav>
 
   <div class="sidebar-contact">
-    <a class="button-primary" href="/contact">{siteCopy.sidebar.contact}<Icon name="arrowRight" /></a>
+    <a class="button-primary" href={localizePath("/contact", locale)}>{siteCopy.sidebar.contact}<Icon name="arrowRight" /></a>
     <div class="sidebar-socials">
       {profile.links.map((link) => (
         <a href={link.href} target="_blank" rel="noreferrer"><Icon name={link.label === "GitHub" ? "github" : "linkedin"} />{link.label}</a>
@@ -33,7 +38,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
   </div>
   <div class="sidebar-preferences">
     <p class="sidebar-platforms">{siteCopy.sidebar.platforms}</p>
-    <ThemePicker />
+    <LocalePicker locale={locale} />
+    <ThemePicker locale={locale} />
   </div>
 
   <details class="mobile-menu">
@@ -41,10 +47,11 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
     <div class="mobile-menu-panel">
       <nav aria-label={siteCopy.navigation}>
         {pageNavItems.map((item) => (
-          <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>{item.label}</a>
+          <a href={localizePath(item.href, locale)} aria-current={currentPath === item.href ? "page" : undefined}>{item.label}</a>
         ))}
       </nav>
-      <ThemePicker />
+      <LocalePicker locale={locale} />
+      <ThemePicker locale={locale} />
     </div>
   </details>
 </header>

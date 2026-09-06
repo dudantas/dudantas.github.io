@@ -1,10 +1,11 @@
 ---
-import { homePage, type CaseStudy } from "../data/portfolio";
+import { getPortfolioContent, type CaseStudy } from "../data/portfolio";
+import type { Locale } from "../i18n/routes";
 import Icon from "./Icon.astro";
 
-type Props = { study: CaseStudy };
-const { study } = Astro.props;
-const labels = homePage.caseLabels;
+type Props = { locale: Locale; study: CaseStudy };
+const { locale, study } = Astro.props;
+const labels = getPortfolioContent(locale).homePage.caseLabels;
 ---
 
 <details id={study.id} data-case-study class="case-study disclosure">

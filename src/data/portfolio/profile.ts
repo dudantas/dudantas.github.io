@@ -41,6 +41,7 @@ export const siteCopy = {
   discussProject: "Discuss your project",
   viewServices: "Explore services",
   caseStudy: "Read case study",
+  language: { label: "Language" },
   theme: { label: "Appearance", light: "Light", dark: "Dark" },
   sidebar: {
     role: "Senior C++ systems engineer",
@@ -84,6 +85,7 @@ export const aboutPage = {
 };
 
 export const homePage = {
+  title: "Eduardo Dantas — Senior C++ Systems Engineer",
   eyebrow: "Selected engineering work",
   headline: ["Problems solved.", "Decisions explained."],
   introduction: "A selection of public work, with implementation evidence.",

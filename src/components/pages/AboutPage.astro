@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ConfidentialityNotice from "../ConfidentialityNotice.astro";
+import Icon from "../Icon.astro";
+import { getPortfolioContent } from "../../data/portfolio";
+import { localizePath, type Locale } from "../../i18n/routes";
+
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const {
+  aboutPage: content,
+  experienceSummaries,
+  premiumClient,
+  privateWork,
+  profile,
+  siteCopy
+} = getPortfolioContent(locale);
+---
+
+<BaseLayout title={content.title} description={content.description} locale={locale}>
+  <main id="main-content">
+    <header class="content-header">
+      <p class="eyebrow">{content.eyebrow}</p>
+      <h1>{content.headline}</h1>
+      <p class="content-lead">{content.lead}</p>
+      <div class="action-row">
+        {profile.links.map((link) => (
+          <a class="text-link" href={link.href} target="_blank" rel="noreferrer">
+            {link.label}<Icon name="arrowUpRight" />
+          </a>
+        ))}
+      </div>
+    </header>
+
+    <div class="prose-stack about-introduction">{content.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
+    <ConfidentialityNotice locale={locale} />
+    <aside class="context-strip about-approach">
+      <h2>{content.approachTitle}</h2>
+      <ul class="plain-list">{content.approach.map((item) => <li>{item}</li>)}</ul>
+    </aside>
+
+    <section class="content-section">
+      <div class="section-heading"><h2>{content.experienceTitle}</h2><p>{content.experienceDescription}</p></div>
+      <div class="experience-list">
+        {experienceSummaries.map((item) => (
+          <article>
+            <div><p class="eyebrow">{item.focus}</p><h3>{item.title}</h3></div>
+            <p>{item.summary}</p>
+            <a
+              class="text-link"
+              href={localizePath(`/#${item.caseStudyId}`, locale)}
+              aria-label={`${siteCopy.caseStudy}: ${item.title}`}
+            >
+              {siteCopy.caseStudy}<Icon name="arrowRight" />
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="content-section editorial-section">
+      <div class="section-heading"><h2>{content.collaborationTitle}</h2></div>
+      <article class="prose-stack">
+        <div><h3>{premiumClient.title}</h3><p class="evidence-status">{premiumClient.label}</p></div>
+        <p>{premiumClient.summary}</p>
+        <p>{premiumClient.description}</p>
+        <a class="text-link" href={premiumClient.link.href} target="_blank" rel="noreferrer">
+          {premiumClient.link.label}<Icon name="arrowUpRight" />
+        </a>
+      </article>
+    </section>
+
+    <section id="private-work" class="content-section editorial-section">
+      <div class="section-heading"><h2>{content.privateTitle}</h2><p>{content.privateDescription}</p></div>
+      <article class="prose-stack">
+        <div><h3>{privateWork.shortTitle}</h3><p class="evidence-status">{privateWork.label}</p></div>
+        <p>{privateWork.shortSummary}</p>
+        <p class="evidence-status">{privateWork.reference}</p>
+      </article>
+    </section>
+
+    <aside class="content-section context-strip"><h2>{siteCopy.business.title}</h2><p>{siteCopy.business.description}</p></aside>
+    <section class="content-section closing-section">
+      <h2>{content.closingTitle}</h2><p>{content.closingDescription}</p>
+      <div class="action-row">
+        <a class="button-primary" href={localizePath("/contact", locale)}>{siteCopy.discussProject}<Icon name="arrowRight" /></a>
+        <a class="text-link" href={localizePath("/services", locale)}>{siteCopy.viewServices}</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

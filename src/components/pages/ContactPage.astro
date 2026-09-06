@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../Icon.astro";
+import { getPortfolioContent } from "../../data/portfolio";
+import type { Locale } from "../../i18n/routes";
+
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const { contactPage: content, siteCopy } = getPortfolioContent(locale);
+---
+
+<BaseLayout title={content.title} description={content.description} locale={locale}>
+  <main id="main-content">
+    <header class="content-header">
+      <p class="eyebrow">{content.eyebrow}</p>
+      <h1>{content.headline}</h1>
+      <p class="content-lead">{content.lead}</p>
+    </header>
+    <div class="contact-grid">
+      <div class="contact-channel">
+        <p>{content.channel.description}</p>
+        <a class="button-primary" href={content.channel.href} target="_blank" rel="noreferrer">
+          {content.channel.label}<Icon name="arrowUpRight" />
+        </a>
+        <div class="contact-next"><h2>{content.nextTitle}</h2><p>{content.nextDescription}</p></div>
+        <div class="contact-next"><h2>{content.rolesTitle}</h2><p>{content.rolesDescription}</p></div>
+        <aside class="quiet-note"><h2>{siteCopy.business.title}</h2><p>{siteCopy.business.description}</p></aside>
+      </div>
+
+      <section id="brief" class="contact-brief">
+        <div class="section-heading"><h2>{content.briefTitle}</h2><p>{content.briefIntroduction}</p></div>
+        <ol class="brief-list">
+          {content.brief.map((item, index) => (
+            <li><span class="eyebrow" aria-hidden="true">0{index + 1}</span><div><h3>{item.title}</h3><p>{item.description}</p></div></li>
+          ))}
+        </ol>
+        <aside class="quiet-note privacy-note"><h3>{content.privacyTitle}</h3><p>{content.privacyDescription}</p></aside>
+      </section>
+    </div>
+  </main>
+</BaseLayout>

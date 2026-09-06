@@ -2,33 +2,46 @@
 import "../styles/global.css";
 import SiteHeader from "../components/SiteHeader.astro";
 import Icon from "../components/Icon.astro";
+import LocaleScript from "../components/LocaleScript.astro";
 import ThemeScript from "../components/ThemeScript.astro";
-import { profile, siteCopy } from "../data/portfolio";
+import { getPortfolioContent } from "../data/portfolio";
+import { alternateLocale, localeMetadata, localizePath, stripLocalePrefix, type Locale } from "../i18n/routes";
 
 type Props = {
   title: string;
   description: string;
+  locale: Locale;
 };
 
-const { title, description } = Astro.props;
+const { title, description, locale } = Astro.props;
+const { profile, siteCopy } = getPortfolioContent(locale);
 const siteUrl = Astro.site ?? new URL("https://dudantas.github.io");
-const canonicalUrl = new URL(Astro.url.pathname.replace(/\/$/, "") || "/", siteUrl).href;
+const neutralPath = stripLocalePrefix(Astro.url.pathname);
+const canonicalUrl = new URL(localizePath(neutralPath, locale), siteUrl).href;
+const alternate = alternateLocale(locale);
+const alternateUrl = new URL(localizePath(neutralPath, alternate), siteUrl).href;
 const socialImageUrl = new URL("/og-image.svg", siteUrl).href;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={localeMetadata[locale].htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
+    <LocaleScript />
     <ThemeScript />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang={localeMetadata[locale].htmlLang} href={canonicalUrl} />
+    <link rel="alternate" hreflang={localeMetadata[alternate].htmlLang} href={alternateUrl} />
+    <link rel="alternate" hreflang="x-default" href={new URL(localizePath(neutralPath, "en"), siteUrl).href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={localeMetadata[locale].ogLocale} />
+    <meta property="og:locale:alternate" content={localeMetadata[alternate].ogLocale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Eduardo Dantas Portfolio" />
@@ -42,7 +55,7 @@ const socialImageUrl = new URL("/og-image.svg", siteUrl).href;
   <body id="top">
     <a class="skip-link" href="#main-content">{siteCopy.skipLink}</a>
     <div class="site-layout">
-      <SiteHeader />
+      <SiteHeader locale={locale} />
       <div class="site-content">
         <slot />
         <footer class="site-footer">

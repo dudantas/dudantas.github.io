@@ -1,0 +1,24 @@
+---
+import { getPortfolioContent } from "../data/portfolio";
+import { localeMetadata, locales, localizePath, stripLocalePrefix, type Locale } from "../i18n/routes";
+
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const { siteCopy } = getPortfolioContent(locale);
+const neutralPath = stripLocalePrefix(Astro.url.pathname);
+---
+
+<nav class="language-picker" aria-label={siteCopy.language.label}>
+  <p class="preference-label">{siteCopy.language.label}</p>
+  <div class="language-options">
+    {locales.map((option) => (
+      <a
+        href={localizePath(neutralPath, option)}
+        data-locale-option={option}
+        lang={localeMetadata[option].htmlLang}
+        hreflang={localeMetadata[option].htmlLang}
+        aria-current={locale === option ? "true" : undefined}
+      >{localeMetadata[option].label}</a>
+    ))}
+  </div>
+</nav>
