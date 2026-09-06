@@ -388,7 +388,7 @@ export const experienceSummariesPtBr: typeof experienceSummaries = [
 export const premiumClientPtBr: typeof premiumClient = {
   ...premiumClient,
   label: "Produto público",
-  summary: "Um cliente disponível publicamente para download, desenvolvido em colaboração com Qatari, Mehah e Lury.",
-  description: "O OTClient Redemption Premium está disponível em sua página oficial de download. É um produto compartilhado com implementação privada.",
+  summary: "Um produto cliente disponível publicamente para download, com implementação privada e superfície pública de releases.",
+  description: "O OTClient Redemption Premium está disponível em sua página oficial de download. Seu código-fonte e os detalhes de implementação permanecem privados.",
   link: { ...premiumClient.link, label: "Produto oficial e downloads" }
 };

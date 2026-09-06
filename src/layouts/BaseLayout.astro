@@ -20,7 +20,7 @@ const neutralPath = stripLocalePrefix(Astro.url.pathname);
 const canonicalUrl = new URL(localizePath(neutralPath, locale), siteUrl).href;
 const alternate = alternateLocale(locale);
 const alternateUrl = new URL(localizePath(neutralPath, alternate), siteUrl).href;
-const socialImageUrl = new URL("/og-image.svg", siteUrl).href;
+const socialImageUrl = new URL("/og-image.png", siteUrl).href;
 const profileUrl = new URL(localizePath("/", locale), siteUrl).href;
 const personStructuredData = JSON.stringify({
   "@context": "https://schema.org",
@@ -60,6 +60,9 @@ const personStructuredData = JSON.stringify({
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Eduardo Dantas Portfolio" />
     <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -93,6 +96,10 @@ const personStructuredData = JSON.stringify({
     if (section instanceof HTMLDetailsElement && (section.hasAttribute("data-case-study") || section.hasAttribute("data-expandable"))) {
       section.open = true;
       section.scrollIntoView({ block: "start" });
+      requestAnimationFrame(() => {
+        const summary = section.querySelector("summary");
+        if (summary instanceof HTMLElement) summary.focus({ preventScroll: true });
+      });
     }
   }
 

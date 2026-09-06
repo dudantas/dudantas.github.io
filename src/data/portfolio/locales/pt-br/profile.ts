@@ -119,7 +119,7 @@ export const homePagePtBr: typeof homePage = {
   moreContributions: "Ver mais contribuições",
   privateTitle: "Trabalho privado",
   privateLink: "Conhecer mais sobre minha experiência",
-  recommendationsLink: "Ler recomendações no LinkedIn",
+  recommendationsLink: "Solicitar uma referência no LinkedIn",
   contactTitle: "Tem um projeto de software em mente?",
   contactDescription: "Disponível para desenvolvimento de software sob demanda, consultoria técnica e posições seniores em engenharia C++.",
   caseLabels: {
@@ -173,7 +173,11 @@ export const heroMetricsPtBr: typeof heroMetrics = [
 
 export const recommendationsPtBr: typeof recommendations = {
   ...recommendations,
-  title: "Recomendações",
-  headline: "Avaliações verificáveis de clientes e colaboradores.",
-  description: "Depoimentos recentes de clientes e colegas estão disponíveis publicamente no meu perfil do LinkedIn."
+  title: "Referências de clientes e colaboradores",
+  headline: "Referências disponíveis mediante solicitação.",
+  description: "Recomendações públicas só são adicionadas após a aprovação de seus autores.",
+  cardLabel: "Referência aprovada pelo cliente",
+  cardTitle: "Solicitar uma referência",
+  cardDescription: "Entre em contato pelo LinkedIn para solicitar uma referência relevante de cliente ou colaborador.",
+  cardLinkLabel: "Entrar em contato pelo LinkedIn"
 };

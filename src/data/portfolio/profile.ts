@@ -114,7 +114,7 @@ export const homePage = {
   moreContributions: "View more contributions",
   privateTitle: "Private work",
   privateLink: "More about my experience",
-  recommendationsLink: "Read recommendations on LinkedIn",
+  recommendationsLink: "Request a reference on LinkedIn",
   contactTitle: "Have a software project in mind?",
   contactDescription: "Available for custom software development, technical consulting, and senior C++ engineering roles.",
   caseLabels: {
@@ -158,14 +158,18 @@ export const contactPage = {
 export const heroMetrics: Metric[] = [
   { label: "Primary focus", value: "C++ backend systems", detail: "Runtime, protocols, performance" },
   { label: "Platforms", value: "Linux / Windows", detail: "Builds, CI/CD, debugging" },
-  { label: "Evidence", value: "Public PRs", detail: "Open source, products, upstream commits" }
+  { label: "Evidence", value: "Public evidence", detail: "PRs, products, upstream commits" }
 ];
 
 export const recommendations = {
-  profileUrl:
-    "https://www.linkedin.com/in/dudantas/details/recommendations/",
-  title: "Recommendations",
-  headline: "Verified feedback from clients and collaborators.",
+  profileUrl: "https://www.linkedin.com/in/dudantas",
+  title: "Client and collaborator feedback",
+  headline: "References are available on request.",
   description:
-    "Recent client and peer testimonials are available on my public LinkedIn profile."
+    "Public recommendations are added only after the author approves publication.",
+  cardLabel: "Client-approved reference",
+  cardTitle: "Request a reference",
+  cardDescription:
+    "Contact me on LinkedIn to request a relevant client or collaborator reference.",
+  cardLinkLabel: "Contact on LinkedIn"
 };

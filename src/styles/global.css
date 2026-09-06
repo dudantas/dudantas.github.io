@@ -71,6 +71,12 @@ section[id], main[id] {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
 }
 
 ::selection {
@@ -309,8 +315,4 @@ section[id], main[id] {
   .process-list li { grid-template-columns: 1.5rem minmax(0, 1fr); gap: .5rem 1rem; }
   .process-list p { grid-column: 2; }
   .contact-grid { gap: 3rem; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition-duration: 0s !important; }
 }

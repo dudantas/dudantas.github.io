@@ -33,9 +33,9 @@ export const portfolioConfidentiality = {
 
 export const publicEvidence = {
   title: "Public Evidence & Contributions",
-  headline: "Claims are tied to public artifacts wherever possible.",
+  headline: "Public evidence for the systems work above.",
   description:
-    "This portfolio prioritizes merged PRs, upstream commits, public product pages, and cross-repository evidence. Private work is separated and described only at a public-safe architecture and outcome level.",
+    "Each public claim links to reviewed source, an upstream commit, or an inspectable product surface. Private work remains explicitly separate.",
   points: [
     {
       title: "Open-source systems",
@@ -119,7 +119,7 @@ export const featuredWork: FeaturedWorkItem[] = [
     url: "https://github.com/protocolbuffers/protobuf/commit/7c090172a4f502a06e3a3c23df8a3242b03f3148",
     evidenceLabel: "Protobuf landed commit",
     relatedUrls: [
-      { label: "Protobuf PR #27407", url: "https://github.com/protocolbuffers/protobuf/pull/27407" },
+      { label: "Protobuf source PR #27407 (closed)", url: "https://github.com/protocolbuffers/protobuf/pull/27407" },
       { label: "vcpkg PR #51545", url: "https://github.com/microsoft/vcpkg/pull/51545" }
     ],
     summary: "Added constrained Protobuf lite-only runtime packaging and vcpkg support for target-side builds.",
@@ -312,7 +312,7 @@ export const caseStudies: CaseStudy[] = [
       "The Protobuf change landed through Copybara as public commit 7c090172. The local PoC measured the build step dropping from 508.063s to 55.648s and installed footprint from 113,754 KB to 21,579 KB.",
     evidenceStatus: "Public upstream commit",
     evidence: [
-      { label: "Protobuf PR #27407", url: "https://github.com/protocolbuffers/protobuf/pull/27407" },
+      { label: "Protobuf source PR #27407 (closed)", url: "https://github.com/protocolbuffers/protobuf/pull/27407" },
       { label: "Landed commit 7c090172", url: "https://github.com/protocolbuffers/protobuf/commit/7c090172a4f502a06e3a3c23df8a3242b03f3148" },
       { label: "vcpkg PR #51545", url: "https://github.com/microsoft/vcpkg/pull/51545" }
     ],
@@ -607,8 +607,8 @@ export const premiumClient = {
   title: "Premium OTClient",
   label: "Public product",
   summary:
-    "A publicly downloadable client product developed in collaboration with Qatari, Mehah, and Lury.",
+    "A publicly downloadable client product with a private implementation and a public release surface.",
   description:
-    "OTClient Redemption Premium is available through its official download page. This is a shared product with a private implementation.",
+    "OTClient Redemption Premium is available through its official download page. Its source and implementation details remain private.",
   link: { label: "Official product & downloads", href: "https://otcrp.com/downloads" }
 };
