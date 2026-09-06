@@ -1,5 +1,10 @@
 import type { LinkItem, Metric } from "./types";
 
+const publicProfileUrls = {
+  github: "https://github.com/dudantas",
+  linkedIn: "https://www.linkedin.com/in/dudantas"
+} as const;
+
 export const profile = {
   name: "Eduardo Dantas",
   handle: "dudantas",
@@ -26,8 +31,8 @@ export const profile = {
   ],
   heroChips: ["C++ Runtime Systems", "Protocols & Networking", "Performance & Reliability", "Linux / Windows"],
   links: [
-    { label: "GitHub", href: "https://github.com/dudantas" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/dudantas" }
+    { label: "GitHub", href: publicProfileUrls.github },
+    { label: "LinkedIn", href: publicProfileUrls.linkedIn }
   ] satisfies LinkItem[]
 };
 
@@ -133,7 +138,7 @@ export const contactPage = {
     "Have an idea for new software or an existing product to improve? Tell me who it is for, what it should do, and what a useful outcome would look like.",
   channel: {
     label: "Message me on LinkedIn",
-    href: profile.links.find((link) => link.label === "LinkedIn")!.href,
+    href: publicProfileUrls.linkedIn,
     description: "Start with a short message on LinkedIn. We can agree on the next step and a suitable channel for the technical discussion."
   },
   briefTitle: "Useful context for your first message",
@@ -162,7 +167,7 @@ export const heroMetrics: Metric[] = [
 ];
 
 export const recommendations = {
-  profileUrl: "https://www.linkedin.com/in/dudantas",
+  profileUrl: publicProfileUrls.linkedIn,
   title: "Client and collaborator feedback",
   headline: "References are available on request.",
   description:

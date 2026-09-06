@@ -7,6 +7,16 @@ import { localizePath, type Locale } from "../../i18n/routes";
 type Props = { locale: Locale };
 const { locale } = Astro.props;
 const { caseStudies, serviceOfferings, servicesPage: content, siteCopy } = getPortfolioContent(locale);
+const caseStudiesById = new Map(caseStudies.map((study) => [study.id, study]));
+
+function getCaseStudy(id: string) {
+  const study = caseStudiesById.get(id);
+  if (!study) {
+    throw new Error(`Missing case study "${id}" referenced by a service offering in locale "${locale}".`);
+  }
+
+  return study;
+}
 ---
 
 <BaseLayout title={content.title} description={content.description} locale={locale}>
@@ -50,7 +60,7 @@ const { caseStudies, serviceOfferings, servicesPage: content, siteCopy } = getPo
                   <h3>{content.evidenceLabel}</h3>
                   <div class="compact-links">
                     {offer.caseStudyIds.map((id) => {
-                      const study = caseStudies.find((item) => item.id === id)!;
+                      const study = getCaseStudy(id);
                       return <a class="text-link" href={localizePath(`/#${study.id}`, locale)}>{study.title}<Icon name="arrowRight" /></a>;
                     })}
                   </div>

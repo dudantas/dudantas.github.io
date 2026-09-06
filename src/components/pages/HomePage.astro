@@ -22,10 +22,15 @@ const {
   workIndex
 } = getPortfolioContent(locale);
 
-const indexEntries = workIndex.map((entry) => ({
-  ...entry,
-  work: featuredWork.find((work) => work.caseStudyId === entry.caseStudyId)!
-}));
+const featuredWorkByCaseStudyId = new Map(featuredWork.map((work) => [work.caseStudyId, work]));
+const indexEntries = workIndex.map((entry) => {
+  const work = featuredWorkByCaseStudyId.get(entry.caseStudyId);
+  if (!work) {
+    throw new Error(`Missing featured work for case study "${entry.caseStudyId}" in locale "${locale}".`);
+  }
+
+  return { ...entry, work };
+});
 const primaryContributions = selectedContributions.slice(0, 4);
 const additionalContributions = selectedContributions.slice(4);
 ---
