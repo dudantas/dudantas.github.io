@@ -4,7 +4,9 @@ import test from "node:test";
 import { runInNewContext } from "node:vm";
 
 const component = readFileSync(new URL("../src/components/ThemeScript.astro", import.meta.url), "utf8");
-const script = component.match(/<script is:inline>([\s\S]*?)<\/script>/)[1];
+const scriptMatch = component.match(/<script is:inline>([\s\S]*?)<\/script>/);
+assert.ok(scriptMatch, "ThemeScript.astro must contain an inline bootstrap script");
+const script = scriptMatch[1];
 
 class ThemeButton {
   constructor(theme) {
