@@ -1,40 +1,112 @@
 ---
 import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import Icon from "../components/Icon.astro";
+import LocaleScript from "../components/LocaleScript.astro";
+import ThemeScript from "../components/ThemeScript.astro";
+import { getPortfolioContent } from "../data/portfolio";
+import { alternateLocale, localeMetadata, localizePath, stripLocalePrefix, type Locale } from "../i18n/routes";
 
 type Props = {
   title: string;
   description: string;
+  locale: Locale;
 };
 
-const { title, description } = Astro.props;
-const canonicalUrl = "https://dudantas.github.io";
+const { title, description, locale } = Astro.props;
+const { profile, siteCopy } = getPortfolioContent(locale);
+const siteUrl = Astro.site ?? new URL("https://dudantas.github.io");
+const neutralPath = stripLocalePrefix(Astro.url.pathname);
+const canonicalUrl = new URL(localizePath(neutralPath, locale), siteUrl).href;
+const alternate = alternateLocale(locale);
+const alternateUrl = new URL(localizePath(neutralPath, alternate), siteUrl).href;
+const socialImageUrl = new URL("/og-image.png", siteUrl).href;
+const profileUrl = new URL(localizePath("/", locale), siteUrl).href;
+const personStructuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": new URL("/#eduardo-dantas", siteUrl).href,
+  name: profile.name,
+  alternateName: profile.handle,
+  url: profileUrl,
+  jobTitle: profile.headline,
+  description: profile.description,
+  sameAs: profile.links.map((link) => link.href),
+  knowsAbout: profile.expertise,
+  skills: profile.expertise
+}).replaceAll("<", "\\u003c");
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={localeMetadata[locale].htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <LocaleScript />
+    <ThemeScript />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang={localeMetadata[locale].htmlLang} href={canonicalUrl} />
+    <link rel="alternate" hreflang={localeMetadata[alternate].htmlLang} href={alternateUrl} />
+    <link rel="alternate" hreflang="x-default" href={new URL(localizePath(neutralPath, "en"), siteUrl).href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={localeMetadata[locale].ogLocale} />
+    <meta property="og:locale:alternate" content={localeMetadata[alternate].ogLocale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Eduardo Dantas Portfolio" />
-    <meta property="og:image" content={`${canonicalUrl}/og-image.png`} />
+    <meta property="og:image" content={socialImageUrl} />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${canonicalUrl}/og-image.png`} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <script type="application/ld+json" is:inline set:html={personStructuredData}></script>
     <title>{title}</title>
   </head>
-  <body>
-    <slot />
+  <body id="top">
+    <a class="skip-link" href="#main-content">{siteCopy.skipLink}</a>
+    <div class="site-layout">
+      <SiteHeader locale={locale} />
+      <div class="site-content">
+        <slot />
+        <footer class="site-footer">
+          <p>{siteCopy.footer}</p>
+          <div class="footer-socials">
+            {profile.links.map((link) => <a href={link.href} target="_blank" rel="noreferrer">{link.label}<Icon name="arrowUpRight" /></a>)}
+          </div>
+          <a class="text-link" href="#top">{siteCopy.backToTop}<Icon name="arrowUp" /></a>
+        </footer>
+      </div>
+    </div>
+    <script>
+      function revealSection(hash: string) {
+        let id: string;
+        try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
+        const section = document.getElementById(id);
+        if (section instanceof HTMLDetailsElement && (section.hasAttribute("data-case-study") || section.hasAttribute("data-expandable"))) {
+          section.open = true;
+          section.scrollIntoView({ block: "start" });
+          requestAnimationFrame(() => {
+            const summary = section.querySelector("summary");
+            if (summary instanceof HTMLElement) summary.focus({ preventScroll: true });
+          });
+        }
+      }
+
+      revealSection(window.location.hash);
+      window.addEventListener("hashchange", () => revealSection(window.location.hash));
+      document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+          if (!event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) revealSection(link.hash);
+        });
+      });
+    </script>
   </body>
 </html>

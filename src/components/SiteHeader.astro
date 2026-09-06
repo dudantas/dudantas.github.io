@@ -1,0 +1,70 @@
+---
+import { getPortfolioContent } from "../data/portfolio";
+import { localizePath, stripLocalePrefix, type Locale } from "../i18n/routes";
+import Icon from "./Icon.astro";
+import LocalePicker from "./LocalePicker.astro";
+import ThemePicker from "./ThemePicker.astro";
+
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const { pageNavItems, profile, siteCopy } = getPortfolioContent(locale);
+const currentPath = stripLocalePrefix(Astro.url.pathname).replace(/\/$/, "") || "/";
+---
+
+<header class="site-sidebar">
+  <div class="sidebar-identity">
+    <a href={localizePath("/", locale)} class="sidebar-name" aria-label={`${profile.name} — Portfolio`}>{profile.name}</a>
+    <p class="sidebar-role">{siteCopy.sidebar.role}</p>
+    <p class="sidebar-introduction">{siteCopy.sidebar.introduction.map((line) => <span>{line}{" "}</span>)}</p>
+  </div>
+
+  <nav class="sidebar-navigation" aria-label={siteCopy.navigation}>
+      {pageNavItems.map((item) => (
+        <a
+          href={localizePath(item.href, locale)}
+          aria-current={currentPath === item.href ? "page" : undefined}
+          class="sidebar-nav-link"
+        >{item.label}</a>
+      ))}
+  </nav>
+
+  <div class="sidebar-contact">
+    <a class="button-primary" href={localizePath("/contact", locale)}>{siteCopy.sidebar.contact}<Icon name="arrowRight" /></a>
+    <div class="sidebar-socials">
+      {profile.links.map((link) => (
+        <a href={link.href} target="_blank" rel="noreferrer"><Icon name={link.label === "GitHub" ? "github" : "linkedin"} />{link.label}</a>
+      ))}
+    </div>
+  </div>
+  <div class="sidebar-preferences">
+    <p class="sidebar-platforms">{siteCopy.sidebar.platforms}</p>
+    <LocalePicker locale={locale} />
+    <ThemePicker locale={locale} />
+  </div>
+
+  <details class="mobile-menu">
+    <summary>{siteCopy.menu}<Icon name="caretDown" /></summary>
+    <div class="mobile-menu-panel">
+      <nav aria-label={siteCopy.navigation}>
+        {pageNavItems.map((item) => (
+          <a href={localizePath(item.href, locale)} aria-current={currentPath === item.href ? "page" : undefined}>{item.label}</a>
+        ))}
+      </nav>
+      <LocalePicker locale={locale} />
+      <ThemePicker locale={locale} />
+    </div>
+  </details>
+</header>
+
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>(".mobile-menu");
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && menu?.open) {
+      menu.open = false;
+      menu.querySelector("summary")?.focus();
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (menu?.open && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
+  });
+</script>

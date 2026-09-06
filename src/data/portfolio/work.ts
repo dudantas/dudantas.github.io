@@ -1,4 +1,35 @@
-import type { CaseStudy, FeaturedWorkItem, SelectedContribution } from "./types";
+import type { CaseStudy, ExperienceSummary, FeaturedWorkItem, SelectedContribution, WorkIndexEntry } from "./types";
+
+export const workIndex: WorkIndexEntry[] = [
+  {
+    caseStudyId: "cpp-lua-runtime-startup-performance",
+    category: "Runtime performance",
+    title: "Faster C++ / Lua startup",
+    summary: "Hot-path improvements across script loading and runtime initialization.",
+    metricIndex: 0
+  },
+  {
+    caseStudyId: "cpp-build-system-protobuf-packaging-optimization",
+    category: "Build tooling",
+    title: "Leaner Protobuf builds",
+    summary: "Constrained packaging for target-side C++ runtimes.",
+    metricIndex: 0
+  },
+  {
+    caseStudyId: "runtime-multiprotocol-networking-architecture",
+    category: "Protocols & networking",
+    title: "One runtime. Multiple client generations.",
+    summary: "Explicit transport and compatibility contracts in a shared C++ runtime.",
+    note: "Designed transport codecs, runtime profiles, session hints, and version-gated payloads so modern and legacy client generations can share one C++ runtime. The case study covers the compatibility boundaries, implementation decisions, and public evidence."
+  }
+];
+
+export const portfolioConfidentiality = {
+  title: "Confidential work & NDAs",
+  description:
+    "Most of my client work is confidential and covered by non-disclosure agreements (NDAs). The projects shown here are a selection of public work and client-approved references, not a complete record of my work.",
+  boundary: "Confidential project details, code, and assets remain private."
+};
 
 export const publicEvidence = {
   title: "Public Evidence & Contributions",
@@ -88,7 +119,7 @@ export const featuredWork: FeaturedWorkItem[] = [
     url: "https://github.com/protocolbuffers/protobuf/commit/7c090172a4f502a06e3a3c23df8a3242b03f3148",
     evidenceLabel: "Protobuf landed commit",
     relatedUrls: [
-      { label: "Protobuf PR #27407", url: "https://github.com/protocolbuffers/protobuf/pull/27407" },
+      { label: "Protobuf source PR #27407 (closed)", url: "https://github.com/protocolbuffers/protobuf/pull/27407" },
       { label: "vcpkg PR #51545", url: "https://github.com/microsoft/vcpkg/pull/51545" }
     ],
     summary: "Added constrained Protobuf lite-only runtime packaging and vcpkg support for target-side builds.",
@@ -281,7 +312,7 @@ export const caseStudies: CaseStudy[] = [
       "The Protobuf change landed through Copybara as public commit 7c090172. The local PoC measured the build step dropping from 508.063s to 55.648s and installed footprint from 113,754 KB to 21,579 KB.",
     evidenceStatus: "Public upstream commit",
     evidence: [
-      { label: "Protobuf PR #27407", url: "https://github.com/protocolbuffers/protobuf/pull/27407" },
+      { label: "Protobuf source PR #27407 (closed)", url: "https://github.com/protocolbuffers/protobuf/pull/27407" },
       { label: "Landed commit 7c090172", url: "https://github.com/protocolbuffers/protobuf/commit/7c090172a4f502a06e3a3c23df8a3242b03f3148" },
       { label: "vcpkg PR #51545", url: "https://github.com/microsoft/vcpkg/pull/51545" }
     ],
@@ -525,6 +556,8 @@ export const selectedContributions: SelectedContribution[] = [
 
 export const privateWork = {
   title: "Private Client/Server Runtime Engineering",
+  shortTitle: "Asteria",
+  shortSummary: "C++/Lua client and server engineering across runtime behavior, protocol compatibility, persistence, and delivery workflows.",
   label: "Client-approved private work",
   summary:
     "Asteria client and server work across C++/Lua runtime systems, protocol compatibility, UI/runtime behavior, persistence, launcher/API integration, asset delivery, telemetry, crash reporting, and release operations.",
@@ -541,4 +574,41 @@ export const privateWork = {
     "Private URLs or internal service addresses",
     "Proprietary code, assets, logs, private diagnostic artifacts, screenshots, and business metrics"
   ]
+};
+
+export const experienceSummaries: ExperienceSummary[] = [
+  {
+    title: "Canary",
+    focus: "C++ / Lua runtimes",
+    summary: "Runtime startup, scheduling, protocol compatibility, and data safety contributions.",
+    caseStudyId: "cpp-lua-runtime-startup-performance"
+  },
+  {
+    title: "Remere's Map Editor",
+    focus: "Large-data developer tooling",
+    summary: "Map loading and saving, allocation, rendering, and asset export improvements.",
+    caseStudyId: "large-data-load-save-rendering-optimization"
+  },
+  {
+    title: "OTClient",
+    focus: "Client engineering & delivery",
+    summary: "Client networking, logging, asset delivery, and release workflow contributions.",
+    caseStudyId: "modern-client-asset-delivery-platform"
+  },
+  {
+    title: "Protocol Buffers & vcpkg",
+    focus: "Upstream C++ build tooling",
+    summary: "Constrained runtime packaging and CMake changes for target-side builds.",
+    caseStudyId: "cpp-build-system-protobuf-packaging-optimization"
+  }
+];
+
+export const premiumClient = {
+  title: "Premium OTClient",
+  label: "Public product",
+  summary:
+    "A publicly downloadable client product with a private implementation and a public release surface.",
+  description:
+    "OTClient Redemption Premium is available through its official download page. Its source and implementation details remain private.",
+  link: { label: "Official product & downloads", href: "https://otcrp.com/downloads" }
 };

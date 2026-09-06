@@ -65,3 +65,29 @@ export type SelectedContribution = {
   linkLabel?: string;
   summary: string;
 };
+
+export type ServiceOffering = {
+  id: string;
+  title: string;
+  summary: string;
+  deliverables: string[];
+  outsideScope: string;
+  assessment: string;
+  caseStudyIds: string[];
+};
+
+export type ExperienceSummary = {
+  title: string;
+  focus: string;
+  summary: string;
+  caseStudyId: string;
+};
+
+export type WorkIndexEntry = {
+  caseStudyId: string;
+  category: string;
+  title: string;
+  summary: string;
+  metricIndex?: number;
+  note?: string;
+};

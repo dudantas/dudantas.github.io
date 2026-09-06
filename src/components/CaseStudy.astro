@@ -1,0 +1,36 @@
+---
+import { getPortfolioContent, type CaseStudy } from "../data/portfolio";
+import type { Locale } from "../i18n/routes";
+import Icon from "./Icon.astro";
+
+type Props = { locale: Locale; study: CaseStudy };
+const { locale, study } = Astro.props;
+const labels = getPortfolioContent(locale).homePage.caseLabels;
+---
+
+<details id={study.id} data-case-study class="case-study disclosure">
+  <summary>
+    <span><span class="disclosure-title">{study.title}</span><span class="evidence-status">{study.evidenceStatus}</span></span>
+    <Icon name="caretDown" class="disclosure-indicator" />
+  </summary>
+  <div class="case-study-body">
+    <dl class="case-narrative">
+      {(["context", "problem", "solution", "impact"] as const).map((key) => (
+        <div><dt>{labels[key]}</dt><dd>{study[key]}</dd></div>
+      ))}
+    </dl>
+    <div class="case-decisions">
+      <div><h3>{labels.ownership}</h3><ul>{study.whatIOwned.map((item) => <li>{item}</li>)}</ul></div>
+      <div><h3>{labels.decisions}</h3><ul>{study.technicalDecisions.map((item) => <li>{item}</li>)}</ul></div>
+    </div>
+    <div class="case-evidence">
+      <h3>{labels.evidence}</h3>
+      <div class="evidence-links">
+        {study.evidence.map((link) => link.url
+          ? <a class="text-link" href={link.url} target="_blank" rel="noreferrer">{link.label}<Icon name="arrowUpRight" /></a>
+          : <span>{link.label}</span>)}
+      </div>
+    </div>
+    <p class="technology-line"><span>{labels.technologies}</span>{study.technologies.join(" · ")}</p>
+  </div>
+</details>

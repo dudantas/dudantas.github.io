@@ -1,0 +1,31 @@
+<script is:inline>
+  (() => {
+    const storageKey = "portfolio-locale";
+    const currentLocale = document.documentElement.lang === "pt-BR" ? "pt-BR" : "en";
+    const isLocale = (value) => value === "en" || value === "pt-BR";
+
+    try {
+      const savedLocale = window.localStorage.getItem(storageKey);
+      if (currentLocale === "en" && savedLocale === "pt-BR") {
+        const localizedPath = window.location.pathname === "/" ? "/pt-br" : `/pt-br${window.location.pathname}`;
+        window.location.replace(`${localizedPath}${window.location.search}${window.location.hash}`);
+        return;
+      }
+    } catch {
+      // Language links remain functional when storage is unavailable.
+    }
+
+    document.addEventListener("click", (event) => {
+      const link = event.target instanceof Element ? event.target.closest("a[data-locale-option]") : null;
+      const locale = link?.getAttribute("data-locale-option");
+      if (!isLocale(locale)) return;
+
+      if (window.location.hash && !link.hash) link.hash = window.location.hash;
+      try {
+        window.localStorage.setItem(storageKey, locale);
+      } catch {
+        // Native navigation still applies the selected language for this visit.
+      }
+    });
+  })();
+</script>
