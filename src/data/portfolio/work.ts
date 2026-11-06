@@ -2,6 +2,13 @@ import type { CaseStudy, ExperienceSummary, FeaturedWorkItem, SelectedContributi
 
 export const workIndex: WorkIndexEntry[] = [
   {
+    caseStudyId: "cpp-async-network-reliability",
+    category: "Network reliability",
+    title: "Reliable asynchronous networking in C++",
+    summary: "Fixed shutdown races in a TCP send queue while preserving ordered delivery on graceful close.",
+    metricIndex: 0
+  },
+  {
     caseStudyId: "cpp-lua-runtime-startup-performance",
     category: "Runtime performance",
     title: "Faster C++ / Lua startup",
@@ -14,13 +21,6 @@ export const workIndex: WorkIndexEntry[] = [
     title: "Leaner Protobuf builds",
     summary: "Constrained packaging for target-side C++ runtimes.",
     metricIndex: 0
-  },
-  {
-    caseStudyId: "runtime-multiprotocol-networking-architecture",
-    category: "Protocols & networking",
-    title: "One runtime. Multiple client generations.",
-    summary: "Explicit transport and compatibility contracts in a shared C++ runtime.",
-    note: "Designed transport codecs, runtime profiles, session hints, and version-gated payloads so modern and legacy client generations can share one C++ runtime. The case study covers the compatibility boundaries, implementation decisions, and public evidence."
   }
 ];
 
@@ -167,10 +167,47 @@ export const featuredWork: FeaturedWorkItem[] = [
       { value: "139,767 -> 126", label: "static viewport sampled CPU" }
     ],
     tags: ["C++", "allocator", "binary I/O", "rendering", "protobuf assets"]
+  },
+  {
+    title: "Reliable Asynchronous Networking in C++",
+    eyebrow: "Network Reliability",
+    evidenceStatus: "Public PR merged",
+    caseStudyId: "cpp-async-network-reliability",
+    url: "https://github.com/opentibiabr/canary/pull/4134",
+    evidenceLabel: "Canary PR #4134",
+    summary: "Fixed shutdown races in a TCP send queue and preserved ordered delivery on graceful close.",
+    impact: "Stopped queued writes from reaching closed sockets and kept diagnostics bounded.",
+    metrics: [{ value: "14 / 14", label: "connection regression tests passed" }],
+    tags: ["C++", "Asio", "TCP", "concurrency"]
   }
 ];
 
 export const caseStudies: CaseStudy[] = [
+  {
+    id: "cpp-async-network-reliability",
+    title: "Reliable Asynchronous Networking in C++",
+    context:
+      "A long-running C++ service uses Asio and a per-connection send queue to deliver TCP messages in order. A graceful close drains queued messages, while a forced close terminates the socket immediately.",
+    problem:
+      "A queued worker or a late completion could start another write after a forced close. On Windows the queued write could fail with an invalid handle. Message preparation also ran outside the connection lock, leaving a second window for the socket to close.",
+    whatIOwned: [
+      "Root-cause analysis and deterministic reproduction on Windows",
+      "Send-queue shutdown behavior and message ownership",
+      "Connection diagnostics and focused regression tests"
+    ],
+    technicalDecisions: [
+      "Recheck socket state immediately before submitting the write, after message preparation",
+      "Keep an owning message reference across preparation so reentrant callbacks cannot invalidate it",
+      "Allow a forced close to interrupt draining while keeping protocol cleanup single-shot"
+    ],
+    solution:
+      "I stopped workers and completion callbacks from writing to a closed socket, preserved ordered draining on graceful close, and rate-limited warnings while retaining the context needed to diagnose failures.",
+    impact:
+      "The initial regression set reproduced five failures in ten scenarios, including four Windows invalid-handle errors. The final implementation passed all 14 tests in the expanded suite, which used real TCP loopback sockets and injected late completions where needed.",
+    evidenceStatus: "Public PR merged",
+    evidence: [{ label: "Canary PR #4134", url: "https://github.com/opentibiabr/canary/pull/4134" }],
+    technologies: ["C++", "Asio", "TCP", "concurrency", "regression testing"]
+  },
   {
     id: "cpp-lua-runtime-startup-performance",
     title: "C++ Runtime Startup Performance with Lua Integration",
@@ -317,6 +354,63 @@ export const caseStudies: CaseStudy[] = [
       { label: "vcpkg PR #51545", url: "https://github.com/microsoft/vcpkg/pull/51545" }
     ],
     technologies: ["CMake", "vcpkg", "Protocol Buffers", "package management", "cross-builds"]
+  },
+  {
+    id: "shared-cpp-dependency-cache",
+    title: "Shared C++ Dependency Cache Across Build Systems",
+    context:
+      "CMake and Visual Studio builds in multiple repositories and worktrees can use identical vcpkg dependencies while maintaining separate build outputs.",
+    problem:
+      "Each checkout could duplicate expanded dependencies. Sharing a mutable installation indiscriminately could mix incompatible manifests, triplets, toolsets, or registries.",
+    whatIOwned: [
+      "Dependency fingerprint and consumer validation",
+      "CMake and MSBuild integration in Canary and OTClient",
+      "Migration, auditing, and resolver regression coverage"
+    ],
+    technicalDecisions: [
+      "Share installed dependencies only when build-affecting inputs match",
+      "Separate dependency identity from consumer-specific configuration",
+      "Keep generated sources, objects, and executables local to each worktree"
+    ],
+    solution:
+      "I built a fingerprinted vcpkg dependency pool and integrated it with CMake and Visual Studio. Incompatible configurations use separate pools, with a local fallback when the shared configuration cannot be validated.",
+    impact:
+      "Canary and OTClient merged the shared-cache integration. Follow-up validation exercised the real resolver with 15 focused tests, and CI checked the identity contract on Windows and Linux.",
+    evidenceStatus: "Public PR merged",
+    evidence: [
+      { label: "Canary PR #4079", url: "https://github.com/opentibiabr/canary/pull/4079" },
+      { label: "OTClient PR #1800", url: "https://github.com/opentibiabr/otclient/pull/1800" },
+      { label: "Canary PR #4113", url: "https://github.com/opentibiabr/canary/pull/4113" }
+    ],
+    technologies: ["CMake", "MSBuild", "vcpkg", "Visual Studio", "GitHub Actions"]
+  },
+  {
+    id: "go-login-authentication-reliability",
+    title: "Authentication & Traffic Isolation in Go",
+    context:
+      "A Go login service issues sessions and handles public startup requests from clients that may share one IP address.",
+    problem:
+      "The password-only login path could bypass a configured second factor. Public startup traffic also shared the authentication rate limit, so a burst could exhaust login capacity.",
+    whatIOwned: [
+      "Second-factor enforcement and trusted-device credential lifecycle",
+      "Request classification and independent rate limits",
+      "Tests for replay, token rotation, and request admission"
+    ],
+    technicalDecisions: [
+      "Issue the session after required TOTP verification",
+      "Store hashes of revocable trusted-device credentials and rotate them after use",
+      "Keep separate request budgets for public startup and authentication"
+    ],
+    solution:
+      "I enforced TOTP on the login path, added rotating trusted-device credentials, and isolated recognized public startup requests from the authentication quota.",
+    impact:
+      "Enrolled accounts now go through second-factor verification or an eligible trusted-device flow. Tests cover the authentication lifecycle and confirm that exhausting the public request quota leaves capacity for login.",
+    evidenceStatus: "Public PR merged",
+    evidence: [
+      { label: "Login-server PR #35", url: "https://github.com/opentibiabr/login-server/pull/35" },
+      { label: "Login-server PR #37", url: "https://github.com/opentibiabr/login-server/pull/37" }
+    ],
+    technologies: ["Go", "HTTP", "TOTP", "rate limiting"]
   },
   {
     id: "runtime-state-persistence-safety",
