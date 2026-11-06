@@ -17,22 +17,21 @@ const mergedAndFieldValidated = "Integrado e validado em campo";
 export const workIndexPtBr: typeof workIndex = [
   {
     ...workIndex[0],
+    category: "Confiabilidade de redes",
+    title: "Redes assíncronas confiáveis em C++",
+    summary: "Corrigi condições de corrida na fila de envio TCP e preservei a ordem das mensagens no fechamento normal."
+  },
+  {
+    ...workIndex[1],
     category: "Desempenho de runtime",
     title: "Inicialização C++ / Lua mais rápida",
     summary: "Melhorias em caminhos críticos do carregamento de scripts e da inicialização do runtime."
   },
   {
-    ...workIndex[1],
+    ...workIndex[2],
     category: "Ferramentas de build",
     title: "Builds mais leves do Protobuf",
     summary: "Empacotamento limitado para runtimes C++ no ambiente de destino."
-  },
-  {
-    ...workIndex[2],
-    category: "Protocolos e redes",
-    title: "Um runtime. Várias gerações de clientes.",
-    summary: "Contratos explícitos de transporte e compatibilidade em um runtime C++ compartilhado.",
-    note: "Projetei codecs de transporte, perfis de runtime, indicações de sessão e payloads condicionados por versão para que gerações modernas e legadas de clientes compartilhem um runtime C++. O estudo de caso apresenta os limites de compatibilidade, as decisões de implementação e as evidências públicas."
   }
 ];
 
@@ -134,12 +133,39 @@ export const featuredWorkPtBr: typeof featuredWork = [
       { value: "17,830 -> 2,230", label: "recargas de slabs" },
       { value: "139,767 -> 126", label: "CPU amostrada na viewport estática" }
     ]
+  },
+  {
+    ...featuredWork[6],
+    title: "Redes Assíncronas Confiáveis em C++",
+    eyebrow: "Confiabilidade de Redes",
+    evidenceStatus: publicPrMerged,
+    summary: "Corrigi condições de corrida na fila de envio TCP e preservei a ordem das mensagens no fechamento normal.",
+    impact: "Impedi escritas enfileiradas em sockets fechados e limitei a frequência dos avisos de diagnóstico.",
+    metrics: [{ value: "14 / 14", label: "testes de regressão de conexão aprovados" }]
   }
 ];
 
 type CaseStudyTranslation = Pick<CaseStudy, "title" | "context" | "problem" | "whatIOwned" | "technicalDecisions" | "solution" | "impact" | "evidenceStatus">;
 
 const caseStudyTranslations: Record<string, CaseStudyTranslation> = {
+  "cpp-async-network-reliability": {
+    title: "Redes Assíncronas Confiáveis em C++",
+    context: "Um serviço C++ de longa duração usa Asio e uma fila de envio por conexão para entregar mensagens TCP em ordem. O fechamento normal esvazia a fila antes de encerrar o socket. O fechamento forçado encerra o socket imediatamente.",
+    problem: "Uma tarefa enfileirada ou um callback tardio podia iniciar outra escrita após o fechamento forçado. No Windows, a escrita podia falhar com um identificador inválido. Como a preparação da mensagem ocorria fora do lock da conexão, o socket também podia fechar durante essa etapa.",
+    whatIOwned: [
+      "Análise da causa e reprodução determinística no Windows",
+      "Comportamento da fila de envio no fechamento e controle da vida útil das mensagens",
+      "Diagnóstico de conexões e testes de regressão focados"
+    ],
+    technicalDecisions: [
+      "Verifiquei o estado do socket novamente logo antes da escrita, após preparar a mensagem",
+      "Mantive uma referência proprietária durante a preparação para evitar invalidação por callbacks reentrantes",
+      "Permiti interromper o esvaziamento da fila com um fechamento forçado e mantive a limpeza do protocolo em uma única execução"
+    ],
+    solution: "Impedi que tarefas e callbacks escrevessem em sockets fechados, preservei a ordem de envio no fechamento normal e limitei a frequência dos avisos sem perder o contexto para diagnosticar falhas.",
+    impact: "O conjunto inicial reproduziu cinco falhas em dez cenários, quatro delas por identificador inválido no Windows. A implementação final passou nos 14 testes do conjunto ampliado, que usou sockets TCP em loopback e injetou callbacks tardios quando necessário.",
+    evidenceStatus: publicPrMerged
+  },
   "cpp-lua-runtime-startup-performance": {
     title: "Desempenho da Inicialização de Runtime C++ com Integração Lua",
     context: "O OpenTibiaBR Canary é um grande runtime de servidor online em C++/Lua cuja inicialização percorre scripts, dados do mapa, caches de tiles, configuração de spawns e registros de runtime.",
@@ -216,6 +242,42 @@ const caseStudyTranslations: Record<string, CaseStudyTranslation> = {
     solution: "Implementei no upstream do Protobuf o suporte CMake a um build limitado do runtime lite e contribuí com a alteração do port vcpkg que torna libprotoc opcional em builds para destinos não nativos.",
     impact: "A alteração no Protobuf foi integrada via Copybara no commit público 7c090172. A PoC local mediu a queda da etapa de build de 508,063s para 55,648s e do espaço instalado de 113.754 KB para 21.579 KB.",
     evidenceStatus: "Commit público no upstream"
+  },
+  "shared-cpp-dependency-cache": {
+    title: "Cache Compartilhado de Dependências C++ entre Sistemas de Build",
+    context: "Builds com CMake e Visual Studio em vários repositórios e worktrees podem usar as mesmas dependências do vcpkg e manter seus artefatos de compilação separados.",
+    problem: "Cada checkout podia duplicar as dependências instaladas. Compartilhar uma instalação mutável sem validar os insumos podia misturar manifestos, triplets, toolsets ou registros incompatíveis.",
+    whatIOwned: [
+      "Identificação das dependências e validação dos consumidores",
+      "Integração com CMake e MSBuild no Canary e no OTClient",
+      "Migração, auditoria e testes de regressão do resolvedor"
+    ],
+    technicalDecisions: [
+      "Compartilhei dependências instaladas apenas quando os insumos de build são compatíveis",
+      "Separei a identidade das dependências da configuração específica do consumidor",
+      "Mantive fontes geradas, objetos e executáveis locais a cada worktree"
+    ],
+    solution: "Criei um armazenamento de dependências vcpkg identificado pelos insumos e o integrei ao CMake e ao Visual Studio. Configurações incompatíveis usam instalações separadas, com fallback local quando a configuração compartilhada não pode ser validada.",
+    impact: "Canary e OTClient integraram o cache compartilhado. A validação posterior exercitou o resolvedor real com 15 testes focados, e a CI verificou o contrato de identidade no Windows e no Linux.",
+    evidenceStatus: publicPrMerged
+  },
+  "go-login-authentication-reliability": {
+    title: "Autenticação e Isolamento de Tráfego em Go",
+    context: "Um serviço de login em Go emite sessões e atende requisições públicas de inicialização de clientes que podem compartilhar o mesmo IP.",
+    problem: "O fluxo de login apenas com senha podia contornar um segundo fator configurado. O tráfego público de inicialização também dividia a cota de autenticação e, em rajadas, podia esgotá-la.",
+    whatIOwned: [
+      "Verificação do segundo fator e ciclo de vida das credenciais de dispositivos confiáveis",
+      "Classificação de requisições e limites independentes",
+      "Testes de replay, rotação de credenciais e admissão de requisições"
+    ],
+    technicalDecisions: [
+      "Emiti a sessão após a verificação de TOTP quando exigida",
+      "Armazenei hashes de credenciais revogáveis e fiz a rotação após cada uso",
+      "Separei as cotas de inicialização pública e autenticação"
+    ],
+    solution: "Passei a exigir TOTP no fluxo de login, adicionei credenciais rotativas de dispositivos confiáveis e isolei as requisições públicas reconhecidas da cota de autenticação.",
+    impact: "Contas com segundo fator habilitado passam pela verificação do código ou pelo fluxo de dispositivo confiável, quando elegíveis. Os testes cobrem o ciclo de autenticação e confirmam que esgotar a cota de requisições públicas ainda deixa capacidade para o login.",
+    evidenceStatus: publicPrMerged
   },
   "runtime-state-persistence-safety": {
     title: "Segurança do Estado de Runtime e da Persistência",
@@ -303,6 +365,8 @@ const caseStudyTranslations: Record<string, CaseStudyTranslation> = {
 };
 
 const technologyTranslations: Record<string, string> = {
+  "regression testing": "testes de regressão",
+  "rate limiting": "limitação de requisições",
   profiling: "análise de desempenho",
   "server runtime": "runtime de servidor",
   concurrency: "concorrência",
